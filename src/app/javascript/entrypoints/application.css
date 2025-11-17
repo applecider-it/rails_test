@@ -21,7 +21,7 @@
     @apply text-5xl font-extrabold tracking-tight text-gray-900 mb-6;
   }
   .app-h2 {
-    @apply text-4xl font-bold tracking-tight text-gray-800 border-b-2 border-blue-500 inline-block mb-4;
+    @apply text-4xl font-bold tracking-tight text-gray-800 border-l-8 pl-4 border-blue-300 inline-block mb-4;
   }
   .app-h3 {
     @apply text-2xl font-semibold text-gray-700 mb-3;

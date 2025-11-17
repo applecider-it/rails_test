@@ -22,9 +22,8 @@
       <!-- 右側リンク：デスクトップ -->
       <div class="hidden sm:flex sm:items-center sm:gap-4">
         <% if user_signed_in? %>
-          <span class="text-gray-700 font-medium"><%= current_user.email %></span>
-          <%= link_to 'Profile', edit_user_registration_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-2 py-1 rounded transition" %>
-          <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "bg-red-500 hover:bg-red-600 text-white font-semibold px-2 py-1 rounded transition" %>
+          <%= link_to current_user.email, edit_user_registration_path, class: "bg-gray-300 hover:bg-gray-200 text-gray-500 font-semibold px-2 py-1 rounded transition" %>
+          <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "bg-red-100 hover:bg-red-200 text-gray-500 font-semibold px-2 py-1 rounded transition" %>
         <% else %>
           <%= link_to 'Login', new_user_session_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-2 py-1 rounded transition" %>
           <%= link_to 'Sign up', new_user_registration_path, class: "bg-green-500 hover:bg-green-600 text-white font-semibold px-2 py-1 rounded transition" %>
@@ -39,9 +38,8 @@
         <%= link_to 'Top', root_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition w-full text-center" %>
 
         <% if user_signed_in? %>
-            <span class="text-gray-700 font-medium"><%= current_user.email %></span>
-            <%= link_to 'Profile', edit_user_registration_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition w-full text-center" %>
-            <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded transition w-full" %>
+            <%= link_to current_user.email, edit_user_registration_path, class: "bg-gray-300 hover:bg-gray-200 text-gray-500 font-semibold px-4 py-2 rounded transition w-full text-center" %>
+            <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "bg-red-100 hover:bg-red-200 text-gray-500 font-semibold px-4 py-2 rounded transition w-full" %>
         <% else %>
             <%= link_to 'Login', new_user_session_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition w-full text-center" %>
             <%= link_to 'Sign up', new_user_registration_path, class: "bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded transition w-full text-center" %>
