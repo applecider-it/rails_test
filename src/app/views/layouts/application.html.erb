@@ -7,10 +7,10 @@
   <body class="bg-gray-100 min-h-screen font-sans flex flex-col items-center p-6">
     <%= render 'layouts/shared/navbar' %>
 
-    <%= render 'layouts/shared/message' %>
-
     <!-- Main Content -->
     <main class="w-full max-w-4xl bg-white shadow-md rounded p-6 mt-6">
+      <%= render 'layouts/shared/message' %>
+
       <%= yield %>
     </main>
 

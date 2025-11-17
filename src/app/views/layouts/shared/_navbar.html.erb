@@ -26,8 +26,8 @@
           <%= link_to 'Profile', edit_user_registration_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-2 py-1 rounded transition" %>
           <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "bg-red-500 hover:bg-red-600 text-white font-semibold px-2 py-1 rounded transition" %>
         <% else %>
-          <%= link_to 'Login', new_user_session_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition" %>
-          <%= link_to 'Sign up', new_user_registration_path, class: "bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded transition" %>
+          <%= link_to 'Login', new_user_session_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-2 py-1 rounded transition" %>
+          <%= link_to 'Sign up', new_user_registration_path, class: "bg-green-500 hover:bg-green-600 text-white font-semibold px-2 py-1 rounded transition" %>
         <% end %>
       </div>
     </div>
