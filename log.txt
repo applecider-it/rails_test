@@ -46,3 +46,5 @@ Depending on your application's configuration some manual setup may be required:
 
 ===============================================================================
 
+rails generate controller home index
+
