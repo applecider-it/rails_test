@@ -50,3 +50,9 @@ rails generate controller home index
 
 rails generate devise User
 
+rails generate devise:views
+
+rails generate devise:controllers users
+
+
+
