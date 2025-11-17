@@ -23,4 +23,6 @@ Rails.application.routes.draw do
   root "home#index"
 
   get "test/index"
+  get "test/backend_test"
+  get "test/react_test"
 end
