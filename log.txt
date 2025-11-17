@@ -61,3 +61,8 @@ rails generate devise:controllers users
 bundle exec vite install
 
 
+npm install -D tailwindcss@^3.4.18 postcss autoprefixer
+
+npx tailwindcss init -p
+
+
