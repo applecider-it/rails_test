@@ -9,7 +9,7 @@ cd /home/owner/workspace/tmp/rails_test/src
 
 Rails
 
-bin/dev
+foreman start -f Procfile.dev
 
 -----------------------------------
 
