@@ -71,4 +71,7 @@ npm install -D typescript @types/node
 
 rails generate controller test index
 
+-----------------------------------
+
+rails generate active_admin:install
 
