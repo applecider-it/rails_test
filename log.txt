@@ -7,6 +7,8 @@ cd myapp
 bin/rails db:create
 bin/rails db:migrate
 
+-----------------------------------
+
 rails generate devise:install
 
 ===============================================================================
@@ -54,5 +56,8 @@ rails generate devise:views
 
 rails generate devise:controllers users
 
+-----------------------------------
+
+bundle exec vite install
 
 
