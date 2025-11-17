@@ -19,7 +19,7 @@ http://localhost:3000/
 test@localhost.com / testtest
 
 
-http://localhost:3000/admin
+http://localhost:3000/admin_secret
 
 admin@example.com / password
 
