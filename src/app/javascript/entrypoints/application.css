@@ -39,4 +39,9 @@
   .app-link-normal {
     @apply text-blue-600 hover:underline;
   }
+
+  /* 通常のコンテナ */
+  .app-container-normal {
+    @apply mx-auto max-w-4xl pt-5;
+  }
 }
