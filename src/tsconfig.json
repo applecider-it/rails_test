@@ -4,10 +4,11 @@
     "module": "esnext",
     "moduleResolution": "node",
     //"strict": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
   },
   "include": ["app/javascript/**/*"]
 }

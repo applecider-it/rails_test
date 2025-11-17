@@ -77,3 +77,13 @@ rails generate active_admin:install
 
 bin/rails db:seed
 
+-----------------------------------
+
+
+npm install react react-dom
+# TypeScript を使う場合
+npm install --save-dev @types/react @types/react-dom
+
+npm install @vitejs/plugin-react
+
+
