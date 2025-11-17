@@ -68,3 +68,8 @@ gem "activeadmin"
 
 gem 'vite_rails'
 
+gem "sprockets-rails"
+gem 'sassc'
+gem 'sass-rails'
+gem 'sassc-rails'
+

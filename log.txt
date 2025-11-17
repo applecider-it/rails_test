@@ -75,3 +75,5 @@ rails generate controller test index
 
 rails generate active_admin:install
 
+bin/rails db:seed
+

@@ -19,6 +19,16 @@ http://localhost:3000/
 test@localhost.com / testtest
 
 
+http://localhost:3000/admin
+
+admin@example.com / password
+
+
+管理者追加
+
+bin/rails db:seed
+
+
 -----------------------------------
 
 ポスグレ接続
