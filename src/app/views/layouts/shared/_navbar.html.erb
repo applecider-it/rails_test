@@ -1,0 +1,63 @@
+    <!-- Authentication Links -->
+<nav class="bg-white shadow-md w-full">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+
+      <!-- 左側：ロゴ / トップリンク -->
+      <div class="hidden sm:flex flex-shrink-0 flex items-center gap-4">
+        <%= link_to 'Top', root_path, class: "text-xl font-bold text-gray-800 hover:text-gray-900" %>
+        <%= link_to 'Top', root_path, class: "text-xl font-bold text-gray-800 hover:text-gray-900" %>
+      </div>
+
+      <!-- ハンバーガーメニュー（モバイル） -->
+      <div class="sm:hidden">
+        <button id="mobile-menu-button" class="text-gray-800 hover:text-gray-900 focus:outline-none">
+          <!-- Heroicons: Menu -->
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- 右側リンク：デスクトップ -->
+      <div class="hidden sm:flex sm:items-center sm:gap-4">
+        <% if user_signed_in? %>
+          <span class="text-gray-700 font-medium"><%= current_user.email %></span>
+          <%= link_to 'Profile', edit_user_registration_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-2 py-1 rounded transition" %>
+          <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "bg-red-500 hover:bg-red-600 text-white font-semibold px-2 py-1 rounded transition" %>
+        <% else %>
+          <%= link_to 'Login', new_user_session_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition" %>
+          <%= link_to 'Sign up', new_user_registration_path, class: "bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded transition" %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- モバイルメニュー -->
+    <div id="mobile-menu" class="hidden sm:hidden mt-2">
+      <div class="flex flex-col gap-2">
+        <%= link_to 'Top', root_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition w-full text-center" %>
+        <%= link_to 'Top', root_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition w-full text-center" %>
+
+        <% if user_signed_in? %>
+            <span class="text-gray-700 font-medium"><%= current_user.email %></span>
+            <%= link_to 'Profile', edit_user_registration_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition w-full text-center" %>
+            <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded transition w-full" %>
+        <% else %>
+            <%= link_to 'Login', new_user_session_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition w-full text-center" %>
+            <%= link_to 'Sign up', new_user_registration_path, class: "bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded transition w-full text-center" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // 簡単なハンバーガー開閉
+  document.addEventListener('DOMContentLoaded', () => {
+    const button = document.getElementById('mobile-menu-button')
+    const menu = document.getElementById('mobile-menu')
+    button?.addEventListener('click', () => {
+      menu.classList.toggle('hidden')
+    })
+  })
+</script>
