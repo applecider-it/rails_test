@@ -1,2 +1,5 @@
-# rails_test
-railsの動作確認のみ
+# Railsモノリスのテスト
+
+## リンク
+
+- [Railsモノリスのドキュメント](./src/documents/index.md)
