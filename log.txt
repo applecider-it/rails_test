@@ -3,3 +3,6 @@ git clone https://github.com/applecider-it/rails_test.git
 
 rails new myapp
 cd myapp
+
+bin/rails db:create
+bin/rails db:migrate
