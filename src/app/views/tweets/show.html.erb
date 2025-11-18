@@ -4,5 +4,7 @@
   <%= link_to "編集", edit_tweet_path(@tweet), class: "app-link-normal" %> |
   <%= link_to "一覧", tweets_path, class: "app-link-normal" %>
 
-  <%= button_to "削除", tweet_path(@tweet), method: :delete, class: "app-btn-danger w-20 mt-10" %>
+  <%= button_to "削除", tweet_path(@tweet), method: :delete,
+    class: "app-btn-danger w-20 mt-10",
+    form: { onsubmit: "return confirm('本当に削除しますか？');" } %>
 </div>

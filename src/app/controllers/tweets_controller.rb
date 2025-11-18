@@ -6,7 +6,8 @@ class TweetsController < ApplicationController
   # GET /tweets or /tweets.json
   def index
     page = params[:page]
-    @tweets = @list_service.get_list page
+    @keyword = params[:keyword]
+    @tweets = @list_service.get_list page, @keyword
   end
 
   # GET /tweets/1 or /tweets/1.json
