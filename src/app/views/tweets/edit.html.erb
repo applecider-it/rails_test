@@ -1,6 +1,4 @@
-<% content_for :title, "Editing user tweet" %>
-
-<h1 class="app-h1">Editing user tweet</h1>
+<h1 class="app-h1">ツイート変更</h1>
 
 <%= form_with(model: @tweet, url: tweet_path(@tweet), scope: :tweet) do |form| %>
   <%= render "form", form: form, tweet: @tweet %>
@@ -9,6 +7,6 @@
 <br>
 
 <div>
-  <%= link_to "Show this user tweet", tweet_path(@tweet), class: "app-link-normal" %> |
-  <%= link_to "Back to user tweets", tweets_path, class: "app-link-normal" %>
+  <%= link_to "参照", tweet_path(@tweet), class: "app-link-normal" %> |
+  <%= link_to "一覧", tweets_path, class: "app-link-normal" %>
 </div>

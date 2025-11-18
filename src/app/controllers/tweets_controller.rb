@@ -29,7 +29,7 @@ class TweetsController < ApplicationController
 
     respond_to do |format|
       if @tweet.save
-        format.html { redirect_to tweet_path(@tweet), notice: "User tweet was successfully created." }
+        format.html { redirect_to tweet_path(@tweet), notice: "作成しました。" }
         format.json { render :show, status: :created, location: tweet_path(@tweet) }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -42,7 +42,7 @@ class TweetsController < ApplicationController
   def update
     respond_to do |format|
       if @tweet.update(tweet_params)
-        format.html { redirect_to tweet_path(@tweet), notice: "User tweet was successfully updated.", status: :see_other }
+        format.html { redirect_to tweet_path(@tweet), notice: "更新しました。", status: :see_other }
         format.json { render :show, status: :ok, location: tweet_path(@tweet) }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -56,7 +56,7 @@ class TweetsController < ApplicationController
     @tweet.destroy!
 
     respond_to do |format|
-      format.html { redirect_to tweets_path, notice: "User tweet was successfully destroyed.", status: :see_other }
+      format.html { redirect_to tweets_path, notice: "削除しました。", status: :see_other }
       format.json { head :no_content }
     end
   end

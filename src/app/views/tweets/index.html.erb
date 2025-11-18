@@ -1,13 +1,11 @@
-<% content_for :title, "User tweets" %>
-
-<h1 class="app-h1">User tweets</h1>
+<h1 class="app-h1">ツイート一覧</h1>
 
 <div id="tweets">
   <% @tweets.each do |tweet| %>
     <div class="mb-5">
       <%= render "row", tweet: tweet %>
 
-      <%= link_to "Show this user tweet", tweet_path(tweet), class: "app-link-normal" %>
+      <%= link_to "参照", tweet_path(tweet), class: "app-link-normal" %>
     </div>
   <% end %>
 </div>
@@ -17,5 +15,5 @@
 </div>
 
 <div class="mt-10">
-  <%= link_to "New user tweet", new_tweet_path, class: "app-btn-primary" %>
+  <%= link_to "新規作成", new_tweet_path, class: "app-btn-primary" %>
 </div>
