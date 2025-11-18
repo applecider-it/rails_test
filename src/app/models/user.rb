@@ -13,4 +13,9 @@ class User < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     []
   end
+
+  # ActiveAdminで空のパスワードは無視するためのメソッド
+  def password_required?
+    new_record? || password.present?
+  end
 end

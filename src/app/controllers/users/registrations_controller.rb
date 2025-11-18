@@ -59,4 +59,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  # 更新処理を上書き
+  protected def update_resource(resource, params)
+    registration_service = UserServices::RegistrationService.new
+    registration_service.update_resource(resource, params)
+  end
+
+  # 更新後のリダイレクト先を指定
+  protected def after_update_path_for(resource)
+    edit_user_registration_path  # 自分の編集画面に戻る
+  end
 end
