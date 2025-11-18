@@ -1,8 +1,0 @@
-<%= render @user_tweet %>
-
-<div>
-  <%= link_to "Edit this user tweet", edit_user_tweet_path(@user_tweet), class: "app-link-normal" %> |
-  <%= link_to "Back to user tweets", user_tweets_path, class: "app-link-normal" %>
-
-  <%= button_to "Delete", @user_tweet, method: :delete, class: "app-btn-danger w-20 mt-10" %>
-</div>

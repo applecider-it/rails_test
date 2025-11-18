@@ -1,0 +1,13 @@
+<% content_for :title, "New user tweet" %>
+
+<h1 class="app-h1">New user tweet</h1>
+
+<%= form_with(model: @tweet, url: tweets_path, scope: :tweet) do |form| %>
+  <%= render "form", form: form, tweet: @tweet %>
+<% end %>
+
+<br>
+
+<div>
+  <%= link_to "Back to user tweets", tweets_path, class: "app-link-normal" %>
+</div>

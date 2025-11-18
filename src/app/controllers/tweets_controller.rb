@@ -1,0 +1,78 @@
+class TweetsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_tweet, only: %i[ show edit update destroy ]
+  before_action :setup_service_class
+
+  # GET /tweets or /tweets.json
+  def index
+    page = params[:page]
+    @tweets = @list_service.get_list page
+  end
+
+  # GET /tweets/1 or /tweets/1.json
+  def show
+  end
+
+  # GET /tweets/new
+  def new
+    @tweet = UserTweet.new
+  end
+
+  # GET /tweets/1/edit
+  def edit
+  end
+
+  # POST /tweets or /tweets.json
+  def create
+    @tweet = UserTweet.new(tweet_params)
+    @tweet.user = current_user
+
+    respond_to do |format|
+      if @tweet.save
+        format.html { redirect_to tweet_path(@tweet), notice: "User tweet was successfully created." }
+        format.json { render :show, status: :created, location: tweet_path(@tweet) }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @tweet.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /tweets/1 or /tweets/1.json
+  def update
+    respond_to do |format|
+      if @tweet.update(tweet_params)
+        format.html { redirect_to tweet_path(@tweet), notice: "User tweet was successfully updated.", status: :see_other }
+        format.json { render :show, status: :ok, location: tweet_path(@tweet) }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @tweet.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /tweets/1 or /tweets/1.json
+  def destroy
+    @tweet.destroy!
+
+    respond_to do |format|
+      format.html { redirect_to tweets_path, notice: "User tweet was successfully destroyed.", status: :see_other }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_tweet
+      @tweet = UserTweet.find(params.expect(:id))
+    end
+
+    # Only allow a list of trusted parameters through.
+    def tweet_params
+      params.expect(tweet: [ :content ])
+    end
+
+    def setup_service_class
+      @list_service = TweetServices::ListService.new
+    end
+end

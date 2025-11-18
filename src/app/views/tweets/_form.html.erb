@@ -1,0 +1,10 @@
+<%= render "shared/message/error_messages", resource: tweet %>
+
+<div>
+  <%= form.label :content, style: "display: block" %>
+  <%= form.textarea :content, class: "app-form-input" %>
+</div>
+
+<div class="my-2">
+  <%= form.submit class: "app-btn-primary w-40" %>
+</div>
