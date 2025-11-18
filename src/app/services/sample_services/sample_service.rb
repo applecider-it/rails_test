@@ -1,5 +1,9 @@
 class SampleServices::SampleService
-  def test_exec
-    p("test !!!!")
+  def initialize
+    @sub_service = SubService.new
+  end
+
+  def test_exec(val)
+    @sub_service.sub_exec(val)
   end
 end

@@ -6,7 +6,7 @@ class DevelopmentController < ApplicationController
   # バックエンド動作確認
   def backend_test
     sample_service = SampleServices::SampleService.new
-    sample_service.test_exec
+    sample_service.test_exec("backend_test")
 
     render :complate
   end
