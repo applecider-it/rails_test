@@ -11,6 +11,10 @@
   <% end %>
 </div>
 
+<div class="mt-5">
+  <%= paginate @user_tweets %>
+</div>
+
 <div class="mt-10">
   <%= link_to "New user tweet", new_user_tweet_path, class: "app-btn-primary" %>
 </div>

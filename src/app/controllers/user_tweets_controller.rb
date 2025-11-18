@@ -4,7 +4,12 @@ class UserTweetsController < ApplicationController
 
   # GET /user_tweets or /user_tweets.json
   def index
-    @user_tweets = UserTweet.includes(:user).all
+    page = params[:page]
+    @user_tweets = UserTweet
+      .includes(:user)
+      .order(id: :desc)
+      .page(page)
+      .per(1)
   end
 
   # GET /user_tweets/1 or /user_tweets/1.json

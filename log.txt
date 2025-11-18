@@ -96,3 +96,7 @@ rails generate active_admin:resource User
 rails g scaffold UserTweet user:references content:text
 
 rails db:migrate
+
+
+rails g kaminari:views default
+
