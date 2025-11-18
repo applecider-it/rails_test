@@ -10,7 +10,5 @@ class TestController < ApplicationController
   end
 
   def react_test
-    test_service = TestServices::TestService.new
-    test_service.test
   end
 end
