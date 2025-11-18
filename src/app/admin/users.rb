@@ -52,7 +52,7 @@ ActiveAdmin.register User do
 
     # ユーザーのツイート一覧
     panel "ツイート一覧" do
-      paginated_collection(user.user_tweets.page(params[:tweets_page]).per(1),
+      paginated_collection(user.user_tweets.page(params[:tweets_page]).per(5),
           param_name: 'tweets_page',
           download_links: false) do
         table_for collection do
