@@ -1,15 +1,12 @@
 class UserTweetsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user_tweet, only: %i[ show edit update destroy ]
+  before_action :setup_service_class
 
   # GET /user_tweets or /user_tweets.json
   def index
     page = params[:page]
-    @user_tweets = UserTweet
-      .includes(:user)
-      .order(id: :desc)
-      .page(page)
-      .per(1)
+    @user_tweets = @list_service.get_list page
   end
 
   # GET /user_tweets/1 or /user_tweets/1.json
@@ -73,5 +70,9 @@ class UserTweetsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_tweet_params
       params.expect(user_tweet: [ :content ])
+    end
+
+    def setup_service_class
+      @list_service = TweetServices::ListService.new
     end
 end
