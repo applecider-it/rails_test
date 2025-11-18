@@ -90,3 +90,9 @@ npm install @vitejs/plugin-react
 
 
 rails generate active_admin:resource User
+
+-----------------------------------
+
+rails g scaffold UserTweet user:references content:text
+
+rails db:migrate

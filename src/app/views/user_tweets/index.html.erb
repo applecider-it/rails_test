@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "User tweets" %>
+
+<h1>User tweets</h1>
+
+<div id="user_tweets">
+  <% @user_tweets.each do |user_tweet| %>
+    <%= render user_tweet %>
+    <p>
+      <%= link_to "Show this user tweet", user_tweet %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New user tweet", new_user_tweet_path %>

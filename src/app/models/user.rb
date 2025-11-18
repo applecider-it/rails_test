@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :user_tweets
+
   # ActiveAdmin / Ransack 用に属性を許可
   def self.ransackable_attributes(auth_object = nil)
     ["created_at", "email", "id", "updated_at", "reset_password_token"]
