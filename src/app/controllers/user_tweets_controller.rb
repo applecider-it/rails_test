@@ -4,7 +4,7 @@ class UserTweetsController < ApplicationController
 
   # GET /user_tweets or /user_tweets.json
   def index
-    @user_tweets = UserTweet.all
+    @user_tweets = UserTweet.includes(:user).all
   end
 
   # GET /user_tweets/1 or /user_tweets/1.json

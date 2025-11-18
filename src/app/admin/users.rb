@@ -41,4 +41,29 @@ ActiveAdmin.register User do
     f.actions
   end
 
+  # 詳細画面
+  show do
+    attributes_table do
+      row :id
+      row :email
+      row :created_at
+      row :updated_at
+    end
+
+    # ユーザーのツイート一覧
+    panel "ツイート一覧" do
+      paginated_collection(user.user_tweets.page(params[:tweets_page]).per(1),
+          param_name: 'tweets_page',
+          download_links: false) do
+        table_for collection do
+          column :id
+          column :content
+          column :created_at
+        end
+      end
+    end
+    
+    # 管理者コメントブロック
+    active_admin_comments
+  end
 end
