@@ -1,0 +1,20 @@
+<div id="<%= dom_id tweet %>" class="max-w-2xl mx-auto bg-white shadow-lg rounded-2xl p-6 border border-gray-200 mb-8">
+  <!-- ヘッダー -->
+  <div class="flex items-center mb-4">
+    <div class="flex-shrink-0">
+      <!-- ユーザーアイコン代用 -->
+      <span class="inline-block w-12 h-12 bg-gray-300 rounded-full text-center leading-12 font-bold text-white">
+        <%= tweet.user.email[0].upcase %>
+      </span>
+    </div>
+    <div class="ml-4">
+      <h2 class="text-xl font-semibold text-gray-800"><%= tweet.user.email %></h2>
+      <p class="text-sm text-gray-500">Posted at <%= tweet.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+    </div>
+  </div>
+
+  <!-- 本文 -->
+  <div class="mt-4 text-gray-800 leading-relaxed text-lg">
+    <p><%= tweet.content %></p>
+  </div>
+</div>

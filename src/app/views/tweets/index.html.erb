@@ -5,7 +5,7 @@
 <div id="tweets">
   <% @tweets.each do |tweet| %>
     <div class="mb-5">
-      <%= render "tweet", tweet: tweet %>
+      <%= render "row", tweet: tweet %>
 
       <%= link_to "Show this user tweet", tweet_path(tweet), class: "app-link-normal" %>
     </div>

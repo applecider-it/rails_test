@@ -6,6 +6,6 @@ class TweetServices::ListService
       .includes(:user)
       .order(id: :desc)
       .page(page)
-      .per(1)
+      .per(2)
   end
 end
