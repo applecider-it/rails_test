@@ -1,6 +1,6 @@
 require "test_helper"
 
-class UserTweetsControllerTest < ActionDispatch::IntegrationTest
+class TweetsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user_tweet = user_tweets(:one)
   end

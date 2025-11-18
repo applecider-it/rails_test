@@ -23,7 +23,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
 
-  get "test/index"
-  get "test/backend_test"
-  get "test/react_test"
+  # 開発者向けページ
+  get "development/index"
+  get "development/backend_test"
+  get "development/react_test"
 end

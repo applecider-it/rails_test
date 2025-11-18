@@ -2,7 +2,7 @@
 console.log('test init')
 
 import { createRoot } from "react-dom/client";
-import TestComponet from "./TestComponet";
+import SampleComponet from "./SampleComponet";
 
   const el = document.getElementById("test-container");
   if (el) {
@@ -12,7 +12,7 @@ import TestComponet from "./TestComponet";
 
     console.log(all);
 
-    root.render(<TestComponet name={all.name} />);
+    root.render(<SampleComponet name={all.name} />);
   }
 
 

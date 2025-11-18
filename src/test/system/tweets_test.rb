@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-class UserTweetsTest < ApplicationSystemTestCase
+class TweetsTest < ApplicationSystemTestCase
   setup do
     @user_tweet = user_tweets(:one)
   end
