@@ -10,5 +10,6 @@ class TestController < ApplicationController
   end
 
   def react_test
+    @name = "Test!!"
   end
 end

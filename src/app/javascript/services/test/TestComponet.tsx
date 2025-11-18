@@ -5,5 +5,5 @@ type Props = {
 };
 
 export default function TestComponet({ name }: Props) {
-  return <h1>Hello, {name}!</h1>;
+  return <h1>Hello React, {name}</h1>;
 }

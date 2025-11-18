@@ -4,7 +4,7 @@ console.log('test init')
 import { createRoot } from "react-dom/client";
 import TestComponet from "./TestComponet";
 
-  const el = document.getElementById("test");
+  const el = document.getElementById("test-container");
   if (el) {
     const root = createRoot(el);
     
