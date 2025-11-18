@@ -34,7 +34,7 @@
     <div id="app-nav-mobile-menu" class="hidden sm:hidden mt-2">
       <div class="flex flex-col gap-2 pb-10">
         <%= link_to 'Top', root_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition w-full text-center" %>
-        <%= link_to 'Top', root_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition w-full text-center" %>
+        <%= link_to 'Tweet', tweets_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition w-full text-center" %>
 
         <% if user_signed_in? %>
             <%= link_to current_user.email, edit_user_registration_path, class: "bg-gray-300 hover:bg-gray-200 text-gray-500 font-semibold px-4 py-2 rounded transition w-full text-center" %>

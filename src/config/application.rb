@@ -29,5 +29,12 @@ module Myapp
 
     # activeadminをインストールするとinherited_resourcesに切り替わるので戻す
     config.generators.scaffold_controller :scaffold_controller
+
+    # アプリケーション全体のタイムゾーン
+    config.time_zone = 'Tokyo'
+
+    # DBに保存する時のタイムゾーン
+    #config.active_record.default_timezone = :utc
+    config.active_record.default_timezone = :local
   end
 end
