@@ -1,0 +1,4 @@
+
+web: RAILS_ENV=production bin/rails s -p 3000
+#log: tail -f ./log/production.log
+

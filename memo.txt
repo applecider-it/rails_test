@@ -45,3 +45,29 @@ DB切り替え
 dt
 
 -----------------------------------
+
+本番環境
+
+DB
+
+RAILS_ENV=production bin/rails db:create
+
+RAILS_ENV=production bin/rails db:migrate
+
+RAILS_ENV=production bin/rails db:seed
+
+
+RAILS_ENV=production bin/rails console
+
+AdminUser.create!(email: 'prod@example.com', password: 'prodprod', password_confirmation: 'prodprod')
+
+
+ビルド
+
+RAILS_ENV=production rails assets:precompile
+
+
+foreman start -f Procfile.prod
+
+
+-----------------------------------
