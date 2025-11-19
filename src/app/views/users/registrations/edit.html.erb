@@ -1,6 +1,6 @@
 <div class="app-container-normal">
 
-  <h1 class="app-h1">Edit <%= resource_name.to_s.humanize %></h1>
+  <h2 class="app-h2">Edit <%= resource_name.to_s.humanize %></h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= render "shared/message/error_messages", resource: resource %>
@@ -38,7 +38,7 @@
     </div>
   <% end %>
 
-  <h2 class="app-h2 mt-10">Cancel my account</h3>
+  <h3 class="app-h3 mt-10">Cancel my account</h3>
 
   <div>Unhappy?
     <%= button_to "Cancel my account", registration_path(resource_name),

@@ -1,4 +1,4 @@
-<h1 class="app-h1">新規ツイート</h1>
+<h2 class="app-h2">新規ツイート</h2>
 
 <%= form_with(model: @tweet, url: tweets_path, scope: :tweet) do |form| %>
   <%= render "form", form: form, tweet: @tweet %>
