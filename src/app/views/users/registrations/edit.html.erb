@@ -40,7 +40,12 @@
 
   <h2 class="app-h2 mt-10">Cancel my account</h3>
 
-  <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), class: "app-btn-danger", data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+  <div>Unhappy?
+    <%= button_to "Cancel my account", registration_path(resource_name),
+          class: "app-btn-danger",
+          data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" },
+          form: { onsubmit: "return confirm('本当に削除しますか？');" },
+          method: :delete %></div>
 
   <div class="my-10">
     <%= link_to "Back", :back, class: "app-link-normal" %>
