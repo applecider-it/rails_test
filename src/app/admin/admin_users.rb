@@ -1,6 +1,9 @@
 ActiveAdmin.register AdminUser do
   permit_params :email, :password, :password_confirmation
 
+  # 削除ボタン除外
+  actions :all, except: [:destroy]
+
   index do
     selectable_column
     id_column

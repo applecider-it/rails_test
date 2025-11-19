@@ -100,3 +100,11 @@ rails db:migrate
 
 rails g kaminari:views default
 
+-----------------------------------
+
+
+
+rails generate migration AddDiscardedAtToUsers discarded_at:datetime:index
+
+rails db:migrate
+

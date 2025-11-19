@@ -16,6 +16,7 @@ ja:
       timeout: "セッションがタイムアウトしました。再度ログインしてください。"
       unauthenticated: "続行するにはログインまたはアカウント登録が必要です。"
       unconfirmed: "続行するにはメールアドレスの確認が必要です。"
+      deleted_account: "削除済みのアカウントです。"
     mailer:
       confirmation_instructions:
         subject: "メールアドレス確認のご案内"

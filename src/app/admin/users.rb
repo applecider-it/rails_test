@@ -17,6 +17,23 @@ ActiveAdmin.register User do
 
   permit_params :email, :password, :password_confirmation
 
+  # 削除ボタン除外
+  actions :all, except: [:destroy]
+
+  # 論理削除ボタン
+  action_item :discard, only: :show, if: -> { !resource.discarded? } do
+    link_to "論理削除", discard_admin_user_path(resource),
+      method: :put,
+      data: { confirm: "本当に論理削除しますか？" }
+  end
+
+  # 復元ボタン
+  action_item :restore, only: :show, if: -> { resource.discarded? } do
+    link_to "復元", undiscard_admin_user_path(resource),
+      method: :put,
+      data: { confirm: "復元しますか？" }
+  end
+
   index do
     selectable_column
     id_column
@@ -24,9 +41,18 @@ ActiveAdmin.register User do
     column :current_sign_in_at
     column :sign_in_count
     column :created_at
+    column "状態" do |user|
+      user.discarded? ? "削除済み" : "有効"
+    end
     actions
   end
 
+  # 絞り込みタブ
+  scope :all, default: true
+  scope :kept
+  scope :discarded
+
+  # 検索フィルター
   filter :email
   filter :current_sign_in_at
   filter :sign_in_count
@@ -48,6 +74,7 @@ ActiveAdmin.register User do
       row :email
       row :created_at
       row :updated_at
+      row :discarded_at
     end
 
     # ユーザーのツイート一覧
@@ -66,4 +93,16 @@ ActiveAdmin.register User do
     # 管理者コメントブロック
     active_admin_comments
   end
+
+  # 論理削除
+  member_action :discard, method: :put do
+    resource.discard
+    redirect_back fallback_location: admin_users_path, notice: "論理削除しました"
+  end
+
+  # 復元
+  member_action :undiscard, method: :put do
+    resource.undiscard
+    redirect_back fallback_location: admin_users_path, notice: "復元しました"
+  end  
 end

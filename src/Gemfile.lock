@@ -122,6 +122,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    discard (1.4.0)
+      activerecord (>= 4.2, < 9.0)
     dotenv (3.1.8)
     drb (2.2.3)
     dry-cli (1.3.0)
@@ -436,6 +438,7 @@ DEPENDENCIES
   capybara
   debug
   devise
+  discard
   importmap-rails
   jbuilder
   kamal

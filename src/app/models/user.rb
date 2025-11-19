@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include Discard::Model
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -19,5 +21,15 @@ class User < ApplicationRecord
   # ActiveAdminで空のパスワードは無視するためのメソッド
   def password_required?
     new_record? || password.present?
+  end
+
+  # ログイン可能かチェック
+  def active_for_authentication?
+    super && !discarded?
+  end
+
+  # 無効な理由（フラッシュ表示用）
+  def inactive_message
+    discarded? ? :deleted_account : super
   end
 end
