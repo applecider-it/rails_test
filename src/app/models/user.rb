@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   has_many :user_tweets
 
+  before_discard :discard_all_relations
+
   # ActiveAdmin / Ransack 用に属性を許可
   def self.ransackable_attributes(auth_object = nil)
     ["created_at", "email", "id", "updated_at", "reset_password_token"]
@@ -31,5 +33,10 @@ class User < ApplicationRecord
   # 無効な理由（フラッシュ表示用）
   def inactive_message
     discarded? ? :deleted_account : super
+  end
+
+  # 関連テーブル全てを高速に論理削除
+  private def discard_all_relations
+    user_tweets.kept.update_all(discarded_at: Time.current)
   end
 end

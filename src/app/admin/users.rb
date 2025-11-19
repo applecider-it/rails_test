@@ -86,6 +86,7 @@ ActiveAdmin.register User do
           column :id
           column :content
           column :created_at
+          column :discarded_at
         end
       end
     end
@@ -96,7 +97,9 @@ ActiveAdmin.register User do
 
   # 論理削除
   member_action :discard, method: :put do
-    resource.discard
+    ActiveRecord::Base.transaction do
+      resource.discard
+    end
     redirect_back fallback_location: admin_users_path, notice: "論理削除しました"
   end
 

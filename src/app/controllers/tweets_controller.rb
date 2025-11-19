@@ -2,6 +2,7 @@ class TweetsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_tweet, only: %i[ show edit update destroy ]
   before_action :setup_service_class
+  before_action :check_owner, only: %i[ edit update destroy ]
 
   # GET /tweets or /tweets.json
   def index
@@ -54,7 +55,7 @@ class TweetsController < ApplicationController
 
   # DELETE /tweets/1 or /tweets/1.json
   def destroy
-    @tweet.destroy!
+    @tweet.discard
 
     respond_to do |format|
       format.html { redirect_to tweets_path, notice: "削除しました。", status: :see_other }
@@ -65,7 +66,7 @@ class TweetsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tweet
-      @tweet = UserTweet.find(params.expect(:id))
+      @tweet = UserTweet.kept.find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.
@@ -73,7 +74,15 @@ class TweetsController < ApplicationController
       params.expect(tweet: [ :content ])
     end
 
+    # サービスクラスのセットアップ
     def setup_service_class
       @list_service = TweetServices::ListService.new
+    end
+
+    # オーナーチェック用メソッド
+    def check_owner
+      return if @tweet.user == current_user
+
+      redirect_to tweets_path, alert: "権限がありません"
     end
 end

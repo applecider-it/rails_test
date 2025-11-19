@@ -1,10 +1,14 @@
 <%= render "info", tweet: @tweet %>
 
 <div>
-  <%= link_to "編集", edit_tweet_path(@tweet), class: "app-link-normal" %> |
+  <% if current_user == @tweet.user %>
+    <%= link_to "編集", edit_tweet_path(@tweet), class: "app-link-normal" %> |
+  <% end %>
   <%= link_to "一覧", tweets_path, class: "app-link-normal" %>
 
-  <%= button_to "削除", tweet_path(@tweet), method: :delete,
-    class: "app-btn-danger w-20 mt-10",
-    form: { onsubmit: "return confirm('本当に削除しますか？');" } %>
+  <% if current_user == @tweet.user %>
+    <%= button_to "削除", tweet_path(@tweet), method: :delete,
+      class: "app-btn-danger w-20 mt-10",
+      form: { onsubmit: "return confirm('本当に削除しますか？');" } %>
+  <% end %>
 </div>

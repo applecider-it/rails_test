@@ -108,3 +108,5 @@ rails generate migration AddDiscardedAtToUsers discarded_at:datetime:index
 
 rails db:migrate
 
+rails generate migration AddDiscardedAtToUserTweets discarded_at:datetime:index
+
