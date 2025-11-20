@@ -1,3 +1,7 @@
+# ユーザーツイートモデル
+# 
+# ドキュメント
+# /documents/models/user_tweet.md
 class UserTweet < ApplicationRecord
   include Discard::Model
 

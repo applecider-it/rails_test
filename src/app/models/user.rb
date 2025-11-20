@@ -1,3 +1,7 @@
+# ユーザーモデル
+# 
+# ドキュメント
+# /documents/models/user.md
 class User < ApplicationRecord
   include Discard::Model
 
