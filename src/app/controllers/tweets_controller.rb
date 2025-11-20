@@ -30,13 +30,25 @@ class TweetsController < ApplicationController
 
   # POST /tweets or /tweets.json
   def create
+    commit = params[:commit]
+    confirm = params[:confirm]
+
     @tweet = UserTweet.new(tweet_params)
     @tweet.user = current_user
 
     respond_to do |format|
-      if @tweet.save
-        format.html { redirect_to tweet_path(@tweet), notice: "作成しました。" }
-        format.json { render :show, status: :created, location: tweet_path(@tweet) }
+      if @tweet.valid?
+        if commit
+          @tweet.save
+          format.html { redirect_to tweet_path(@tweet), notice: "作成しました。" }
+          format.json { render :show, status: :created, location: tweet_path(@tweet) }
+        else
+          if confirm
+            format.html { render :new_confirm }
+          else
+            format.html { render :new }
+          end
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
@@ -46,10 +58,24 @@ class TweetsController < ApplicationController
 
   # PATCH/PUT /tweets/1 or /tweets/1.json
   def update
+    commit = params[:commit]
+    confirm = params[:confirm]
+
+    @tweet.assign_attributes(tweet_params)
+
     respond_to do |format|
-      if @tweet.update(tweet_params)
-        format.html { redirect_to tweet_path(@tweet), notice: "更新しました。", status: :see_other }
-        format.json { render :show, status: :ok, location: tweet_path(@tweet) }
+      if @tweet.valid?
+        if commit
+          @tweet.save
+          format.html { redirect_to tweet_path(@tweet), notice: "更新しました。", status: :see_other }
+          format.json { render :show, status: :ok, location: tweet_path(@tweet) }
+        else
+          if confirm
+            format.html { render :edit_confirm }
+          else
+            format.html { render :edit }
+          end
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @tweet.errors, status: :unprocessable_entity }

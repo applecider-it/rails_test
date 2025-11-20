@@ -3,6 +3,7 @@ ja:
   activerecord:
     models:
       user: "ユーザー"
+      user_tweet: "ツイート"
       admin_user: "管理者"
     attributes:
       user:
@@ -11,6 +12,8 @@ ja:
         current_password: "現在のパスワード"
         password: "パスワード"
         password_confirmation: "パスワードの確認"
+      user_tweet:
+        content: "投稿内容"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

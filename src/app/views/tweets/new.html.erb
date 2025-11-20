@@ -2,6 +2,10 @@
 
 <%= form_with(model: @tweet, url: tweets_path, scope: :tweet) do |form| %>
   <%= render "form", form: form, tweet: @tweet %>
+
+  <div class="my-2">
+    <%= form.submit "確認", class: "app-btn-primary w-40", name: "confirm" %>
+  </div>
 <% end %>
 
 <br>

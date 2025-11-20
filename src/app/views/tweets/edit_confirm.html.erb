@@ -1,10 +1,11 @@
-<h2 class="app-h2">ツイート変更</h2>
+<h2 class="app-h2">ツイート変更確認</h2>
 
 <%= form_with(model: @tweet, url: tweet_path(@tweet), scope: :tweet) do |form| %>
-  <%= render "form", form: form, tweet: @tweet %>
+  <%= render "confirm", form: form, tweet: @tweet %>
 
   <div class="my-2">
-    <%= form.submit "確認", class: "app-btn-primary w-40", name: "confirm" %>
+    <%= form.submit "戻る", class: "app-btn-primary w-40", name: "back" %>
+    <%= form.submit class: "app-btn-primary w-40" %>
   </div>
 <% end %>
 

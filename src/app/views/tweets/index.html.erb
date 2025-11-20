@@ -1,5 +1,9 @@
 <h2 class="app-h2">ツイート一覧</h2>
 
+<div class="my-10">
+  <%= link_to "新規作成", new_tweet_path, class: "app-btn-primary" %>
+</div>
+
 <div class="my-3">
   <%= form_with url: tweets_path, method: :get, local: true do |form| %>
     <%= form.text_field :keyword, value: @keyword, placeholder: "キーワード検索", class: "app-form-input inline-block w-auto" %>
@@ -17,8 +21,4 @@
 
 <div class="mt-5">
   <%= paginate @tweets %>
-</div>
-
-<div class="mt-10">
-  <%= link_to "新規作成", new_tweet_path, class: "app-btn-primary" %>
 </div>
