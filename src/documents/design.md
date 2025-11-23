@@ -13,6 +13,7 @@ app/
   admin/ <- activeadmin関連
   controllers/
     users/ <- devise関連
+    tweets_controller.rb <- user_tweets_controller.rbにしないで、Tweetというドメインを表すようにしている。
   javascript/
     entrypoints/ <- vite_railsのエントリーポイント
     services/ <- ビジネスロジックなど
@@ -52,3 +53,11 @@ vite.config.ts
 ## Rubyのサービスクラスの命名規則
 
 モジュール名、クラス名の衝突を避けるため、カテゴリーごとのディレクトリには`_services`、サービスクラスには`_service`をポストフィックスにしている。
+
+## Railswayじゃない部分
+
+モデルはDB構成に連動させるべきですが、コントローラーはドメインの区切りに合わせるべきなので、user_tweets_controller.rbにしないで、tweets_controller.rbにして、UserTweetモデルとの連動を断っています。
+
+フロントエンドは、vite、react、tsxを使うほうがいいので、importmapなどは使っていません。
+
+ビジネスロジックは、コントローラーやモデルに書かないで、サービスクラスにまとめています。
