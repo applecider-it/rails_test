@@ -6,6 +6,7 @@
 ## 実装内容
 
 - [ツイート機能](./features/tweet.md)
+- [チャット機能](./features/chat.md)
 
 ## モデル
 
