@@ -5,22 +5,24 @@ class Api::DevelopmentController < Api::ApplicationController
 
   # GOからのレスポンステスト
   def go_api_test
-    header = request.headers['Authorization']
-    token = header.split(' ').last if header
+    jwt_token_service = ApiServices::JwtTokenService.new
+    ret = jwt_token_service.parce_jwt(request)
 
-    p("token", token)
+    p("parce result", ret)
 
-    begin
-      decoded = JWT.decode(token, ENV['APP_JWT_SECRET'], true, { algorithm: 'HS256' })
-      user = User.find(decoded[0]['user_id'])
+    if ret
+      user_id = ret[:user_id]
+      user = User.find(user_id)
       p("user", user)
-    rescue JWT::DecodeError
+
+      p("params[:title]", params[:title])
+      p("params[:sender_message]", params[:sender_message])
+
+      render json: { status: 'OK' }
+      return
+    else
       render json: { status: 'NG', error: 'Unauthorized' }, status: :unauthorized
       return
     end
-
-    p("params[:message]", params[:message])
-
-    render json: { status: 'OK' }
   end
 end
