@@ -1,3 +1,5 @@
+require 'jwt'
+
 # ユーザーモデル
 # 
 # ドキュメント
@@ -42,5 +44,12 @@ class User < ApplicationRecord
   # 関連テーブル全てを高速に論理削除
   private def discard_all_relations
     user_tweets.kept.update_all(discarded_at: Time.current)
+  end
+
+  # WebSocket用のjwtトークン
+  def jwt_token
+    payload = { user_id: id, email: email, exp: 24.hours.from_now.to_i }
+    secret = ENV['APP_JWT_SECRET']  # .env の値を参照
+    JWT.encode(payload, secret, 'HS256')
   end
 end

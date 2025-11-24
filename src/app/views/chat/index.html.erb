@@ -1,25 +1,25 @@
 <h2 class="app-h2">Go Chat</h2>
 <div>
-    <input type="text" id="username" placeholder="Username" class="app-form-input w-auto">
     <input type="text" id="message" placeholder="Message" class="app-form-input w-auto">
     <button onclick="sendMessage()" class="app-btn-primary w-auto">Send</button>
     <ul id="chat"></ul>
 </div>
 
 <script>
-    let ws = new WebSocket("ws://localhost:8080/ws");
+    const token = "<%= current_user.jwt_token %>";
+
+    let ws = new WebSocket(`ws://localhost:8080/ws?token=${token}`);
     
     function onMessage(event) {
         let msg = JSON.parse(event.data);
         let li = document.createElement("li");
-        li.textContent = msg.username + ": " + msg.message;
+        li.textContent = `${msg.user_id} (${msg.email}): ${msg.message}`;
         document.getElementById("chat").prepend(li);
     };
 
     function sendMessage() {
-        let username = document.getElementById("username").value;
         let message = document.getElementById("message").value;
-        ws.send(JSON.stringify({username, message}));
+        ws.send(JSON.stringify({message}));
         document.getElementById("message").value = "";
     }
     

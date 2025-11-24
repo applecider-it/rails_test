@@ -124,4 +124,8 @@ go run main.go
 
 rails generate controller chat index
 
+go get github.com/joho/godotenv
 
+go get github.com/golang-jwt/jwt/v5
+
+air init

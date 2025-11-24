@@ -1,0 +1,2 @@
+# 共通のJWTシークレット
+APP_JWT_SECRET=ThisIsASecretKey1234567890

@@ -74,3 +74,6 @@ gem 'sass-rails'
 gem 'sassc-rails'
 
 gem 'discard'
+
+gem 'jwt'
+gem 'dotenv-rails', groups: [:development, :test]
