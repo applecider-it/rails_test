@@ -30,4 +30,5 @@ Rails.application.routes.draw do
   get "development/index"
   get "development/backend_test"
   get "development/react_test"
+  post "api/development/go_api_test"
 end

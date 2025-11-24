@@ -6,9 +6,10 @@ import (
 
 // WebSocket 接続情報とユーザー情報をまとめて保存
 type Client struct {
-	Conn   *websocket.Conn
-	UserID int
-	Email  string
+	Conn        *websocket.Conn
+	UserID      int
+	Email       string
+	TokenString string
 }
 
 // メッセージの型定義

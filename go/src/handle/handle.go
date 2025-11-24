@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"myapp/src/auth"
+	"myapp/src/test"
 	"myapp/src/types"
 	"myapp/src/websocket"
 )
@@ -44,9 +45,10 @@ func HandleConnections(w http.ResponseWriter, r *http.Request) {
 
 	// 接続ユーザー情報を保存
 	client := &types.Client{
-		Conn:   ws,
-		UserID: userID,
-		Email:  email,
+		Conn:        ws,
+		UserID:      userID,
+		Email:       email,
+		TokenString: tokenString,
 	}
 	clients[client] = true
 
@@ -66,6 +68,8 @@ func HandleConnections(w http.ResponseWriter, r *http.Request) {
 
 		fmt.Printf("Received message: message=%s, userID=%d, email=%s\n",
 			msg.Message, msg.UserID, msg.Email)
+
+		test.TestSend(client.TokenString)
 
 		broadcast <- msg // チャネル broadcast にメッセージを送る（送信処理へ渡す）。
 	}
