@@ -36,5 +36,8 @@ module Myapp
     # DBに保存する時のタイムゾーン
     #config.active_record.default_timezone = :utc
     config.active_record.default_timezone = :local
+
+    # WebSocketサーバーホスト名
+    config.x.ws_server_host = ''
   end
 end

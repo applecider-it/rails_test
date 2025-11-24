@@ -11,5 +11,7 @@ const el = document.getElementById('chat-root')!;
 if (el) {
   const all = JSON.parse(el.dataset.all!);
 
-  createRoot(el).render(<ChatArea token={all.token} />);
+  console.log(all);
+
+  createRoot(el).render(<ChatArea token={all.token} host={all.host} />);
 }

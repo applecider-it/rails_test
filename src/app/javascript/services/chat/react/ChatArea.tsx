@@ -3,14 +3,14 @@ import { useEffect, useRef, useState } from 'react';
 /**
  * チャットコンポーネント
  */
-export default function ChatArea({ token }) {
+export default function ChatArea({ token, host }) {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const wsRef = useRef(null);
 
   useEffect(() => {
     // WebSocket 接続
-    const ws = new WebSocket(`ws://localhost:8080/ws?token=${token}`);
+    const ws = new WebSocket(`ws://${host}/ws?token=${token}`);
     wsRef.current = ws;
 
     ws.onmessage = (event) => {

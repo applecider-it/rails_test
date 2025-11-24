@@ -6,16 +6,19 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 )
 
 // railsへのAPIのテスト送信
 func TestSend(tokenString string) {
 	fmt.Printf("testSend: %s", tokenString)
 
+	var railsHost []byte = []byte(os.Getenv("APP_RAILS_HOST"))
+
 	// 送信するデータ
 	jsonData := []byte(`{"message":"hello from Go"}`)
 
-	req, err := http.NewRequest("POST", "http://localhost:3000/api/development/go_api_test", bytes.NewBuffer(jsonData))
+	req, err := http.NewRequest("POST", "http://"+string(railsHost)+"/api/development/go_api_test", bytes.NewBuffer(jsonData))
 	if err != nil {
 		panic(err)
 	}
