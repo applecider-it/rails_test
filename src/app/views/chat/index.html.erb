@@ -1,27 +1,7 @@
-<h2 class="app-h2">Go Chat</h2>
-<div>
-    <input type="text" id="message" placeholder="Message" class="app-form-input w-auto">
-    <button onclick="sendMessage()" class="app-btn-primary w-auto">Send</button>
-    <ul id="chat"></ul>
-</div>
+<%= vite_typescript_tag 'chat' %>
 
-<script>
-    const token = "<%= current_user.jwt_token %>";
-
-    let ws = new WebSocket(`ws://localhost:8080/ws?token=${token}`);
-    
-    function onMessage(event) {
-        let result = JSON.parse(event.data);
-        let li = document.createElement("li");
-        li.textContent = `${result.sender.user_id} (${result.sender.email}): ${result.data.message}`;
-        document.getElementById("chat").prepend(li);
-    };
-
-    function sendMessage() {
-        let message = document.getElementById("message").value;
-        ws.send(JSON.stringify({message}));
-        document.getElementById("message").value = "";
-    }
-    
-    ws.onmessage = onMessage;
-</script>
+<div id="chat-root"
+  data-all="<%= {
+    token: current_user.jwt_token,
+    }.to_json %>"
+></div>
