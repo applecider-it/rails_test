@@ -1,9 +1,7 @@
 # APIのJWTトークン管理クラス
 class ApiServices::JwtTokenService
   # JWTトークンをパース
-  def parce_jwt(request)
-    token = get_jwt(request)
-
+  def parse_jwt(token)
     begin
       decoded = JWT.decode(token, ENV['APP_JWT_SECRET'], true, { algorithm: 'HS256' })
       return {
@@ -15,7 +13,7 @@ class ApiServices::JwtTokenService
   end
 
   # リクエストオブジェクトからJWTトークンを取得
-  private def get_jwt(request)
+  def get_jwt(request)
     header = request.headers['Authorization']
     token = header.split(' ').last if header
     token

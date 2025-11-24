@@ -6,11 +6,14 @@ class Api::DevelopmentController < Api::ApplicationController
   # GOからのレスポンステスト
   def go_api_test
     jwt_token_service = ApiServices::JwtTokenService.new
-    ret = jwt_token_service.parce_jwt(request)
 
-    p("parce result", ret)
+    token = jwt_token_service.get_jwt(request)
+    ret = jwt_token_service.parse_jwt(token)
+
+    p("parse result", ret)
 
     if ret
+      p('valid token')
       user_id = ret[:user_id]
       user = User.find(user_id)
       p("user", user)
@@ -21,6 +24,7 @@ class Api::DevelopmentController < Api::ApplicationController
       render json: { status: 'OK' }
       return
     else
+      p('invalid token')
       render json: { status: 'NG', error: 'Unauthorized' }, status: :unauthorized
       return
     end
