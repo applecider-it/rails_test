@@ -11,6 +11,20 @@ Rails
 
 foreman start -f Procfile.dev
 
+-------
+
+go
+
+cd /home/owner/workspace/tmp/rails_test/go
+
+air
+
+
+watchしない場合
+
+go run main.go
+
+
 -----------------------------------
 
 

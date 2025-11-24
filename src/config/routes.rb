@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "chat/index"
   resources :tweets
   scope "/admin_secret" do
     devise_for :admin_users, ActiveAdmin::Devise.config

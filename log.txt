@@ -110,3 +110,18 @@ rails db:migrate
 
 rails generate migration AddDiscardedAtToUserTweets discarded_at:datetime:index
 
+-----------------------------------
+
+
+
+go get github.com/gorilla/websocket
+go get github.com/gorilla/mux
+
+go mod init myapp
+
+
+go run main.go
+
+rails generate controller chat index
+
+
