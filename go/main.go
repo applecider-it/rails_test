@@ -29,8 +29,8 @@ func main() {
 	setupRoute(router)
 	startGoroutines()
 
-	fmt.Println("Server started on :8080")
-	log.Fatal(http.ListenAndServe(":8080", router)) // サーバー起動（8080番で待ち受け）
+	fmt.Println("Server started on :3030")
+	log.Fatal(http.ListenAndServe(":3030", router)) // サーバー起動（3030番で待ち受け）
 }
 
 // ルート設定

@@ -77,5 +77,5 @@ Rails.application.configure do
   # config.generators.apply_rubocop_autocorrect_after_generate!
 
   # WebSocketサーバーホスト名
-  config.x.ws_server_host = 'localhost:8080'
+  config.x.ws_server_host = 'localhost:3030'
 end
