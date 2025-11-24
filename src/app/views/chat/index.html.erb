@@ -11,9 +11,9 @@
     let ws = new WebSocket(`ws://localhost:8080/ws?token=${token}`);
     
     function onMessage(event) {
-        let msg = JSON.parse(event.data);
+        let result = JSON.parse(event.data);
         let li = document.createElement("li");
-        li.textContent = `${msg.user_id} (${msg.email}): ${msg.message}`;
+        li.textContent = `${result.sender.user_id} (${result.sender.email}): ${result.data.message}`;
         document.getElementById("chat").prepend(li);
     };
 

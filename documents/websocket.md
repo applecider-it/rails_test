@@ -20,12 +20,25 @@ websocketはgoで連携する。
 
 ## メッセージ送信時
 
-| 項目名 | 内容 | 型 | 詳細 |
-|--------|--------|--------|--------|
-| message | メッセージ | string |  |
-| user_id | ユーザーID | integer | ブロードキャスト時のみ |
-| email | メールアドレス | string | ブロードキャスト時のみ |
+```json
+{
+  message: string,
+}
+```
 
+## ブロードキャスト時
+
+```json
+{
+  data: {
+    message: string
+  },
+  sender: {
+    user_id: int,
+    email: string
+  }
+}
+```
 
 
 

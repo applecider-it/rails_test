@@ -16,11 +16,13 @@ type Client struct {
 //
 // JSON で受け取り・送信するためのデータ形式。
 //
-// 受信：{ "message": "hello" }
-//
-// 送信：{ "message": "hello", user_id: 1, email: "test@example.com" }
+// 例：{ "message": "hello" }
 type Message struct {
 	Message string `json:"message"` // メッセージ本文
-	UserID  int    `json:"user_id"` // 送信者のID
-	Email   string `json:"email"`   // 送信者のメールアドレス
+}
+
+// ブロードキャスト用
+type BroadcastPayload struct {
+	Msg    Message
+	Client *Client
 }

@@ -20,7 +20,7 @@ var clients = make(map[*types.Client]bool)
 // メッセージを送るためのチャネル
 //
 // 誰かから受け取ったメッセージを「全員に送る」ための通信用チャネル。
-var broadcast = make(chan types.Message)
+var broadcast = make(chan types.BroadcastPayload)
 
 // WebSocket の接続を処理する関数
 func HandleConnections(w http.ResponseWriter, r *http.Request) {
@@ -62,25 +62,61 @@ func HandleConnections(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 
-		// 送信者情報をセット
-		msg.UserID = client.UserID
-		msg.Email = client.Email
-
 		fmt.Printf("Received message: message=%s, userID=%d, email=%s\n",
-			msg.Message, msg.UserID, msg.Email)
+			msg.Message, client.UserID, client.Email)
 
 		test.TestSend(client.TokenString)
 
-		broadcast <- msg // チャネル broadcast にメッセージを送る（送信処理へ渡す）。
+		// チャネル broadcast にメッセージを送る（送信処理へ渡す）
+		broadcast <- types.BroadcastPayload{
+			Msg:    msg,
+			Client: client,
+		}
 	}
 }
 
 // メッセージを全員に送信する関数
 func HandleMessages() {
 	for {
-		msg := <-broadcast // チャネル broadcast にメッセージが届くのを待つ（待ち受け）
+		payload := <-broadcast // チャネル broadcast にメッセージが届くのを待つ（待ち受け）
+		msg := payload.Msg
+		sender := payload.Client
 		for client := range clients {
-			err := client.Conn.WriteJSON(msg) // 接続中の全 WebSocket クライアントに送信する。
+			// 接続中の全 WebSocket クライアントに送信する。
+			//
+			// 送信内容
+			//{
+			//	data: {
+			//		message: msg.Message
+			//	},
+			//	sender: {
+			//		user_id: sender.UserID,
+			//		email: sender.Email,
+			//	},
+			//}
+			err := client.Conn.WriteJSON(struct {
+				Data struct {
+					Message string `json:"message"`
+				} `json:"data"`
+				Sender struct {
+					UserID int    `json:"user_id"`
+					Email  string `json:"email"`
+				} `json:"sender"`
+			}{
+				Data: struct {
+					Message string `json:"message"`
+				}{
+					Message: msg.Message,
+				},
+				Sender: struct {
+					UserID int    `json:"user_id"`
+					Email  string `json:"email"`
+				}{
+					UserID: sender.UserID,
+					Email:  sender.Email,
+				},
+			})
+
 			if err != nil {
 				log.Printf("error: %v", err)
 				client.Conn.Close()
