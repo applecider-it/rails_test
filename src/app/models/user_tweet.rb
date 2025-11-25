@@ -14,4 +14,9 @@ class UserTweet < ApplicationRecord
     return all if keyword.blank?
     where("content LIKE ?", "%#{sanitize_sql_like(keyword)}%")
   }
+
+  # シリアライズ対象から除外
+  def self.hidden_attributes
+    [:updated_at, :discarded_at]
+  end
 end

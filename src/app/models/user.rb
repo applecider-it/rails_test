@@ -52,4 +52,9 @@ class User < ApplicationRecord
     secret = ENV['APP_JWT_SECRET']  # .env の値を参照
     JWT.encode(payload, secret, 'HS256')
   end
+
+  # シリアライズ対象から除外
+  def self.hidden_attributes
+    [:created_at, :updated_at, :discarded_at]
+  end
 end

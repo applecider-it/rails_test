@@ -29,6 +29,6 @@ Rails.application.routes.draw do
   # 開発者向けページ
   get "development/index"
   get "development/backend_test"
-  get "development/react_test"
+  get "development/frontend_test"
   post "api/development/go_api_test"
 end
