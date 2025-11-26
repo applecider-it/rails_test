@@ -91,7 +91,7 @@ func HandleMessages() {
 				// 送信内容
 				//{
 				//	data: {
-				//		message: msg.Message
+				//		json: receivedData.Json
 				//	},
 				//	sender: {
 				//		user_id: sender.UserID,
