@@ -20,7 +20,7 @@ websocketはgoで連携する。
 
 ## メッセージ送信時
 
-```json
+```
 {
   message: string,
 }
@@ -28,7 +28,7 @@ websocketはgoで連携する。
 
 ## ブロードキャスト時
 
-```json
+```
 {
   data: {
     message: string
