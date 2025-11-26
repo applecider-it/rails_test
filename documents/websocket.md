@@ -2,6 +2,8 @@
 
 websocketはgoで連携する。
 
+Railsと双方向APIで連携。
+
 認証はJWTを使う。
 
 ## コネクション時のパラメーター
@@ -9,6 +11,7 @@ websocketはgoで連携する。
 | 項目名 | 内容 | 型 | 詳細 |
 |--------|--------|--------|--------|
 | token | 認証情報を含むJWTトークン | string |  |
+| channel | 接続するチャンネル | string | つまり、同時に複数のチャンネルには接続できない。 |
 
 ## token
 
@@ -22,16 +25,21 @@ websocketはgoで連携する。
 
 ```
 {
-  message: string,
+  json: string,
 }
 ```
+
+| 項目名 | 内容 | 型 | 詳細 |
+|--------|--------|--------|--------|
+| json | Jsonデータ | string | 各チャンネルごとに別々の値が入る |
+
 
 ## ブロードキャスト時
 
 ```
 {
   data: {
-    message: string
+    json: string
   },
   sender: {
     user_id: int,

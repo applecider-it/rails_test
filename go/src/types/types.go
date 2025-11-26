@@ -10,19 +10,18 @@ type Client struct {
 	UserID      int
 	Email       string
 	TokenString string
+	Channel     string
 }
 
-// メッセージの型定義
+// 受信データの型定義
 //
 // JSON で受け取り・送信するためのデータ形式。
-//
-// 例：{ "message": "hello" }
-type Message struct {
-	Message string `json:"message"` // メッセージ本文
+type ReceivedData struct {
+	Json string `json:"json"` // JSON文字列
 }
 
 // ブロードキャスト用
 type BroadcastPayload struct {
-	Msg    Message
-	Client *Client
+	Received ReceivedData
+	Client   *Client
 }

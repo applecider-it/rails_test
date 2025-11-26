@@ -24,10 +24,10 @@ var broadcast = make(chan types.BroadcastPayload)
 
 // WebSocket の接続を処理する関数
 func HandleConnections(w http.ResponseWriter, r *http.Request) {
-	// JWT トークンを取得
 	tokenString := r.URL.Query().Get("token")
+	channel := r.URL.Query().Get("channel")
 
-	fmt.Printf("Connection: tokenString=%s\n", tokenString)
+	fmt.Printf("Connection: tokenString=%s channel=%s\n", tokenString, channel)
 
 	userID, email, err := auth.AuthenticateToken(tokenString)
 	if err != nil {
@@ -49,28 +49,29 @@ func HandleConnections(w http.ResponseWriter, r *http.Request) {
 		UserID:      userID,
 		Email:       email,
 		TokenString: tokenString,
+		Channel:     channel,
 	}
 	clients[client] = true
 
 	// 永久ループで WebSocket からデータを受け取る。
 	for {
-		var msg types.Message
-		err := ws.ReadJSON(&msg) // JSONが届くのを待つ（待ち受け）
+		var receivedData types.ReceivedData
+		err := ws.ReadJSON(&receivedData) // JSONが届くのを待つ（待ち受け）
 		if err != nil {
 			log.Printf("error: %v", err)
 			delete(clients, client)
 			break
 		}
 
-		fmt.Printf("Received message: message=%s, userID=%d, email=%s\n",
-			msg.Message, client.UserID, client.Email)
+		fmt.Printf("Received data: json=%s, userID=%d, email=%s\n",
+			receivedData.Json, client.UserID, client.Email)
 
-		test.TestSend(client.TokenString, msg.Message)
+		test.TestSend(client.TokenString, receivedData.Json)
 
 		// チャネル broadcast にメッセージを送る（送信処理へ渡す）
 		broadcast <- types.BroadcastPayload{
-			Msg:    msg,
-			Client: client,
+			Received: receivedData,
+			Client:   client,
 		}
 	}
 }
@@ -79,48 +80,53 @@ func HandleConnections(w http.ResponseWriter, r *http.Request) {
 func HandleMessages() {
 	for {
 		payload := <-broadcast // チャネル broadcast にメッセージが届くのを待つ（待ち受け）
-		msg := payload.Msg
+		receivedData := payload.Received
 		sender := payload.Client
 		for client := range clients {
-			// 接続中の全 WebSocket クライアントに送信する。
-			//
-			// 送信内容
-			//{
-			//	data: {
-			//		message: msg.Message
-			//	},
-			//	sender: {
-			//		user_id: sender.UserID,
-			//		email: sender.Email,
-			//	},
-			//}
-			err := client.Conn.WriteJSON(struct {
-				Data struct {
-					Message string `json:"message"`
-				} `json:"data"`
-				Sender struct {
-					UserID int    `json:"user_id"`
-					Email  string `json:"email"`
-				} `json:"sender"`
-			}{
-				Data: struct {
-					Message string `json:"message"`
-				}{
-					Message: msg.Message,
-				},
-				Sender: struct {
-					UserID int    `json:"user_id"`
-					Email  string `json:"email"`
-				}{
-					UserID: sender.UserID,
-					Email:  sender.Email,
-				},
-			})
+			if sender.Channel == client.Channel {
+				// チャンネルが一致する時
 
-			if err != nil {
-				log.Printf("error: %v", err)
-				client.Conn.Close()
-				delete(clients, client)
+				// 接続中の全 WebSocket クライアントに送信する。
+				//
+				// 送信内容
+				//{
+				//	data: {
+				//		message: msg.Message
+				//	},
+				//	sender: {
+				//		user_id: sender.UserID,
+				//		email: sender.Email,
+				//	},
+				//}
+				err := client.Conn.WriteJSON(struct {
+					Data struct {
+						Json string `json:"json"`
+					} `json:"data"`
+					Sender struct {
+						UserID int    `json:"user_id"`
+						Email  string `json:"email"`
+					} `json:"sender"`
+				}{
+					Data: struct {
+						Json string `json:"json"`
+					}{
+						Json: receivedData.Json,
+					},
+					Sender: struct {
+						UserID int    `json:"user_id"`
+						Email  string `json:"email"`
+					}{
+						UserID: sender.UserID,
+						Email:  sender.Email,
+					},
+				})
+
+				if err != nil {
+					log.Printf("error: %v", err)
+					client.Conn.Close()
+					delete(clients, client)
+				}
+
 			}
 		}
 	}

@@ -10,16 +10,18 @@ export default function ChatArea({ token, host }) {
 
   useEffect(() => {
     // WebSocket 接続
-    const ws = new WebSocket(`ws://${host}/ws?token=${token}`);
+    const ws = new WebSocket(`ws://${host}/ws?token=${token}&channel=chat`);
     wsRef.current = ws;
 
     ws.onmessage = (event) => {
+      // result = { data: { json }, sender: { user_id, email } }
       const result = JSON.parse(event.data);
 
-      // result = { data: { message }, sender: { user_id, email } }
+      const data = JSON.parse(result.data.json);
+      
       setMessages((prev) => [
         {
-          message: result.data.message,
+          message: data.message,
           userId: result.sender.user_id,
           email: result.sender.email,
         },
@@ -33,7 +35,8 @@ export default function ChatArea({ token, host }) {
   const sendMessage = () => {
     if (!message) return;
 
-    wsRef.current.send(JSON.stringify({ message }));
+    const json = JSON.stringify({ message });
+    wsRef.current.send(JSON.stringify({ json }));
     setMessage('');
   };
 
