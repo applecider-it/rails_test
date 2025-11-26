@@ -1,6 +1,10 @@
 
 <%= vite_typescript_tag 'development' %>
 
-<div id="test-container" data-all="<%= {
+<div id="react-root" data-all="<%= {
+  name: @name
+}.to_json %>"></div>
+
+<div id="vue-root" data-all="<%= {
   name: @name
 }.to_json %>"></div>

@@ -2,17 +2,30 @@
 console.log('test init')
 
 import { createRoot } from "react-dom/client";
-import SampleComponet from "./SampleComponet";
+import { createApp } from 'vue'
 
-  const el = document.getElementById("test-container");
-  if (el) {
-    const root = createRoot(el);
-    
-    const all: any = JSON.parse(el.dataset.all);
+import ReactSample from "./react/ReactSample";
+import VueSample from "./vue/VueSample.vue";
 
-    console.log(all);
+let el = null;
 
-    root.render(<SampleComponet name={all.name} />);
-  }
+el = document.getElementById("react-root");
+if (el) {
+  const all: any = JSON.parse(el.dataset.all);
+
+  console.log(all);
+
+  const root = createRoot(el);
+  root.render(<ReactSample name={all.name} />);
+}
+
+el = document.getElementById("vue-root");
+if (el) {
+  const all: any = JSON.parse(el.dataset.all);
+
+  console.log(all);
+
+  createApp(VueSample, {name: all.name}).mount(el)
+}
 
 

@@ -129,3 +129,7 @@ go get github.com/joho/godotenv
 go get github.com/golang-jwt/jwt/v5
 
 air init
+
+-----------------------------------
+
+npm install vue @vitejs/plugin-vue
