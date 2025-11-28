@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-// Rails空のレスポンス
+// Railsからのレスポンス
 type ApiResponse struct {
 	Status string `json:"status"`
 }

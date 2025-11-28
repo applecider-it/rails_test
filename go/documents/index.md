@@ -5,6 +5,6 @@ websocket連携の仲介。
 # 構成
 
 ```
-src/ ソース
+internal/ ソース
 main.go エントリーポイント
 ```
