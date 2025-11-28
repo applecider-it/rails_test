@@ -2,7 +2,7 @@ package test
 
 import (
 	"fmt"
-	"myapp/src/http"
+	"myapp/internal/http"
 )
 
 // railsへのAPIのテスト送信

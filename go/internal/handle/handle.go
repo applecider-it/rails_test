@@ -5,10 +5,10 @@ import (
 	"log"
 	"net/http"
 
-	"myapp/src/auth"
-	"myapp/src/test"
-	"myapp/src/types"
-	"myapp/src/websocket"
+	"myapp/internal/auth"
+	"myapp/internal/test"
+	"myapp/internal/types"
+	"myapp/internal/websocket"
 )
 
 // 参加中のクライアントを保存する変数

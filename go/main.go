@@ -15,8 +15,8 @@ import (
 
 	"github.com/gorilla/mux"
 
-	ha "myapp/src/handle"
-	"myapp/src/system"
+	ha "myapp/internal/handle"
+	"myapp/internal/system"
 )
 
 // main 関数
