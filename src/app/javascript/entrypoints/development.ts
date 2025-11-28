@@ -1,2 +1,1 @@
-
-import "@/services/development/setup-development";
+import '@/services/development/setup-development';

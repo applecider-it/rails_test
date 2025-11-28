@@ -18,7 +18,7 @@ export default function ChatArea({ token, host }) {
       const result = JSON.parse(event.data);
 
       const data = JSON.parse(result.data.json);
-      
+
       setMessages((prev) => [
         {
           message: data.message,

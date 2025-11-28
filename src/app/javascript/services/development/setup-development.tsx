@@ -1,15 +1,14 @@
+console.log('development page init');
 
-console.log('test init')
+import { createRoot } from 'react-dom/client';
+import { createApp } from 'vue';
 
-import { createRoot } from "react-dom/client";
-import { createApp } from 'vue'
-
-import ReactSample from "./react/ReactSample";
-import VueSample from "./vue/VueSample.vue";
+import ReactSample from './react/ReactSample';
+import VueSample from './vue/VueSample.vue';
 
 let el = null;
 
-el = document.getElementById("react-root");
+el = document.getElementById('react-root');
 if (el) {
   const all: any = JSON.parse(el.dataset.all);
 
@@ -19,13 +18,11 @@ if (el) {
   root.render(<ReactSample name={all.name} />);
 }
 
-el = document.getElementById("vue-root");
+el = document.getElementById('vue-root');
 if (el) {
   const all: any = JSON.parse(el.dataset.all);
 
   console.log(all);
 
-  createApp(VueSample, {name: all.name}).mount(el)
+  createApp(VueSample, { name: all.name }).mount(el);
 }
-
-

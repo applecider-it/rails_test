@@ -1,11 +1,11 @@
 <template>
-  <h2>Hello from Vue + Vite + Rails {{ name }}🎉</h2>
+  <h2>Hello Vue {{ name }}</h2>
 </template>
 
 <script setup lang="ts">
 interface Props {
-  name: string
+  name: string;
 }
 
-defineProps<Props>()
+defineProps<Props>();
 </script>
