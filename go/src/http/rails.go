@@ -1,14 +1,12 @@
-package request
+package http
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
-	"io"
-	"net/http"
 	"os"
 )
 
+// Rails空のレスポンス
 type ApiResponse struct {
 	Status string `json:"status"`
 }
@@ -20,32 +18,13 @@ func PostToRails(path, token string, payload interface{}) (*ApiResponse, error) 
 		return nil, fmt.Errorf("APP_RAILS_HOST is not set")
 	}
 
-	// JSONに変換
-	jsonBytes, err := json.Marshal(payload)
+	url := railsHost + path
+
+	body, err := PostWithAuth(url, token, payload)
+
 	if err != nil {
 		return nil, err
 	}
-
-	req, err := http.NewRequest(
-		"POST",
-		"http://"+railsHost+path,
-		bytes.NewBuffer(jsonBytes),
-	)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", "Bearer "+token)
-
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	body, _ := io.ReadAll(resp.Body)
 
 	var result ApiResponse
 	if err := json.Unmarshal(body, &result); err != nil {

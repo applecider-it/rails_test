@@ -2,12 +2,12 @@ package test
 
 import (
 	"fmt"
-	"myapp/src/request"
+	"myapp/src/http"
 )
 
 // railsへのAPIのテスト送信
 func TestSend(tokenString string, msg string) {
-	result, err := request.PostToRails("/api/development/go_api_test", tokenString, map[string]string{
+	result, err := http.PostToRails("/api/development/go_api_test", tokenString, map[string]string{
 		"title":          "hello from Go",
 		"sender_message": msg,
 	})
