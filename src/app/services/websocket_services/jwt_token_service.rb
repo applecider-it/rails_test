@@ -1,5 +1,5 @@
-# APIのJWTトークン管理クラス
-class ApiServices::JwtTokenService
+# WebsocketのJWTトークン管理クラス
+class WebsocketServices::JwtTokenService
   # JWTトークンをパース
   def parse_jwt(token)
     begin
@@ -17,5 +17,19 @@ class ApiServices::JwtTokenService
     header = request.headers['Authorization']
     token = header.split(' ').last if header
     token
+  end
+
+  # userのjwtトークン
+  def create_user_jwt_token(user)
+    payload = {
+      user_id: user.id,
+      email: user.email,
+      exp: 24.hours.from_now.to_i,
+      iat: Time.current.to_i
+    }
+
+    secret = ENV['APP_JWT_SECRET']  # .env の値を参照
+
+    JWT.encode(payload, secret, 'HS256')
   end
 end

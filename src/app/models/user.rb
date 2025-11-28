@@ -48,9 +48,8 @@ class User < ApplicationRecord
 
   # WebSocket用のjwtトークン
   def jwt_token
-    payload = { user_id: id, email: email, exp: 24.hours.from_now.to_i }
-    secret = ENV['APP_JWT_SECRET']  # .env の値を参照
-    JWT.encode(payload, secret, 'HS256')
+    jwt_token_service = WebsocketServices::JwtTokenService.new
+    jwt_token_service.create_user_jwt_token self
   end
 
   # シリアライズ対象から除外

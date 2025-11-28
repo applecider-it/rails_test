@@ -5,7 +5,7 @@ class Api::DevelopmentController < Api::ApplicationController
 
   # GOからのレスポンステスト
   def go_api_test
-    jwt_token_service = ApiServices::JwtTokenService.new
+    jwt_token_service = WebsocketServices::JwtTokenService.new
 
     token = jwt_token_service.get_jwt(request)
     ret = jwt_token_service.parse_jwt(token)
