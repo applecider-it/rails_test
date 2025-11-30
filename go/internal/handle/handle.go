@@ -1,9 +1,13 @@
 package handle
 
 import (
+	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/go-redis/redis/v8"
 
 	"myapp/internal/auth"
 	"myapp/internal/test"
@@ -21,6 +25,8 @@ var clients = make(map[*types.Client]bool)
 //
 // 誰かから受け取ったメッセージを「全員に送る」ための通信用チャネル。
 var broadcast = make(chan types.BroadcastPayload)
+
+var ctx = context.Background()
 
 // WebSocket の接続を処理する関数
 func HandleConnections(w http.ResponseWriter, r *http.Request) {
@@ -71,10 +77,68 @@ func HandleConnections(w http.ResponseWriter, r *http.Request) {
 			test.TestSend(client.TokenString, receivedData.Json)
 		}
 
+		// 送信用ユーザー情報に変換
+		sender := types.ClientSimple{
+			UserID:      client.UserID,
+			Email:       client.Email,
+			TokenString: client.TokenString,
+			Channel:     client.Channel,
+		}
+
 		// チャネル broadcast にメッセージを送る（送信処理へ渡す）
 		broadcast <- types.BroadcastPayload{
 			Received: receivedData,
-			Client:   client,
+			Sender:   sender,
+		}
+	}
+}
+
+// Redis Pub/Subの処理
+func RedisProcess() {
+	fmt.Println("begin redisProcess")
+
+	rdb := redis.NewClient(&redis.Options{
+		Addr: "127.0.0.1:6379",
+		DB:   0,
+	})
+
+	pubsub := rdb.Subscribe(ctx, "broadcast")
+	defer pubsub.Close()
+
+	ch := pubsub.Channel()
+	for msg := range ch {
+		// メッセージを受け取った時
+
+		fmt.Printf("redisProcess Received: %s\n", msg.Payload)
+		var redisData types.RedisReceivedData
+
+		err := json.Unmarshal([]byte(msg.Payload), &redisData)
+		if err != nil {
+			fmt.Println("Error:", err)
+			return
+		}
+
+		fmt.Printf("Channel: %s, Json: %s\n", redisData.Channel, redisData.Json)
+
+		// 送信用ユーザー情報に変換
+		sender := types.ClientSimple{
+			UserID:      0,
+			Email:       "System (redis)",
+			TokenString: "",
+			Channel:     redisData.Channel,
+		}
+
+		receivedData := types.ReceivedData{
+			Json: redisData.Json,
+		}
+
+		fmt.Println(sender)
+		fmt.Println(receivedData)
+
+		// チャネル broadcast にメッセージを送る（送信処理へ渡す）
+		broadcast <- types.BroadcastPayload{
+			Received: receivedData,
+			Sender:   sender,
 		}
 	}
 }
@@ -84,7 +148,7 @@ func HandleMessages() {
 	for {
 		payload := <-broadcast // チャネル broadcast にメッセージが届くのを待つ（待ち受け）
 		receivedData := payload.Received
-		sender := payload.Client
+		sender := payload.Sender
 		for client := range clients {
 			if sender.Channel == client.Channel {
 				// チャンネルが一致する時

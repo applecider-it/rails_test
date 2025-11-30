@@ -24,6 +24,8 @@ air
 
 watchしない場合
 
+cd /home/owner/workspace/tmp/rails_test/go
+
 go run main.go
 
 

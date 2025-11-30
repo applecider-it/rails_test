@@ -13,6 +13,14 @@ type Client struct {
 	Channel     string
 }
 
+// Redis, Websocker両方で利用できるユーザー情報
+type ClientSimple struct {
+	UserID      int
+	Email       string
+	TokenString string
+	Channel     string
+}
+
 // 受信データの型定義
 //
 // JSON で受け取り・送信するためのデータ形式。
@@ -23,5 +31,11 @@ type ReceivedData struct {
 // ブロードキャスト用
 type BroadcastPayload struct {
 	Received ReceivedData
-	Client   *Client
+	Sender   ClientSimple
+}
+
+// Redisの受信データの型定義
+type RedisReceivedData struct {
+	Json    string `json:"json"`    // JSON文字列
+	Channel string `json:"channel"` // JSON文字列
 }

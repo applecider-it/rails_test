@@ -33,13 +33,27 @@ class DevelopmentController < ApplicationController
 
   # WebScoketテスト
   def websocket_test
+    #websocket_test_send
+    websocket_test_redis
+
+    render :complate
+  end
+
+  def websocket_test_send
     system_service = WebsocketServices::SystemService.new
 
     system_service.send_from_system(
       "chat",
       { message: "Hello from Rails" }
     )
+  end
 
-    render :complate
+  def websocket_test_redis
+    system_service = WebsocketServices::SystemService.new
+
+    system_service.send_to_redis(
+      "chat",
+      { message: "Hello from Rails Redis Pub/Sub" }
+    )
   end
 end
