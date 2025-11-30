@@ -40,6 +40,9 @@ class TweetsController < ApplicationController
       if @tweet.valid?
         if commit
           @tweet.save
+
+          @websocket_service.broadcast(@tweet)
+
           format.html { redirect_to tweet_path(@tweet), notice: "作成しました。" }
           format.json { render :show, status: :created, location: tweet_path(@tweet) }
         else
@@ -107,6 +110,7 @@ class TweetsController < ApplicationController
     # サービスクラスのセットアップ
     def setup_service_class
       @list_service = TweetServices::ListService.new
+      @websocket_service = TweetServices::WebsocketService.new
     end
 
     # オーナーチェック用メソッド

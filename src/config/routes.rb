@@ -31,4 +31,5 @@ Rails.application.routes.draw do
   get "development/backend_test"
   get "development/frontend_test"
   post "api/development/go_api_test"
+  get "development/websocket_test"
 end

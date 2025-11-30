@@ -77,3 +77,6 @@ gem 'discard'
 
 gem 'jwt'
 gem 'dotenv-rails', groups: [:development, :test]
+
+gem 'websocket-client-simple'
+

@@ -58,7 +58,7 @@ func HandleConnections(w http.ResponseWriter, r *http.Request) {
 		var receivedData types.ReceivedData
 		err := ws.ReadJSON(&receivedData) // JSONが届くのを待つ（待ち受け）
 		if err != nil {
-			log.Printf("error: %v", err)
+			log.Printf("error: ReadJSON: %v", err)
 			delete(clients, client)
 			break
 		}
@@ -66,7 +66,10 @@ func HandleConnections(w http.ResponseWriter, r *http.Request) {
 		fmt.Printf("Received data: json=%s, userID=%d, email=%s\n",
 			receivedData.Json, client.UserID, client.Email)
 
-		test.TestSend(client.TokenString, receivedData.Json)
+		// 0はシステムからの送信なので、それ以外の時は、Railsへのテスト送信
+		if client.UserID != 0 {
+			test.TestSend(client.TokenString, receivedData.Json)
+		}
 
 		// チャネル broadcast にメッセージを送る（送信処理へ渡す）
 		broadcast <- types.BroadcastPayload{
@@ -122,7 +125,7 @@ func HandleMessages() {
 				})
 
 				if err != nil {
-					log.Printf("error: %v", err)
+					log.Printf("error: WriteJSON: %v", err)
 					client.Conn.Close()
 					delete(clients, client)
 				}
