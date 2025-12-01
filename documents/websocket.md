@@ -17,7 +17,7 @@ Railsと双方向APIで連携。
 
 | 項目名 | 内容 | 型 | 詳細 |
 |--------|--------|--------|--------|
-| user_id | ユーザーID | integer |  |
+| user_id | ユーザーID | integer | システムからの接続は`0` |
 | email | メールアドレス | string |  |
 | exp | 有効期限 | integer |  |
 
@@ -33,6 +33,22 @@ Railsと双方向APIで連携。
 |--------|--------|--------|--------|
 | json | Jsonデータ | string | 各チャンネルごとに別々の値が入る |
 
+### チャットの場合のjsonをパースした状態
+
+```
+{
+  message: string,
+}
+```
+
+### Tweetの場合のjsonをパースした状態
+
+```
+{
+  content: string,
+}
+```
+
 
 ## ブロードキャスト時
 
@@ -45,6 +61,18 @@ Railsと双方向APIで連携。
     user_id: int,
     email: string
   }
+}
+```
+
+## Redis Pub/Sub連携
+
+Pub/Subのチャンネル名: broadcast
+
+```
+{
+  channel: string, <- WebSocketチャンネル名
+  json: string, <- 上記の、「メッセージ送信時」のjsonの部分
+
 }
 ```
 
