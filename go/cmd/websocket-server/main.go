@@ -15,8 +15,8 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"myapp/internal/handle"
-	"myapp/internal/system"
+	"myapp/internal/services/system"
+	"myapp/internal/services/websocket-server/handle"
 )
 
 // main 関数

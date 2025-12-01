@@ -2,7 +2,7 @@ package test
 
 import (
 	"fmt"
-	"myapp/internal/http"
+	"myapp/internal/services/websocket-server/http"
 )
 
 // railsへのAPIのテスト送信

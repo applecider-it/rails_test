@@ -9,10 +9,10 @@ import (
 
 	"github.com/go-redis/redis/v8"
 
-	"myapp/internal/auth"
-	"myapp/internal/test"
-	"myapp/internal/types"
-	"myapp/internal/websocket"
+	"myapp/internal/services/websocket-server/auth"
+	"myapp/internal/services/websocket-server/test"
+	"myapp/internal/services/websocket-server/types"
+	"myapp/internal/services/websocket-server/websocket"
 )
 
 // 参加中のクライアントを保存する変数
