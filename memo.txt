@@ -19,14 +19,9 @@ websocketサーバー起動
 
 cd /home/owner/workspace/tmp/rails_test/go
 
-air
+go run ./cmd/websocket-server
 
 
-watchしない場合
-
-cd /home/owner/workspace/tmp/rails_test/go
-
-go run main.go
 
 
 -----------------------------------
