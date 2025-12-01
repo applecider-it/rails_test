@@ -139,4 +139,5 @@ npm install vue @vitejs/plugin-vue
 
 go get github.com/go-redis/redis/v8
 
+go get github.com/SherClockHolmes/webpush-go
 

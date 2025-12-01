@@ -22,6 +22,10 @@ cd /home/owner/workspace/tmp/rails_test/go
 go run ./cmd/websocket-server
 
 
+まとめてpush通知
+
+go run ./cmd/push-sender
+
 
 
 -----------------------------------
