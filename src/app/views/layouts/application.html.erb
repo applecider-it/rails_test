@@ -4,13 +4,15 @@
     <%= render 'layouts/shared/head' %>
   </head>
 
-  <body class="bg-gray-100 min-h-screen font-sans flex flex-col items-center p-6">
+  <body class="bg-gray-100 min-h-screen font-sans flex flex-col items-center">
     <%= render 'layouts/shared/navbar' %>
 
-    <main class="w-full bg-white shadow-md rounded p-6">
-      <%= render 'layouts/shared/message' %>
+    <main class="w-full p-0 sm:p-10 flex items-center">
+      <div class="w-full bg-white shadow-md rounded p-6">
+        <%= render 'layouts/shared/message' %>
 
-      <%= yield %>
+        <%= yield %>
+      </div>
     </main>
 
   </body>
