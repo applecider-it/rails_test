@@ -1,0 +1,26 @@
+<!-- ハンバーガーメニュー（モバイル） -->
+<div class="flex justify-between h-16 items-center sm:hidden">
+  <div>
+    <button id="app-nav-mobile-menu-button" class="text-gray-800 hover:text-gray-900 focus:outline-none">
+      <!-- Heroicons: Menu -->
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<div id="app-nav-mobile-menu" class="hidden sm:hidden mt-2">
+  <div class="flex flex-col gap-2 pb-10">
+    <%= link_to 'Top', root_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition w-full text-center" %>
+    <%= link_to 'Tweet', tweets_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition w-full text-center" %>
+
+    <% if user_signed_in? %>
+        <%= link_to current_user.email, edit_user_registration_path, class: "bg-gray-300 hover:bg-gray-200 text-gray-500 font-semibold px-4 py-2 rounded transition w-full text-center" %>
+        <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "bg-red-100 hover:bg-red-200 text-gray-500 font-semibold px-4 py-2 rounded transition w-full" %>
+    <% else %>
+        <%= link_to 'Login', new_user_session_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition w-full text-center" %>
+        <%= link_to 'Sign up', new_user_registration_path, class: "bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded transition w-full text-center" %>
+    <% end %>
+  </div>
+</div>
