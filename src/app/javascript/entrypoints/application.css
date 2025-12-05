@@ -6,7 +6,7 @@
   /* ボタン */
 
   .app-btn {
-    @apply font-semibold px-4 py-2 rounded transition w-full;
+    @apply font-semibold px-4 py-2 rounded transition;
   }
   .app-btn-primary {
     @apply app-btn bg-blue-500 hover:bg-blue-600 text-white;

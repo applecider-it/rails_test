@@ -141,3 +141,12 @@ go get github.com/go-redis/redis/v8
 
 go get github.com/SherClockHolmes/webpush-go
 
+-----------------------------------
+
+
+
+npm install react-router-dom
+
+npm uninstall react-router-dom
+
+npm install axios

@@ -5,10 +5,14 @@
     "moduleResolution": "node",
     //"strict": true,
     "jsx": "react-jsx",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
+    //"esModuleInterop": true,
+    //"forceConsistentCasingInFileNames": true,
+    //"skipLibCheck": true,
+    //"allowSyntheticDefaultImports": true,
+    "baseUrl": "./app/javascript",
+    "paths": {
+      "@/*": ["*"]
+    }
   },
   "include": ["app/javascript/**/*"]
 }

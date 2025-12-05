@@ -15,6 +15,14 @@ class TweetsController < ApplicationController
     @tweets = @list_service.get_list page, @keyword
   end
 
+  # GET /tweets/react_top
+  def react_top
+    page = params[:page]
+    @keyword = params[:keyword]
+    @tweets = @list_service.get_list page, @keyword
+    @user = current_user
+  end
+
   # GET /tweets/1 or /tweets/1.json
   def show
   end
@@ -54,7 +62,7 @@ class TweetsController < ApplicationController
         end
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @tweet.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @tweet.errors}, status: :unprocessable_entity }
       end
     end
   end

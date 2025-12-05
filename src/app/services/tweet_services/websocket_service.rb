@@ -4,7 +4,7 @@ class TweetServices::WebsocketService
   def broadcast(tweet)
     system_service = WebsocketServices::SystemService.new
 
-    system_service.send_from_system(
+    system_service.send_to_redis(
       "tweet",
       { content: tweet.content }
     )

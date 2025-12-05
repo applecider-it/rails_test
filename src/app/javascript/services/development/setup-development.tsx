@@ -3,8 +3,8 @@ console.log('development page init');
 import { createRoot } from 'react-dom/client';
 import { createApp } from 'vue';
 
-import ReactSample from './react/ReactSample';
-import VueSample from './vue/VueSample.vue';
+import TestArea from './react/TestArea';
+import TestAreaVue from './vue/TestAreaVue.vue';
 
 let el = null;
 
@@ -15,7 +15,7 @@ if (el) {
   console.log(all);
 
   const root = createRoot(el);
-  root.render(<ReactSample name={all.name} />);
+  root.render(<TestArea />);
 }
 
 el = document.getElementById('vue-root');
@@ -24,5 +24,5 @@ if (el) {
 
   console.log(all);
 
-  createApp(VueSample, { name: all.name }).mount(el);
+  createApp(TestAreaVue, { name: all.name }).mount(el);
 }

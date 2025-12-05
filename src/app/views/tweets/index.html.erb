@@ -1,5 +1,3 @@
-<%= vite_typescript_tag 'tweet' %>
-
 <h2 class="app-h2">ツイート一覧</h2>
 
 <div class="my-10">
@@ -24,10 +22,3 @@
 <div class="mt-5">
   <%= paginate @tweets %>
 </div>
-
-<div id="tweet-root"
-  data-all="<%= {
-    token: current_user.jwt_token,
-    host: Rails.configuration.x.ws_server_host,
-    }.to_json %>"
-></div>

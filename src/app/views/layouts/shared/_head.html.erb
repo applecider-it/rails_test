@@ -31,3 +31,7 @@
 
   Visit the guide for more information: https://vite-ruby.netlify.app/guide/rails
 -->
+
+<% if user_signed_in? %>
+  <meta name="user" data-json="<%= current_user.to_json %>">
+<% end %>

@@ -149,9 +149,20 @@ func HandleMessages() {
 		payload := <-broadcast // チャネル broadcast にメッセージが届くのを待つ（待ち受け）
 		receivedData := payload.Received
 		sender := payload.Sender
+
+		fmt.Println("receivedData")
+		fmt.Println(receivedData)
+		fmt.Println("sender")
+		fmt.Println(sender)
+
 		for client := range clients {
+			fmt.Println("client")
+			fmt.Println(client)
+
 			if sender.Channel == client.Channel {
 				// チャンネルが一致する時
+
+				fmt.Println("send")
 
 				// 接続中の全 WebSocket クライアントに送信する。
 				//

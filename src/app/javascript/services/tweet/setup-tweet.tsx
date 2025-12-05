@@ -2,30 +2,22 @@
  * ツイート画面のセットアップ
  */
 
-const el = document.getElementById('tweet-root')!;
+import { createRoot } from 'react-dom/client';
+import TweetArea from './react/TweetArea';
+
+import TweetClient from './TweetClient';
+
+const el: any = document.getElementById('tweet-root');
 
 if (el) {
-  const all = JSON.parse(el.dataset.all!);
+  const all = JSON.parse(el.dataset.all);
 
   console.log(all);
 
-  const { token, host } = all;
+  const tweetClient = new TweetClient(all.token, all.wsHost, all.user);
 
-  // WebSocket 接続
-  const ws = new WebSocket(`ws://${host}/ws?token=${token}&channel=tweet`);
-
-  ws.onmessage = (event) => {
-    // result = { data: { json }, sender: { user_id, email } }
-    const result = JSON.parse(event.data);
-
-    console.log(result);
-
-    const data = JSON.parse(result.data.json);
-
-    console.log(data);
-
-    alert(`新しいメッセージがあります。${data.content}`);
-
-    location.reload();
-  };
+  const root = createRoot(el);
+  root.render(
+    <TweetArea initialTweets={all.tweets} tweetClient={tweetClient} />
+  );
 }

@@ -1,10 +1,18 @@
 Rails.application.routes.draw do
+  # チャット
   get "chat/index"
+
+  # ツイート
+  get "tweets/react_top"
   resources :tweets
+
+  # 管理画面
   scope "/admin_secret" do
     devise_for :admin_users, ActiveAdmin::Devise.config
     ActiveAdmin.routes(self)
   end
+
+  # ユーザー関連
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
@@ -13,6 +21,7 @@ Rails.application.routes.draw do
     unlocks: 'users/unlocks',
     #omniauth_callbacks: "users/omniauth_callbacks"
   }
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

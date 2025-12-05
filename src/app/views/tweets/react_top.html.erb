@@ -1,0 +1,12 @@
+<%= vite_typescript_tag 'tweet' %>
+
+<div id="tweet-root"
+  data-all="<%= {
+    token: current_user.jwt_token,
+    wsHost: Rails.configuration.x.ws_server_host,
+    user: @user,
+    tweets: @tweets.as_json(
+      include: :user,
+    ),
+    }.to_json %>"
+></div>
