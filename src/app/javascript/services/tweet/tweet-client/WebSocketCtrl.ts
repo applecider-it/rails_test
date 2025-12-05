@@ -10,7 +10,6 @@ export default class WebSocketCtrl {
   wsHost;
   user;
   ws;
-  channel: string;
 
   constructor(token, wsHost, user) {
     this.token = token;
@@ -18,8 +17,6 @@ export default class WebSocketCtrl {
     this.user = user;
 
     this.ws = null;
-
-    this.channel = 'tweet';
 
     this.initWebSocket();
   }
@@ -29,7 +26,7 @@ export default class WebSocketCtrl {
     console.log(`[DEBUG] Connecting WebSocket with token: ${this.token}`);
 
     this.ws = new WebSocket(
-      `ws://${this.wsHost}/ws?token=${this.token}&channel=${this.channel}`
+      `ws://${this.wsHost}/ws?token=${this.token}`
     );
 
     this.ws.onopen = () => {

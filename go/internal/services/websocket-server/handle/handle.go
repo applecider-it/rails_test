@@ -31,17 +31,16 @@ var ctx = context.Background()
 // WebSocket の接続を処理する関数
 func HandleConnections(w http.ResponseWriter, r *http.Request) {
 	tokenString := r.URL.Query().Get("token")
-	channel := r.URL.Query().Get("channel")
 
-	fmt.Printf("Connection: tokenString=%s channel=%s\n", tokenString, channel)
+	fmt.Printf("Connection: tokenString=%s\n", tokenString)
 
-	userID, email, err := auth.AuthenticateToken(tokenString)
+	userID, email, channel, err := auth.AuthenticateToken(tokenString)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return
 	}
 
-	fmt.Printf("Connected user: ID=%d, Email=%s\n", userID, email)
+	fmt.Printf("Connected user: ID=%d, Email=%s channel=%s\n", userID, email, channel)
 
 	ws, err := websocket.Upgrader.Upgrade(w, r, nil) // WebSocketへ変換
 	if err != nil {

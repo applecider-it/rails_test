@@ -2,7 +2,7 @@
 
 <div id="tweet-root"
   data-all="<%= {
-    token: current_user.jwt_token,
+    token: current_user.jwt_token('tweet'),
     wsHost: Rails.configuration.x.ws_server_host,
     user: @user,
     tweets: @tweets.as_json(

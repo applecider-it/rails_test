@@ -47,9 +47,9 @@ class User < ApplicationRecord
   end
 
   # WebSocket用のjwtトークン
-  def jwt_token
+  def jwt_token(channel)
     jwt_token_service = WebsocketServices::JwtTokenService.new
-    jwt_token_service.create_user_jwt_token self
+    jwt_token_service.create_user_jwt_token(self, channel)
   end
 
   # シリアライズ対象から除外

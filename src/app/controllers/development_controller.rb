@@ -33,8 +33,8 @@ class DevelopmentController < ApplicationController
 
   # WebScoketテスト
   def websocket_test
-    #websocket_test_send
-    websocket_test_redis
+    websocket_test_send
+    #websocket_test_redis
 
     render :complate
   end

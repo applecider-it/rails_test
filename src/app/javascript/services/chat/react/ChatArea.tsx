@@ -10,7 +10,7 @@ export default function ChatArea({ token, host }) {
 
   useEffect(() => {
     // WebSocket 接続
-    const ws = new WebSocket(`ws://${host}/ws?token=${token}&channel=chat`);
+    const ws = new WebSocket(`ws://${host}/ws?token=${token}`);
     wsRef.current = ws;
 
     ws.onmessage = (event) => {

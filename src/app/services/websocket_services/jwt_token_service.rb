@@ -20,10 +20,11 @@ class WebsocketServices::JwtTokenService
   end
 
   # userのjwtトークン
-  def create_user_jwt_token(user)
+  def create_user_jwt_token(user, channel)
     payload = {
       user_id: user.id,
       email: user.email,
+      channel: channel,
       exp: 24.hours.from_now.to_i,
       iat: Time.current.to_i
     }
@@ -34,10 +35,11 @@ class WebsocketServices::JwtTokenService
   end
 
   # システムのjwtトークン
-  def create_system_jwt_token
+  def create_system_jwt_token(channel)
     payload = {
       user_id: 0,
       email: 'system',
+      channel: channel,
       exp: 1.minutes.from_now.to_i,
       iat: Time.current.to_i
     }
