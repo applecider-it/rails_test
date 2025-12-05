@@ -17,9 +17,6 @@ class TweetsController < ApplicationController
 
   # GET /tweets/react_top
   def react_top
-    page = params[:page]
-    @keyword = params[:keyword]
-    @tweets = @list_service.get_list page, @keyword
     @user = current_user
   end
 
