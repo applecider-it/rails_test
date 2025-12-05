@@ -46,6 +46,7 @@ Railsと双方向APIで連携。
 ```
 {
   content: string,
+  user_id: integer,
 }
 ```
 

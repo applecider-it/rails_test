@@ -58,6 +58,11 @@ export default class WebSocketCtrl {
 
     const detail = JSON.parse(data.data.json);
 
+    if (this.user.id === detail.user_id) {
+      console.log('自分のツイート');
+      return;
+    }
+
     showToast(`新しいツイートがあります。${detail.content}`);
   }
 }

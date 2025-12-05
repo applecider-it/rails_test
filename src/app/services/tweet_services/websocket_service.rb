@@ -6,7 +6,7 @@ class TweetServices::WebsocketService
 
     system_service.send_to_redis(
       "tweet",
-      { content: tweet.content }
+      { content: tweet.content, user_id: tweet.user_id }
     )
   end
 end

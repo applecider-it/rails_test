@@ -50,7 +50,7 @@ export default function TweetNew({tweetClient}: Prop) {
           onChange={(e) => setContent(e.target.value)}
         />
         {errors.content && (
-          <p className="app-error-text">{errors.content[0]}</p>
+          <p className="text-red-600">{errors.content[0]}</p>
         )}
         <button type="submit" className="mt-2 app-btn-primary">
           Tweet
