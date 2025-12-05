@@ -7,8 +7,8 @@ type Props = {
 /** トーストリストコンポーネント */
 export default function ToastsComponent({ toasts }: Props) {
   const computedClass = (toast: Toast) => {
-    const color = toast.type === 'alert' ? 'red-200' : 'blue-200';
-    return `text-sm bg-${color} border-2 border-gray-400 text-black px-3 py-1 rounded-lg shadow-lg animate-slide-in`;
+    const color = toast.type === 'alert' ? 'red-300' : 'blue-300';
+    return `text-md bg-${color} border-4 border-gray-700 text-black px-4 py-2 rounded-lg shadow-lg animate-slide-in`;
   };
 
   return (

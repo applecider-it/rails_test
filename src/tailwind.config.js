@@ -9,7 +9,7 @@ export default {
   // 正規表現でまとめて書ける
   safelist: [
     {
-      pattern: /bg-(red|blue)-200/,
+      pattern: /bg-(red|blue)-([\d]+)/,
     },
   ],
   theme: {
