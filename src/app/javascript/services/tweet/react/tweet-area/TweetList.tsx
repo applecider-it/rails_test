@@ -19,6 +19,7 @@ export default function TweetList({ tweetClient } : Prop) {
     init();
   }, []);
 
+  /** 初期化 */
   const init = async () => {
     const initialTweets = await tweetClient.tweetCtrl.getList();
 
@@ -49,6 +50,9 @@ export default function TweetList({ tweetClient } : Prop) {
               by {tweetContainer.tweet.user.email} -{' '}
               {new Date(tweetContainer.tweet.created_at).toLocaleString()}
             </p>
+            <div className="mt-4">
+              <Link to={`/${tweetContainer.tweet.id}`} className="app-link-normal">参照</Link>
+            </div>
           </div>
         ))}
       </div>

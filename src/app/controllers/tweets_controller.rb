@@ -33,6 +33,7 @@ class TweetsController < ApplicationController
   def edit
   end
 
+  # 新規作成処理
   # POST /tweets or /tweets.json
   def create
     commit = params[:commit]
@@ -43,7 +44,11 @@ class TweetsController < ApplicationController
 
     respond_to do |format|
       if @tweet.valid?
+        # エラーがないとき
+
         if commit
+          # 確定ボタンの時
+          
           @tweet.save
 
           @websocket_service.broadcast(@tweet)
@@ -52,18 +57,29 @@ class TweetsController < ApplicationController
           format.json { render :show, status: :created, location: tweet_path(@tweet) }
         else
           if confirm
+            # 確認ボタンの時
+            # 確認画面に遷移
+            # Jsonでは、statusだけ返す。
+            
             format.html { render :new_confirm }
+            format.json { render json: {status: true} }
           else
+            # 戻るボタンの時
+            
             format.html { render :new }
           end
         end
       else
+        # エラーがあるとき
+        # 全てのボタンで共通
+        
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: {errors: @tweet.errors}, status: :unprocessable_entity }
       end
     end
   end
 
+  # 更新処理
   # PATCH/PUT /tweets/1 or /tweets/1.json
   def update
     commit = params[:commit]
@@ -73,18 +89,31 @@ class TweetsController < ApplicationController
 
     respond_to do |format|
       if @tweet.valid?
+        # エラーがないとき
+
         if commit
+          # 確定ボタンの時
+          
           @tweet.save
           format.html { redirect_to tweet_path(@tweet), notice: "更新しました。", status: :see_other }
           format.json { render :show, status: :ok, location: tweet_path(@tweet) }
         else
           if confirm
+            # 確認ボタンの時
+            # 確認画面に遷移
+            # Jsonでは、statusだけ返す。
+            
             format.html { render :edit_confirm }
           else
+            # 戻るボタンの時
+            
             format.html { render :edit }
           end
         end
       else
+        # エラーがあるとき
+        # 全てのボタンで共通
+        
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end

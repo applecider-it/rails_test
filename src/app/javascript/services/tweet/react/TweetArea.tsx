@@ -3,6 +3,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 
 import TweetNew from './tweet-area/TweetNew';
 import TweetList from './tweet-area/TweetList';
+import TweetShow from './tweet-area/TweetShow';
 
 import TweetClient from '../TweetClient';
 
@@ -21,6 +22,10 @@ export default function TweetApp({ tweetClient }: Prop) {
           <Route
             path="/new"
             element={<TweetNew tweetClient={tweetClient} />}
+          />
+          <Route
+            path="/:id"
+            element={<TweetShow tweetClient={tweetClient} />}
           />
         </Routes>
       </HashRouter>

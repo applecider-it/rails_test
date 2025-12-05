@@ -11,6 +11,9 @@
   .app-btn-primary {
     @apply app-btn bg-blue-500 hover:bg-blue-600 text-white;
   }
+  .app-btn-secondary {
+    @apply app-btn bg-gray-500 hover:bg-gray-600 text-white;
+  }
   .app-btn-danger {
     @apply app-btn bg-red-500 hover:bg-red-600 text-white;
   }
