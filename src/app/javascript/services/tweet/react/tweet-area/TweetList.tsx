@@ -37,7 +37,9 @@ export default function TweetList({ tweetClient } : Prop) {
 
   return (
     <div>
-      <div>
+      <h2 className="app-h2">ツイート一覧</h2>
+
+      <div className="my-10">
         <Link to="/new" className="app-btn-primary">新規作成</Link>
       </div>
 

@@ -1,6 +1,6 @@
-import { useParams, Link, useNavigate  } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { setIsLoading } from '@/services/ui/message';
+import { setIsLoading, showToast } from '@/services/ui/message';
 
 import TweetClient from '../../TweetClient';
 
@@ -34,16 +34,28 @@ export default function TweetShow({ tweetClient }: Prop) {
 
   /** 削除ボタンクリック時 */
   const onDelete = async () => {
+    if (!confirm('削除しますか？')) return;
     console.log(tweet);
 
+    setIsLoading(true);
     await tweetClient.tweetCtrl.deleteTweet(tweet.id);
+    setIsLoading(false);
 
-    navigate("/");
+    showToast("削除しました。", 'alert');
+
+    navigate('/');
+  };
+
+  /** 更新ボタンクリック時 */
+  const onUpdate = async () => {
+    navigate(`/${tweet.id}/edit`);
   };
 
   return (
     <div>
-      <div>
+      <h2 className="app-h2">ツイート詳細</h2>
+
+      <div className="my-10">
         <Link to="/" className="app-btn-primary">
           一覧
         </Link>
@@ -52,7 +64,14 @@ export default function TweetShow({ tweetClient }: Prop) {
       {tweet ? (
         <div className="mb-4 mt-10">
           <div>content: {tweet.content}</div>
-          <div className="mt-10 space-x-4">
+          <div className="mt-10 flex justify-between">
+            <button
+              type="button"
+              onClick={onUpdate}
+              className="app-btn-primary"
+            >
+              更新
+            </button>
             <button type="button" onClick={onDelete} className="app-btn-danger">
               削除
             </button>

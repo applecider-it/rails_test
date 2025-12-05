@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { setIsLoading } from '@/services/ui/message';
+import { setIsLoading, showToast } from '@/services/ui/message';
 
 import TweetClient from '../../TweetClient';
 
@@ -37,6 +37,8 @@ export default function TweetNew({ tweetClient }: Prop) {
       } else {
         // 確認画面の時
 
+        showToast("ツイートしました。");
+
         // データクリア
         setContent('');
         setErrors({});
@@ -64,7 +66,9 @@ export default function TweetNew({ tweetClient }: Prop) {
 
   return (
     <div>
-      <div>
+      <h2 className="app-h2">新規ツイート</h2>
+
+      <div className="my-10">
         <Link to="/" className="app-btn-primary">
           一覧
         </Link>

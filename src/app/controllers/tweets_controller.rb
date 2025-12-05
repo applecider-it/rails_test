@@ -104,6 +104,7 @@ class TweetsController < ApplicationController
             # Jsonでは、statusだけ返す。
             
             format.html { render :edit_confirm }
+            format.json { render json: {status: true} }
           else
             # 戻るボタンの時
             
@@ -115,7 +116,7 @@ class TweetsController < ApplicationController
         # 全てのボタンで共通
         
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @tweet.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @tweet.errors}, status: :unprocessable_entity }
       end
     end
   end

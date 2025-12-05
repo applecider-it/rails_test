@@ -34,6 +34,28 @@ export default class TweetCtrl {
     return response.data;
   }
 
+  /**
+   * ツイートの更新を送信
+   * 
+   * @param isCommit trueの場合は確定。falseだと確認のみ。
+   */
+  async putTweet(id: number, content, isCommit: boolean) {
+    const headers = jsonRequestHeaders();
+
+    const data: any = { content };
+    if (isCommit) {
+      data.commit = true;
+    } else {
+      data.confirm = true;
+    }
+
+    const response = await axios.put(`/tweets/${id}`, data, {
+      headers: headers,
+    });
+    console.log('response.data', response.data);
+    return response.data;
+  }
+
   /** ツイート取得 */
   async getTweet(id) {
     const headers = jsonRequestHeaders();
