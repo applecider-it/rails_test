@@ -42,8 +42,6 @@ export default function ChatArea({ token, host }) {
 
   return (
     <div>
-      <h2 className="app-h2">Chat</h2>
-
       <div>
         <input
           type="text"
