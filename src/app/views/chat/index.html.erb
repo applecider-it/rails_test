@@ -2,7 +2,7 @@
 
 <div id="chat-root"
   data-all="<%= {
-    token: current_user.jwt_token('chat'),
+    token: @token,
     host: Rails.configuration.x.ws_server_host,
     }.to_json %>"
 ></div>

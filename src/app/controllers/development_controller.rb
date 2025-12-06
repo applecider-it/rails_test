@@ -43,7 +43,7 @@ class DevelopmentController < ApplicationController
     system_service = WebsocketServices::SystemService.new
 
     system_service.send_from_system(
-      "chat",
+      ChannelServices::ChatChannelService.get_channel,
       { message: "Hello from Rails" }
     )
   end
@@ -52,7 +52,7 @@ class DevelopmentController < ApplicationController
     system_service = WebsocketServices::SystemService.new
 
     system_service.send_to_redis(
-      "chat",
+      ChannelServices::ChatChannelService.get_channel,
       { message: "Hello from Rails Redis Pub/Sub" }
     )
   end

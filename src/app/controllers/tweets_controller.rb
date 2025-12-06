@@ -18,6 +18,7 @@ class TweetsController < ApplicationController
   # GET /tweets/react_top
   def react_top
     @user = current_user
+    @token = current_user.jwt_token(ChannelServices::TweetChannelService.get_channel)
   end
 
   # GET /tweets/1 or /tweets/1.json
