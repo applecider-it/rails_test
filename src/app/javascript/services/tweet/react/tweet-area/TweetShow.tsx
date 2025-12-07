@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { setIsLoading, showToast } from '@/services/ui/message';
 
 import TweetClient from '../../TweetClient';
+import { getCurrentUser } from '@/services/application/application';
 
 type Prop = {
   tweetClient: TweetClient;
@@ -16,6 +17,8 @@ export default function TweetShow({ tweetClient }: Prop) {
   const navigate = useNavigate();
 
   const [tweet, setTweet] = useState<any>(null);
+
+  const currentUser = getCurrentUser();
 
   useEffect(() => {
     console.log('init show', id);
@@ -41,7 +44,7 @@ export default function TweetShow({ tweetClient }: Prop) {
     await tweetClient.tweetCtrl.deleteTweet(tweet.id);
     setIsLoading(false);
 
-    showToast("削除しました。", 'alert');
+    showToast('削除しました。', 'alert');
 
     navigate('/');
   };
@@ -50,6 +53,8 @@ export default function TweetShow({ tweetClient }: Prop) {
   const onUpdate = async () => {
     navigate(`/${tweet.id}/edit`);
   };
+
+  console.log('render', currentUser, tweet)
 
   return (
     <div>
@@ -64,18 +69,24 @@ export default function TweetShow({ tweetClient }: Prop) {
       {tweet ? (
         <div className="mb-4 mt-10">
           <div>content: {tweet.content}</div>
-          <div className="mt-10 flex justify-between">
-            <button
-              type="button"
-              onClick={onUpdate}
-              className="app-btn-primary"
-            >
-              更新
-            </button>
-            <button type="button" onClick={onDelete} className="app-btn-danger">
-              削除
-            </button>
-          </div>
+          {currentUser.id === tweet.user.id ? (
+            <div className="mt-10 flex justify-between">
+              <button
+                type="button"
+                onClick={onUpdate}
+                className="app-btn-primary"
+              >
+                更新
+              </button>
+              <button
+                type="button"
+                onClick={onDelete}
+                className="app-btn-danger"
+              >
+                削除
+              </button>
+            </div>
+          ) : null}
         </div>
       ) : null}
     </div>

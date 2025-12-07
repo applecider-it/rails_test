@@ -1,13 +1,13 @@
 console.log('application init');
 
 import { createRoot } from 'react-dom/client';
-import { getAuthUser } from './application';
+import { getCurrentUser } from './application';
 
 import AppCommon from './react/AppCommon';
 
-const user = getAuthUser();
+const user = getCurrentUser();
 
-console.log(user);
+console.log('currentUser', user);
 
 const el: any = document.getElementById('app-container-common');
 

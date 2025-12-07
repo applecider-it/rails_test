@@ -18,6 +18,6 @@ if (el) {
 
   const root = createRoot(el);
   root.render(
-    <TweetArea initialTweets={all.tweets} tweetClient={tweetClient} />
+    <TweetArea tweetClient={tweetClient} />
   );
 }
