@@ -5,7 +5,7 @@ class TweetServices::WebsocketService
     system_service = WebsocketServices::SystemService.new
 
     system_service.send_to_redis(
-      "tweet",
+      ChannelServices::TweetChannelService.get_channel,
       { content: tweet.content, user_id: tweet.user_id }
     )
   end
