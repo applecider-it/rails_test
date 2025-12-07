@@ -33,19 +33,4 @@ class WebsocketServices::JwtTokenService
 
     JWT.encode(payload, secret, 'HS256')
   end
-
-  # システムのjwtトークン
-  def create_system_jwt_token(channel)
-    payload = {
-      user_id: 0,
-      email: 'system',
-      channel: channel,
-      exp: 1.minutes.from_now.to_i,
-      iat: Time.current.to_i
-    }
-
-    secret = ENV['APP_JWT_SECRET']  # .env の値を参照
-
-    JWT.encode(payload, secret, 'HS256')
-  end
 end

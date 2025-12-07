@@ -5,22 +5,9 @@ class CommandServices::WebsocketTestCommandService
     case type
     when "redis"
       test_redis
-    when "websocket"
-      test_websocket
     else
       puts "invalid type: #{type}"
     end
-  end
-
-  def test_websocket
-    system_service = WebsocketServices::SystemService.new
-
-    system_service.send_from_system(
-      ChannelServices::ChatChannelService.get_channel,
-      { message: "Hello from Rails" }
-    )
-
-    puts "test_websocket sended"
   end
 
   def test_redis

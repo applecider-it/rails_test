@@ -71,10 +71,8 @@ func HandleConnections(w http.ResponseWriter, r *http.Request) {
 		fmt.Printf("Received data: json=%s, userID=%d, email=%s\n",
 			receivedData.Json, client.UserID, client.Email)
 
-		// 0はシステムからの送信なので、それ以外の時は、Railsへのテスト送信
-		if client.UserID != 0 {
-			test.TestSend(client.TokenString, receivedData.Json)
-		}
+		// Railsへのテスト送信
+		test.TestSend(client.TokenString, receivedData.Json)
 
 		// 送信用ユーザー情報に変換
 		sender := types.ClientSimple{

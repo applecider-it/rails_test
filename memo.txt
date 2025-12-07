@@ -98,6 +98,4 @@ WebSocket動作確認
 
 bin/rails app:websocket_test[redis]
 
-bin/rails app:websocket_test[websocket]
-
 -----------------------------------

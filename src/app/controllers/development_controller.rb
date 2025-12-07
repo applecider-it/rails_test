@@ -30,16 +30,4 @@ class DevelopmentController < ApplicationController
   def frontend_test
     @name = "Test!!"
   end
-
-  # WebScoketテスト
-  def websocket_test
-    system_service = WebsocketServices::SystemService.new
-
-    system_service.send_from_system(
-      ChannelServices::ChatChannelService.get_channel,
-      { message: "Hello from Rails" }
-    )
-
-    render :complate
-  end
 end

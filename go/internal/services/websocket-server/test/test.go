@@ -16,7 +16,7 @@ func TestSend(tokenString string, msg string) {
 		return
 	}
 
-	fmt.Println("Status:", result.Status)
+	fmt.Println("Status From Rails:", result.Status)
 
 	if result.Status == "OK" {
 		fmt.Println("OK process")
