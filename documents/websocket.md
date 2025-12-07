@@ -20,10 +20,11 @@ Railsと双方向APIで連携。
 
 | 項目名 | 内容 | 型 | 詳細 |
 |--------|--------|--------|--------|
-| user_id | ユーザーID | integer | システムからの接続は`0` |
+| user_id | ユーザーID | integer |  |
 | email | メールアドレス | string |  |
-| exp | 有効期限 | integer |  |
 | channel | 接続するチャンネル | string | つまり、同時に複数のチャンネルには接続できない。 |
+| exp | 有効期限 | integer |  |
+| iat | 現在日時 | integer |  |
 
 ## メッセージ送信時
 
@@ -63,7 +64,7 @@ Railsと双方向APIで連携。
     json: string
   },
   sender: {
-    user_id: int,
+    user_id: int, <- システムからの送信は 0
     email: string
   }
 }
