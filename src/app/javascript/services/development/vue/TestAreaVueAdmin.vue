@@ -1,9 +1,9 @@
 <template>
-  <div class="mt-5 py-6 border-gray-500 border-2 p-5 space-y-3">
-    <div class="mb-6 text-lg">vue動作確認</div>
-    <div class="mb-6">タグからの値: {{ name }}</div>
+  <div style="border: 1px solid #aaa; padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
+    <h3>Vue動作確認</h3>
+    <div>タグからの値: {{ name }}</div>
     <div>
-      <button @click="cnt++" class="app-btn-primary">Add</button>
+      <button @click="cnt++">Add</button>
     </div>
     <div>
       <span>cnt: {{ cnt }}</span>

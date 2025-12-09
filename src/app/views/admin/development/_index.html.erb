@@ -1,11 +1,18 @@
 <%= render "admin/shared/common" %>
 
-<%= vite_typescript_tag 'development' %>
+<%= vite_typescript_tag 'development-admin' %>
 
-<div id="react-root" data-all="<%= {
-  name: name
-}.to_json %>"></div>
+<div style="display: flex; flex-direction: column; gap: 1rem;">
+  <div id="react-root" data-all="<%= {
+    name: name
+  }.to_json %>">
+    <%= render 'admin/shared/message/loading' %>
+  </div>
 
-<div id="vue-root" data-all="<%= {
-  name: name
-}.to_json %>"></div>
+  <div id="vue-root" data-all="<%= {
+    name: name
+  }.to_json %>">
+    <%= render 'admin/shared/message/loading' %>
+  </div>
+</div>
+
