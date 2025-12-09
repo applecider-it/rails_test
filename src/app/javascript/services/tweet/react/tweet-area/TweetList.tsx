@@ -45,7 +45,7 @@ export default function TweetList({ tweetClient }: Prop) {
 
       <div className="space-y-4 mt-10">
         {tweetContainers.map((tweetContainer) => (
-          <RowArea tweetContainer={tweetContainer}></RowArea>
+          <RowArea tweetContainer={tweetContainer} key={tweetContainer.tweet.id}></RowArea>
         ))}
       </div>
     </div>
