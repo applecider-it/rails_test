@@ -10,6 +10,10 @@ ActiveAdmin.register_page "Dashboard" do
       end
     end
 
+    div do
+      para link_to "development", admin_development_path
+    end
+
     # Here is an example of a simple dashboard with columns and panels.
     #
     # columns do

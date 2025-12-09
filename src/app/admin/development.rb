@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 ActiveAdmin.register_page "Development" do
-  menu priority: 1, label: "開発者向けページ"
+  menu false
 
   content title: proc { "開発者向けページ" } do
     para "ここは独自ページです。"
