@@ -3,8 +3,12 @@
 
 <div id="react-root" data-all="<%= {
   name: @name
-}.to_json %>"></div>
+}.to_json %>">
+  <%= render 'shared/message/loading' %>
+</div>
 
 <div id="vue-root" data-all="<%= {
   name: @name
-}.to_json %>"></div>
+}.to_json %>">
+  <%= render 'shared/message/loading' %>
+</div>
