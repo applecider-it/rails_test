@@ -49,42 +49,59 @@ export default function TweetShow({ tweetClient }: Prop) {
     navigate('/');
   };
 
-  /** 更新ボタンクリック時 */
-  const onUpdate = async () => {
-    navigate(`/${tweet.id}/edit`);
-  };
-
-  console.log('render', currentUser, tweet)
+  console.log('render', currentUser, tweet);
 
   return (
     <div>
       <h2 className="app-h2">ツイート詳細</h2>
 
-      <div className="my-10">
-        <Link to="/" className="app-btn-primary">
-          一覧
-        </Link>
-      </div>
-
       {tweet ? (
         <div className="mb-4 mt-10">
-          <div>content: {tweet.content}</div>
+          <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-2xl p-6 border border-gray-200 mb-8">
+            {/** ヘッダー */}
+            <div className="flex items-center mb-4">
+              <div className="flex-shrink-0">
+                {/** ユーザーアイコン代用 */}
+                <span className="inline-block w-12 h-12 bg-gray-300 rounded-full text-center leading-12 font-bold text-white">
+                  {tweet.user.email[0].toUpperCase()}
+                </span>
+              </div>
+              <div className="ml-4">
+                <h2 className="text-xl font-semibold text-gray-800">
+                  {tweet.user.email}
+                </h2>
+                <p className="text-sm text-gray-500">
+                  Posted at {new Date(tweet.created_at).toLocaleString()}
+                </p>
+              </div>
+            </div>
+
+            {/** 本文 */}
+            <div className="mt-4 text-gray-800 leading-relaxed text-lg">
+              <p>{tweet.content}</p>
+            </div>
+          </div>
+
           {currentUser.id === tweet.user.id ? (
             <div className="mt-10 flex justify-between">
-              <button
-                type="button"
-                onClick={onUpdate}
-                className="app-btn-primary"
-              >
-                更新
-              </button>
-              <button
-                type="button"
-                onClick={onDelete}
-                className="app-btn-danger"
-              >
-                削除
-              </button>
+              <div className='space-x-2'>
+                <Link to="/" className="app-link-normal">
+                  一覧
+                </Link>
+                <span>|</span>
+                <Link to={`/${tweet.id}/edit`} className="app-link-normal">
+                  更新
+                </Link>
+              </div>
+              <div>
+                <button
+                  type="button"
+                  onClick={onDelete}
+                  className="app-btn-danger"
+                >
+                  削除
+                </button>
+              </div>
             </div>
           ) : null}
         </div>
