@@ -20,10 +20,7 @@ export default function TweetApp({ tweetClient }: Prop) {
       <HashRouter>
         <Routes>
           <Route path="/" element={<TweetList tweetClient={tweetClient} />} />
-          <Route
-            path="/new"
-            element={<TweetNew tweetClient={tweetClient} />}
-          />
+          <Route path="/new" element={<TweetNew tweetClient={tweetClient} />} />
           <Route
             path="/:id"
             element={<TweetShow tweetClient={tweetClient} />}
