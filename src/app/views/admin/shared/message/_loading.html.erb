@@ -1,6 +1,6 @@
 <style>
 /* 中央に表示 */
-.app-admin-loading-placeholder {
+.app-admin-view-loading-placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,16 +10,16 @@
   color: #555;
 }
 /* ローディングアニメーション */
-.app-admin-loading-spinner {
+.app-admin-view-loading-spinner {
   width: 2rem;
   height: 2rem;
   border: 3px solid #ccc;
   border-top-color: #333;
   border-radius: 50%;
-  animation: app-admin-loading-spin 1s linear infinite;
+  animation: app-admin-view-loading-spin 1s linear infinite;
   margin-right: 0.5rem;
 }
-@keyframes app-admin-loading-spin {
+@keyframes app-admin-view-loading-spin {
   0% {
     transform: rotate(0deg);
   }
@@ -29,7 +29,7 @@
   }
 }
 </style>
-<div class="app-admin-loading-placeholder">
-    <div class="app-admin-loading-spinner"></div>
+<div class="app-admin-view-loading-placeholder">
+    <div class="app-admin-view-loading-spinner"></div>
     <div>読み込み中…</div>
 </div>

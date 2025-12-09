@@ -1,12 +1,32 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios';
+
+import { jsonRequestHeaders } from '@/services/api/http';
+
 
 /** テスト用コンポーネント */
-export default function TestAreaAdmin({ name }) {
+export default function TestAreaReactAdmin({ name, apiUrl }) {
   const [cnt, setCnt] = useState(0);
 
   useEffect(() => {
     console.log('admin react init');
   }, []);
+
+  /** API動作確認 */
+  const apiTest = async() => {
+    console.log(apiUrl);
+
+    const data = {
+      cnt: cnt,
+    }
+
+    const headers = jsonRequestHeaders();
+    const response = await axios.post(apiUrl, data, {
+      headers: headers,
+    });
+
+    console.log('response.data', response.data);
+  } 
 
   return (
     <div
@@ -25,6 +45,9 @@ export default function TestAreaAdmin({ name }) {
       </div>
       <div>
         <span>cnt: {cnt}</span>
+      </div>
+      <div>
+        <button onClick={apiTest}>API実装例</button>
       </div>
     </div>
   );

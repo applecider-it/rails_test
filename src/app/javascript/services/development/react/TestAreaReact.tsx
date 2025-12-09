@@ -8,7 +8,7 @@ import ProgressBar from '@/services/ui/react/message/ProgressBar';
 let cnt2 = 0;
 
 /** テスト用コンポーネント */
-export default function TestArea({ name }) {
+export default function TestAreaReact({ name }) {
   const [cnt, setCnt] = useState(0);
   const refCnt = useRef(0);
   const [progress, setProgress] = useState(0); // 0〜100
