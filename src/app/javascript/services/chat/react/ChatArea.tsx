@@ -45,23 +45,29 @@ export default function ChatArea({ token, host }) {
       <div>
         <input
           type="text"
-          className="app-form-input w-auto"
+          className="app-form-input"
+          style={{ maxWidth: '30rem' }}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Message"
         />
-        <button onClick={sendMessage} className="app-btn-primary w-auto">
+        <button onClick={sendMessage} className="app-btn-primary w-auto ml-2 mt-2">
           Send
         </button>
       </div>
 
-      <ul>
-        {messages.map((msg, index) => (
-          <li key={index}>
-            {msg.email} ({msg.userId}): {msg.message}
-          </li>
-        ))}
-      </ul>
+      <div className="h-72 my-5 overflow-y-scroll border-2">
+        <ul>
+          {messages.map((msg, index) => (
+            <li key={index} className="p-1">
+              {msg.message}
+              <span className="ml-3 text-sm text-gray-500">
+                by {msg.email}({msg.userId})
+              </span>
+            </li>
+          ))}
+        </ul>        
+      </div>
     </div>
   );
 }
