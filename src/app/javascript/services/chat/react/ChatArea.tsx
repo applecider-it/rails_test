@@ -1,44 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /**
  * チャットコンポーネント
  */
-export default function ChatArea({ token, host }) {
+export default function ChatArea({ chatClient }) {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
-  const wsRef = useRef(null);
 
   useEffect(() => {
-    // WebSocket 接続
-    const ws = new WebSocket(`ws://${host}/ws?token=${token}`);
-    wsRef.current = ws;
-
-    ws.onmessage = (event) => {
-      // result = { data: { json }, sender: { user_id, email } }
-      const result = JSON.parse(event.data);
-
-      const data = JSON.parse(result.data.json);
-
-      setMessages((prev) => [
-        {
-          message: data.message,
-          userId: result.sender.user_id,
-          email: result.sender.email,
-        },
-        ...prev, // 先頭に追加 → 最新メッセージが上
-      ]);
-    };
-
-    return () => ws.close();
+    chatClient.setMessage = setMessage;
+    chatClient.setMessages = setMessages;
   }, []);
 
+  /** メッセージ送信 */
   const sendMessage = () => {
-    if (!message) return;
-
-    const json = JSON.stringify({ message });
-    wsRef.current.send(JSON.stringify({ json }));
-    setMessage('');
-  };
+    chatClient.sendMessage(message);
+  }
 
   return (
     <div>

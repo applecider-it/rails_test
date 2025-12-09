@@ -4,6 +4,7 @@
 
 import { createRoot } from 'react-dom/client';
 
+import ChatClient from './ChatClient';
 import ChatArea from './react/ChatArea';
 
 const el = document.getElementById('chat-root')!;
@@ -13,5 +14,7 @@ if (el) {
 
   console.log(all);
 
-  createRoot(el).render(<ChatArea token={all.token} host={all.host} />);
+  const chatClient = new ChatClient(all.host, all.token);
+
+  createRoot(el).render(<ChatArea chatClient={chatClient} />);
 }
