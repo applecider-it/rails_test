@@ -5,12 +5,8 @@ import { useEffect, useState, useRef } from 'react';
 import { showToast, setIsLoading } from '@/services/ui/message';
 import ProgressBar from '@/services/ui/react/message/ProgressBar';
 
-let cnt2 = 0;
-
 /** テスト用コンポーネント */
 export default function TestAreaReact({ name }) {
-  const [cnt, setCnt] = useState(0);
-  const refCnt = useRef(0);
   const [progress, setProgress] = useState(0); // 0〜100
 
   useEffect(() => {}, []);
@@ -26,11 +22,7 @@ export default function TestAreaReact({ name }) {
 
   /** トーストの動作確認 */
   const toastTest = (type) => {
-    refCnt.current++;
-    setCnt(refCnt.current);
-    cnt2++;
-
-    const msg = `トーストテスト type:${type} cnt:${cnt} refCnt:${refCnt.current} cnt2:${cnt2}`;
+    const msg = `トーストテスト type:${type}`;
     console.log(msg);
     showToast(msg, type);
   };
@@ -63,7 +55,6 @@ export default function TestAreaReact({ name }) {
         >
           Toast 2
         </button>
-        <span>cnt: {cnt}</span>
       </div>
 
       <div className="space-y-2">
