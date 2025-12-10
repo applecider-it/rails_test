@@ -329,6 +329,7 @@ ActiveAdmin.setup do |config|
   # you only pass content you trust.
   #
   # config.head = ''.html_safe
+  config.head = '<link rel="icon" href="/icon.svg" type="image/svg+xml">'.html_safe
 
   # == Footer
   #
