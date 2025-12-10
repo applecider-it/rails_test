@@ -63,6 +63,6 @@ export default class WebSocketCtrl {
       return;
     }
 
-    showToast(`新しいツイートがあります。${detail.content}`);
+    showToast(`新しいツイートがあります。[ ${detail.content} ]`);
   }
 }

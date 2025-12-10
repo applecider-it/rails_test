@@ -58,10 +58,7 @@ export default function TweetShow({ tweetClient }: Prop) {
       {tweet && (
         <div className="mb-4 mt-10">
           <ShowArea tweet={tweet}></ShowArea>
-
-          {currentUser.id === tweet.user.id && (
-            <CtrlArea {...{ tweet, onDelete }}></CtrlArea>
-          )}
+          <CtrlArea {...{ tweet, onDelete, currentUser }}></CtrlArea>
         </div>
       )}
     </div>
@@ -99,22 +96,28 @@ const ShowArea = ({ tweet }) => {
 };
 
 /** コントロールエリア */
-const CtrlArea = ({ tweet, onDelete }) => {
+const CtrlArea = ({ tweet, onDelete, currentUser }) => {
   return (
     <div className="mt-10 flex justify-between">
       <div className="space-x-2">
         <Link to="/" className="app-link-normal">
           一覧
         </Link>
-        <span>|</span>
-        <Link to={`/${tweet.id}/edit`} className="app-link-normal">
-          更新
-        </Link>
+        {currentUser.id === tweet.user.id && (
+          <>
+            <span>|</span>
+            <Link to={`/${tweet.id}/edit`} className="app-link-normal">
+              更新
+            </Link>
+          </>
+        )}
       </div>
       <div>
-        <button type="button" onClick={onDelete} className="app-btn-danger">
-          削除
-        </button>
+        {currentUser.id === tweet.user.id && (
+          <button type="button" onClick={onDelete} className="app-btn-danger">
+            削除
+          </button>
+        )}
       </div>
     </div>
   );
