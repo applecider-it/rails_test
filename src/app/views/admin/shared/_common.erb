@@ -1,2 +1,38 @@
 <%= vite_client_tag %>
 <%= vite_react_refresh_tag %>
+<%= vite_typescript_tag 'admin' %>
+<div id="app-admin-container-common"></div>
+<style>
+/* viewのローディングアニメーション */
+@keyframes app-admin-view-loading-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* トーストアニメーション */
+@keyframes app-admin-toast-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ローディングアニメーション */
+@keyframes app-admin-loading-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+</style>
