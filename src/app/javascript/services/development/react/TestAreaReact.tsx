@@ -3,12 +3,9 @@ import axios from 'axios';
 import { useEffect, useState, useRef } from 'react';
 
 import { showToast, setIsLoading } from '@/services/ui/message';
-import ProgressBar from '@/services/ui/react/message/ProgressBar';
 
 /** テスト用コンポーネント */
 export default function TestAreaReact({ name }) {
-  const [progress, setProgress] = useState(0); // 0〜100
-
   useEffect(() => {}, []);
 
   /** ロード画面の動作確認 */
@@ -54,18 +51,6 @@ export default function TestAreaReact({ name }) {
           }}
         >
           Toast 2
-        </button>
-      </div>
-
-      <div className="space-y-2">
-        <ProgressBar progress={progress} />
-
-        {/* ボタン */}
-        <button
-          onClick={() => setProgress(progress + 10)}
-          className="app-btn-primary"
-        >
-          進める
         </button>
       </div>
     </div>
