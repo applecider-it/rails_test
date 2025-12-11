@@ -5,7 +5,7 @@ export default function LoadingInline() {
   return (
     <>
       <style>{`
-        @keyframes fadeInAccel {
+        @keyframes appUiMessageLoadingInlineFadeInAccel {
           0% { opacity: 0; transform: scale(0.5); }
           100% { opacity: 1; transform: scale(1); }
         }
@@ -15,7 +15,7 @@ export default function LoadingInline() {
         className="
           flex space-x-2 justify-center items-center my-28
           opacity-0
-          animate-[fadeInAccel_3s_cubic-bezier(0.16,1,0.3,1)_forwards]
+          animate-[appUiMessageLoadingInlineFadeInAccel_3s_cubic-bezier(0.16,1,0.3,1)_forwards]
         "
       >
         <span className="w-3 h-3 bg-gray-500 rounded-full animate-bounce"></span>
