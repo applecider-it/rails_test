@@ -37,7 +37,12 @@ module Myapp
     #config.active_record.default_timezone = :utc
     config.active_record.default_timezone = :local
 
+    # アプリケーション独自の設定
+
     # WebSocketサーバーホスト名
     config.x.ws_server_host = ''
+
+    # RedisのURL
+    config.x.redis_url = ''
   end
 end
