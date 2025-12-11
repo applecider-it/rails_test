@@ -18,7 +18,7 @@ export default function ToastsAdmin({ toasts }: Props) {
       borderRadius: '0.5rem',
       boxShadow: '0 4px 10px rgba(0,0,0,0.2)',
       animation:
-        'app-local_javascript_services_ui_react_message_ToastsAdmin-slide-in 0.3s ease-out',
+        'app-local__javascript__services__ui__react__message__ToastsAdmin__slide-in 0.3s ease-out',
     };
   };
 
@@ -26,7 +26,7 @@ export default function ToastsAdmin({ toasts }: Props) {
     <>
       <style>{`
       /* トーストアニメーション */
-      @keyframes app-local_javascript_services_ui_react_message_ToastsAdmin-slide-in {
+      @keyframes app-local__javascript__services__ui__react__message__ToastsAdmin__slide-in {
         from {
           opacity: 0;
           transform: translateX(20px);

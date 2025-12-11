@@ -20,7 +20,7 @@ export default function LoadingAdmin({ isLoading }: { isLoading: boolean }) {
     borderTopColor: 'transparent',
     borderRadius: '50%',
     animation:
-      'app-local_javascript_services_ui_react_message_LoadingAdmin_loading-spin 0.8s linear infinite',
+      'app-local__javascript__services__ui__react__message__LoadingAdmin__loading-spin 0.8s linear infinite',
     boxShadow: '0 0 4px rgba(0,0,0,0.3)',
   };
 
@@ -28,7 +28,7 @@ export default function LoadingAdmin({ isLoading }: { isLoading: boolean }) {
     <>
       <style>{`
       /* ローディングアニメーション */
-      @keyframes app-local_javascript_services_ui_react_message_LoadingAdmin_loading-spin {
+      @keyframes app-local__javascript__services__ui__react__message__LoadingAdmin__loading-spin {
         from {
           transform: rotate(0deg);
         }
