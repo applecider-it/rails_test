@@ -2,6 +2,8 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { setIsLoading, showToast } from '@/services/ui/message';
 
+import LoadingInline from '@/services/ui/react/message/LoadingInline';
+
 import TweetClient from '../../TweetClient';
 
 type Prop = {
@@ -79,7 +81,7 @@ export default function TweetEdit({ tweetClient }: Prop) {
     <div>
       <h2 className="app-h2">ツイート更新</h2>
 
-      {tweet && (
+      {tweet ? (
         <>
           {isForm ? (
             <FormArea {...{ onSubmit, content, setContent, errors }}></FormArea>
@@ -97,6 +99,10 @@ export default function TweetEdit({ tweetClient }: Prop) {
             </Link>
           </div>
         </>
+      ) : (
+        <div>
+          <LoadingInline />
+        </div>
       )}
     </div>
   );
@@ -139,4 +145,3 @@ const ConfirmArea = ({ onSubmit, content, onBack }) => {
     </form>
   );
 };
-

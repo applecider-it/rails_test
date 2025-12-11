@@ -3,7 +3,7 @@
  */
 
 import { createRoot } from 'react-dom/client';
-import TweetArea from './react/TweetArea';
+import TweetRouter from './react/TweetRouter';
 
 import TweetClient from './TweetClient';
 
@@ -18,6 +18,6 @@ if (el) {
 
   const root = createRoot(el);
   root.render(
-    <TweetArea tweetClient={tweetClient} />
+    <TweetRouter tweetClient={tweetClient} />
   );
 }

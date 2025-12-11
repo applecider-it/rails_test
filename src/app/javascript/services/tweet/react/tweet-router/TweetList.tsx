@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
+import LoadingInline from '@/services/ui/react/message/LoadingInline';
+
 import TweetClient from '../../TweetClient';
 
 type Prop = {
@@ -9,7 +11,7 @@ type Prop = {
 
 /** 一覧ページ */
 export default function TweetList({ tweetClient }: Prop) {
-  const [tweetContainers, setTweetContainers] = useState([]);
+  const [tweetContainers, setTweetContainers] = useState(null);
 
   useEffect(() => {
     console.log('init list');
@@ -43,11 +45,20 @@ export default function TweetList({ tweetClient }: Prop) {
         </Link>
       </div>
 
-      <div className="space-y-4 mt-10">
-        {tweetContainers.map((tweetContainer) => (
-          <RowArea tweetContainer={tweetContainer} key={tweetContainer.tweet.id}></RowArea>
-        ))}
-      </div>
+      {tweetContainers ? (
+        <div className="space-y-4 mt-10">
+          {tweetContainers.map((tweetContainer) => (
+            <RowArea
+              tweetContainer={tweetContainer}
+              key={tweetContainer.tweet.id}
+            ></RowArea>
+          ))}
+        </div>
+      ) : (
+        <div>
+          <LoadingInline />
+        </div>
+      )}
     </div>
   );
 }

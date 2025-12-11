@@ -2,6 +2,8 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { setIsLoading, showToast } from '@/services/ui/message';
 
+import LoadingInline from '@/services/ui/react/message/LoadingInline';
+
 import TweetClient from '../../TweetClient';
 import { getCurrentUser } from '@/services/application/application';
 
@@ -55,10 +57,14 @@ export default function TweetShow({ tweetClient }: Prop) {
     <div>
       <h2 className="app-h2">ツイート詳細</h2>
 
-      {tweet && (
+      {tweet ? (
         <div className="mb-4 mt-10">
           <ShowArea tweet={tweet}></ShowArea>
           <CtrlArea {...{ tweet, onDelete, currentUser }}></CtrlArea>
+        </div>
+      ) : (
+        <div>
+          <LoadingInline />
         </div>
       )}
     </div>
