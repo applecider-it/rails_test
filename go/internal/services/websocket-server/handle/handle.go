@@ -7,9 +7,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/go-redis/redis/v8"
-
 	"myapp/internal/services/websocket-server/auth"
+	"myapp/internal/services/websocket-server/data"
 	"myapp/internal/services/websocket-server/test"
 	"myapp/internal/services/websocket-server/types"
 	"myapp/internal/services/websocket-server/websocket"
@@ -27,6 +26,9 @@ var clients = make(map[*types.Client]bool)
 var broadcast = make(chan types.BroadcastPayload)
 
 var ctx = context.Background()
+
+// ブロードキャスト用pub/subチャンネル
+const BroadcastPubSubChannel = "broadcast"
 
 // WebSocket の接続を処理する関数
 func HandleConnections(w http.ResponseWriter, r *http.Request) {
@@ -94,12 +96,9 @@ func HandleConnections(w http.ResponseWriter, r *http.Request) {
 func RedisProcess() {
 	fmt.Println("begin redisProcess")
 
-	rdb := redis.NewClient(&redis.Options{
-		Addr: "127.0.0.1:6379",
-		DB:   0,
-	})
+	rdb := data.GetRedis()
 
-	pubsub := rdb.Subscribe(ctx, "broadcast")
+	pubsub := rdb.Subscribe(ctx, BroadcastPubSubChannel)
 	defer pubsub.Close()
 
 	ch := pubsub.Channel()
