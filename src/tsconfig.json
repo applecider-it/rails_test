@@ -1,14 +1,9 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
-    //"strict": true,
+    "target": "es2022",
+    "module": "es2022",
     "jsx": "react-jsx",
-    //"esModuleInterop": true,
-    //"forceConsistentCasingInFileNames": true,
-    //"skipLibCheck": true,
-    //"allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
     "baseUrl": "./app/javascript",
     "paths": {
       "@/*": ["*"]

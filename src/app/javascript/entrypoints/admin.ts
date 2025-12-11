@@ -1,1 +1,1 @@
-import '@/services/admin/setup-admin.tsx';
+import '@/services/admin/setup-admin';

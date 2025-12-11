@@ -1,4 +1,4 @@
-import '@/services/application/setup-application.tsx';
+import '@/services/application/setup-application';
 
 // To see this message, add the following to the `<head>` section in your
 // views/layouts/application.html.erb
