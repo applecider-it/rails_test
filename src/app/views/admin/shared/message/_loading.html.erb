@@ -14,9 +14,21 @@ style_spinner =
   border: 3px solid #ccc;
   border-top-color: #333;
   border-radius: 50%;
-  animation: app-admin-view-loading-spin 1s linear infinite;
+  animation: app-local_views_admin_shared_message_loading_loading-spin 1s linear infinite;
   margin-right: 0.5rem;"
 %>
+<style>
+/* viewのローディングアニメーション */
+@keyframes app-local_views_admin_shared_message_loading_loading-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
 <div style="<%= style %>">
     <div style="<%= style_spinner %>">
     </div>

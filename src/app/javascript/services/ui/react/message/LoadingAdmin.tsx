@@ -19,13 +19,27 @@ export default function LoadingAdmin({ isLoading }: { isLoading: boolean }) {
     border: '4px solid #6b7280',
     borderTopColor: 'transparent',
     borderRadius: '50%',
-    animation: 'app-admin-loading-spin 0.8s linear infinite',
+    animation:
+      'app-local_javascript_services_ui_react_message_LoadingAdmin_loading-spin 0.8s linear infinite',
     boxShadow: '0 0 4px rgba(0,0,0,0.3)',
   };
 
   return (
-    <div style={overlayStyle}>
-      <div style={spinnerStyle}></div>
-    </div>
+    <>
+      <style>{`
+      /* ローディングアニメーション */
+      @keyframes app-local_javascript_services_ui_react_message_LoadingAdmin_loading-spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      } 
+      `}</style>
+      <div style={overlayStyle}>
+        <div style={spinnerStyle}></div>
+      </div>
+    </>
   );
 }
