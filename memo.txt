@@ -28,6 +28,18 @@ go run ./cmd/push-sender
 
 
 
+本番環境
+
+go build -o ./bin/websocket-server ./cmd/websocket-server
+
+./bin/websocket-server
+
+
+go build -o ./bin/push-sender ./cmd/push-sender
+
+./bin/push-sender
+
+
 -----------------------------------
 
 
