@@ -6,6 +6,7 @@ class AdminApi::DevelopmentController < ApplicationController
     render json: {
       message: "hello",
       current_admin_user: current_admin_user,
+      params: params,
     }
   end
 end
