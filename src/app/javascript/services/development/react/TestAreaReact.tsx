@@ -4,11 +4,13 @@ import { useEffect, useState, useRef } from 'react';
 
 import { showToast, setIsLoading } from '@/services/ui/message';
 import Modal from '@/services/ui/react/popup/Modal';
+import LoadingInline from '@/services/ui/react/message/LoadingInline';
 
 /** テスト用コンポーネント */
 export default function TestAreaReact({ name }) {
   const [open, setOpen] = useState(false);
   const [modalValue, setModalValue] = useState('');
+  const [inline, setInline] = useState(false);
 
   useEffect(() => {}, []);
 
@@ -19,6 +21,13 @@ export default function TestAreaReact({ name }) {
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
+  };
+  const loadingInlineTest = () => {
+    console.log('LoadingInline');
+    setInline(true);
+    setTimeout(() => {
+      setInline(false);
+    }, 3000);
   };
 
   /** トーストの動作確認 */
@@ -44,6 +53,12 @@ export default function TestAreaReact({ name }) {
           <button className="app-btn-primary mr-2" onClick={loadingTest}>
             Loading
           </button>
+          <button className="app-btn-primary mr-2" onClick={loadingInlineTest}>
+            Loading inline
+          </button>
+          <div>
+            {inline && <LoadingInline />}
+          </div>
         </div>
 
         <div className="space-x-3">
