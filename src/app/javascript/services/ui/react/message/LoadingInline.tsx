@@ -1,22 +1,17 @@
+import styles from "./LoadingInline.module.css";
+
 /**
  * Reactコードに埋め込む用のLoading
  */
 export default function LoadingInline() {
   return (
     <>
-      <style>{`
-        @keyframes appUiMessageLoadingInlineFadeInAccel {
-          0% { opacity: 0; transform: scale(0.5); }
-          100% { opacity: 1; transform: scale(1); }
-        }
-      `}</style>
-
       <div
-        className="
+        className={`
           flex space-x-2 justify-center items-center my-28
           opacity-0
-          animate-[appUiMessageLoadingInlineFadeInAccel_3s_cubic-bezier(0.16,1,0.3,1)_forwards]
-        "
+           ${styles.fadeInAccel}
+        `}
       >
         <span className="w-3 h-3 bg-gray-500 rounded-full animate-bounce"></span>
         <span className="w-3 h-3 bg-gray-500 rounded-full animate-bounce [animation-delay:-0.2s]"></span>
