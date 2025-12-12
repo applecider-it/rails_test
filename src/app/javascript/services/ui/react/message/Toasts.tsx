@@ -1,5 +1,7 @@
 import { Toasts, Toast } from '../../types';
 
+import styles from "./Toasts.module.css";
+
 type Props = {
   toasts: Toasts;
 };
@@ -8,7 +10,7 @@ type Props = {
 export default function ToastsComponent({ toasts }: Props) {
   const computedClass = (toast: Toast) => {
     const color = toast.type === 'alert' ? 'red-300' : 'blue-300';
-    return `text-md bg-${color} border-4 border-gray-700 text-black px-4 py-2 rounded-lg shadow-lg animate-slide-in`;
+    return `text-md bg-${color} border-4 border-gray-700 text-black px-4 py-2 rounded-lg shadow-lg ${styles.toastSlideIn}`;
   };
 
   return (
