@@ -42,6 +42,9 @@ module Myapp
     # WebSocketサーバーホスト名
     config.x.ws_server_host = ''
 
+    # WebSocketサーバーのRedis Pub/Subチャンネル名
+    config.x.ws_redis_publish_channel = 'broadcast'
+
     # RedisのURL
     config.x.redis_url = ''
   end

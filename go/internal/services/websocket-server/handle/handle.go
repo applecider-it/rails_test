@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 
+	"myapp/internal/config"
 	"myapp/internal/services/websocket-server/auth"
 	"myapp/internal/services/websocket-server/data"
 	"myapp/internal/services/websocket-server/test"
@@ -26,9 +27,6 @@ var clients = make(map[*types.Client]bool)
 var broadcast = make(chan types.BroadcastPayload)
 
 var ctx = context.Background()
-
-// ブロードキャスト用pub/subチャンネル
-const BroadcastPubSubChannel = "broadcast"
 
 // WebSocket の接続を処理する関数
 func HandleConnections(w http.ResponseWriter, r *http.Request) {
@@ -98,7 +96,7 @@ func RedisProcess() {
 
 	rdb := data.GetRedis()
 
-	pubsub := rdb.Subscribe(ctx, BroadcastPubSubChannel)
+	pubsub := rdb.Subscribe(ctx, config.WS_REDIS_PUBSUB_CHANNEL)
 	defer pubsub.Close()
 
 	ch := pubsub.Channel()
