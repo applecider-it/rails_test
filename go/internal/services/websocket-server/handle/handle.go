@@ -117,7 +117,7 @@ func RedisProcess() {
 		// 送信用ユーザー情報に変換
 		sender := types.ClientSimple{
 			UserID:      0,
-			Email:       "System (redis)",
+			Email:       config.WS_REDIS_SYSTEM_EMAIL,
 			TokenString: "",
 			Channel:     redisData.Channel,
 		}
