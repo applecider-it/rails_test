@@ -8,6 +8,8 @@ import (
 
 	webpush "github.com/SherClockHolmes/webpush-go"
 	"github.com/go-redis/redis/v8"
+
+	"myapp/internal/services/websocket-server/data"
 )
 
 // Push データの型定義
@@ -15,7 +17,7 @@ type PushData struct {
 	Endpoint string `json:"endpoint"`
 	P256dh   string `json:"p256dh"`
 	Auth     string `json:"auth"`
-	Message  string `json:"message"`
+	Title    string `json:"title"`
 	Options  any    `json:"options"`
 }
 
@@ -29,16 +31,13 @@ type PushSender struct {
 }
 
 // プッシュ通知送信管理クラスコンストラクタ
-func NewPushSender(mailto, publicKey, privateKey string) *PushSender {
+func NewPushSender(mailto string, publicKey string, privateKey string, redisKey string) *PushSender {
 	return &PushSender{
 		Mailto:     mailto,
 		PublicKey:  publicKey,
 		PrivateKey: privateKey,
-		RedisKey:   "laravel-test-database-push_queue",
-		Redis: redis.NewClient(&redis.Options{
-			Addr: "localhost:6379",
-			DB:   0,
-		}),
+		RedisKey:   redisKey,
+		Redis:      data.GetRedis(),
 	}
 }
 
@@ -79,7 +78,7 @@ func (ps *PushSender) pushOne(item string) error {
 
 	// WebPush payload
 	payload, err := json.Marshal(map[string]any{
-		"title":   data.Message,
+		"title":   data.Title,
 		"options": data.Options,
 	})
 	if err != nil {
