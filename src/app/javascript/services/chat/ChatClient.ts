@@ -5,7 +5,6 @@ import consumer from '@/channels/consumer';
 import axios from 'axios';
 
 import { jsonRequestHeaders } from '@/services/api/http';
-import { channel } from 'diagnostics_channel';
 
 /**
  * チャットクライアント
@@ -17,42 +16,49 @@ export default class ChatClient {
   room;
 
   constructor(host, token, room) {
-    // WebSocket 接続
-    this.ws = new WebSocket(`ws://${host}/ws?token=${token}`);
-
     this.room = room;
 
-    this.ws.onmessage = (event) => {
-      // result = { data: { json }, sender: { user_id, email } }
-      const result = JSON.parse(event.data);
-      console.log('onmessage', result);
-
-      const data = JSON.parse(result.data.json);
-
-      this.addMessage({
-        message: data.message,
-        userId: result.sender.user_id,
-        email: result.sender.email,
-      } as ChatMessage);
-    };
-
     console.log('this.room', this.room);
+
+    // WebSocket 接続
+    this.ws = new WebSocket(`ws://${host}/ws?token=${token}`);
+    this.ws.onmessage = (event) => this.onMessage(event);
+
+    // ActionCable 接続
     consumer.subscriptions.create(
       { channel: 'ChatChannel', room: this.room },
       {
-        received: (data) => {
-          console.log('受信:', data);
-          this.addMessage({
-            message: data.message,
-            userId: data.user_id,
-            email: data.email,
-          } as ChatMessage);
-        },
+        received: (data) => this.onReceived(data),
       }
     );
   }
 
-  /** メッセージ送信 */
+  /** WebSocketメッセージ受信 */
+  onMessage(event) {
+    // result = { data: { json }, sender: { user_id, email } }
+    const result = JSON.parse(event.data);
+    console.log('onmessage', result);
+
+    const data = JSON.parse(result.data.json);
+
+    this.addMessage({
+      message: data.message,
+      userId: result.sender.user_id,
+      email: result.sender.email,
+    } as ChatMessage);
+  }
+
+  /** ActionCableメッセージ受信 */
+  onReceived(data) {
+    console.log('受信:', data);
+    this.addMessage({
+      message: data.message,
+      userId: data.user_id,
+      email: data.email,
+    } as ChatMessage);
+  }
+
+  /** WebSocketメッセージ送信 */
   sendMessage(message: string) {
     console.log(message);
     if (!message) return;

@@ -1,5 +1,6 @@
 class ChatController < ApplicationController
   before_action :authenticate_user!
+  before_action :setup_service_class
 
   # チャット画面
   def index
@@ -15,16 +16,12 @@ class ChatController < ApplicationController
 
   # ActionCableによる送信
   def store_ac
-    channel_id = "chat_channel.#{params[:room]}"
-    p("store_ac channel_id", channel_id)
-    ActionCable.server.broadcast(
-      channel_id,
-      {
-        message: params[:message],
-        user_id: current_user.id,
-        email: current_user.email,
-      }
-    )
+    @actioncable_service.broadcast(params[:room], params[:message], current_user)
     render json: { status: 'OK' }
+  end
+
+  # サービスクラスのセットアップ
+  private def setup_service_class
+    @actioncable_service = ChatServices::ActioncableService.new
   end
 end
