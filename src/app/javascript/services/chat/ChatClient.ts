@@ -1,5 +1,11 @@
 import { ChatMessage } from './types';
 
+import consumer from '@/channels/consumer';
+
+import axios from 'axios';
+
+import { jsonRequestHeaders } from '@/services/api/http';
+
 /**
  * チャットクライアント
  */
@@ -25,6 +31,17 @@ export default class ChatClient {
         email: result.sender.email,
       } as ChatMessage);
     };
+
+    consumer.subscriptions.create('ChatChannel', {
+      received: (data) => {
+        console.log('受信:', data);
+        this.addMessage({
+          message: data.message,
+          userId: data.user_id,
+          email: data.email,
+        } as ChatMessage);
+      },
+    });
   }
 
   /** メッセージ送信 */
@@ -34,6 +51,19 @@ export default class ChatClient {
 
     const json = JSON.stringify({ message });
     this.ws.send(JSON.stringify({ json }));
+    this.setMessage('');
+  }
+
+  /** ActionCableでメッセージ送信 */
+  async sendMessageAC(message: string) {
+    const headers = jsonRequestHeaders();
+
+    const data: any = { message };
+
+    const response = await axios.post('/chat/store_ac', data, {
+      headers: headers,
+    });
+    console.log('response.data', response.data);
     this.setMessage('');
   }
 }

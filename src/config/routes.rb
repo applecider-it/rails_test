@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # チャット
   get "chat/index"
+  post "chat/store_ac"
 
   # ツイート
   get "tweets/react_top"

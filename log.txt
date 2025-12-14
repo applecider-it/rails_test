@@ -150,3 +150,10 @@ npm install react-router-dom
 npm uninstall react-router-dom
 
 npm install axios
+
+-----------------------------------
+
+
+rails g channel Chat
+
+npm install @rails/actioncable

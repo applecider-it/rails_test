@@ -12,6 +12,9 @@
       <button @click="sendMessage" class="app-btn-primary w-auto ml-2 mt-2">
         Send
       </button>
+      <button @click="sendMessageAC" class="app-btn-primary w-auto ml-2 mt-2">
+        Send(AC)
+      </button>
     </div>
 
     <div class="h-72 my-5 overflow-y-scroll border-2">
@@ -53,6 +56,12 @@ const onKeydown = (e) => {
 const sendMessage = () => {
   console.log(message.value);
   props.chatClient.sendMessage(message.value);
+};
+
+/** メッセージ送信(ActionCable) */
+const sendMessageAC = () => {
+  console.log(message.value);
+  props.chatClient.sendMessageAC(message.value);
 };
 
 // 初期化時

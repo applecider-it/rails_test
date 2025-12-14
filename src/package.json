@@ -13,6 +13,7 @@
     "vite-plugin-ruby": "^5.1.1"
   },
   "dependencies": {
+    "@rails/actioncable": "^8.1.100",
     "@vitejs/plugin-react": "^5.1.1",
     "@vitejs/plugin-vue": "^6.0.2",
     "axios": "^1.13.2",
