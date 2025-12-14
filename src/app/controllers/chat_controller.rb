@@ -15,8 +15,10 @@ class ChatController < ApplicationController
 
   # ActionCableによる送信
   def store_ac
+    channel_id = "chat_channel.#{params[:room]}"
+    p("store_ac channel_id", channel_id)
     ActionCable.server.broadcast(
-      "chat_channel",
+      channel_id,
       {
         message: params[:message],
         user_id: current_user.id,

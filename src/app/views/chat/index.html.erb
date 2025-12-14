@@ -17,6 +17,7 @@
   data-all="<%= {
     token: @token,
     host: Rails.configuration.x.ws_server_host,
+    room: @room ? @room : 'default',
     }.to_json %>"
 >
   <%= render 'shared/message/loading' %>

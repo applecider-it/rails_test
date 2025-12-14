@@ -5,6 +5,7 @@ import consumer from '@/channels/consumer';
 import axios from 'axios';
 
 import { jsonRequestHeaders } from '@/services/api/http';
+import { channel } from 'diagnostics_channel';
 
 /**
  * チャットクライアント
@@ -13,10 +14,13 @@ export default class ChatClient {
   ws;
   setMessage;
   addMessage;
+  room;
 
-  constructor(host, token) {
+  constructor(host, token, room) {
     // WebSocket 接続
     this.ws = new WebSocket(`ws://${host}/ws?token=${token}`);
+
+    this.room = room;
 
     this.ws.onmessage = (event) => {
       // result = { data: { json }, sender: { user_id, email } }
@@ -32,16 +36,20 @@ export default class ChatClient {
       } as ChatMessage);
     };
 
-    consumer.subscriptions.create('ChatChannel', {
-      received: (data) => {
-        console.log('受信:', data);
-        this.addMessage({
-          message: data.message,
-          userId: data.user_id,
-          email: data.email,
-        } as ChatMessage);
-      },
-    });
+    console.log('this.room', this.room);
+    consumer.subscriptions.create(
+      { channel: 'ChatChannel', room: this.room },
+      {
+        received: (data) => {
+          console.log('受信:', data);
+          this.addMessage({
+            message: data.message,
+            userId: data.user_id,
+            email: data.email,
+          } as ChatMessage);
+        },
+      }
+    );
   }
 
   /** メッセージ送信 */
@@ -58,7 +66,8 @@ export default class ChatClient {
   async sendMessageAC(message: string) {
     const headers = jsonRequestHeaders();
 
-    const data: any = { message };
+    const data: any = { message, room: this.room };
+    console.log(data);
 
     const response = await axios.post('/chat/store_ac', data, {
       headers: headers,

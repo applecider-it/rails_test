@@ -9,6 +9,7 @@ module ApplicationCable
     private
 
     def find_verified_user
+      p("warden", env["warden"])
       env["warden"].user || reject_unauthorized_connection
     end
   end
