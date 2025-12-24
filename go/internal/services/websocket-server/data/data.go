@@ -1,20 +1,16 @@
 package data
 
 import (
-	"os"
-	"strconv"
+	"myapp/internal/config"
 
 	"github.com/go-redis/redis/v8"
 )
 
 // Redisクライアントを返す
-func GetRedis() *redis.Client {
-	Addr := os.Getenv("APP_REDIS_ADDR")
-	DB, _ := strconv.Atoi(os.Getenv("APP_REDIS_DB"))
-
+func GetRedis(cfg *config.Config) *redis.Client {
 	rdb := redis.NewClient(&redis.Options{
-		Addr: Addr,
-		DB:   DB,
+		Addr: cfg.Redis.Addr,
+		DB:   cfg.Redis.DB,
 	})
 
 	return rdb

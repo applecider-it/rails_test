@@ -3,7 +3,7 @@ package http
 import (
 	"encoding/json"
 	"fmt"
-	"os"
+	"myapp/internal/config"
 )
 
 // Railsからのレスポンス
@@ -12,8 +12,8 @@ type ApiResponse struct {
 }
 
 // Rails API に POST 送信して結果を返す共通関数
-func PostToRails(path, token string, payload interface{}) (*ApiResponse, error) {
-	railsHost := os.Getenv("APP_RAILS_HOST")
+func PostToRails(path, token string, payload interface{}, cfg *config.Config) (*ApiResponse, error) {
+	railsHost := cfg.RailsHost
 	if railsHost == "" {
 		return nil, fmt.Errorf("APP_RAILS_HOST is not set")
 	}

@@ -15,6 +15,7 @@ import (
 
 	"github.com/gorilla/mux"
 
+	"myapp/internal/config"
 	"myapp/internal/services/system"
 	"myapp/internal/services/websocket-server/handle"
 )
@@ -25,26 +26,30 @@ func main() {
 
 	system.SetupApp()
 
+	cfg := config.Load()
+
+	wsHandler := handle.NewWSHandler(cfg)
+
 	// Gorilla Mux でルーティング
 	router := mux.NewRouter()
 
-	setupRoute(router)
-	startGoroutines()
+	setupRoute(router, wsHandler)
+	startGoroutines(wsHandler)
 
-	fmt.Println("Server started on :3030")
-	log.Fatal(http.ListenAndServe(":3030", router)) // サーバー起動（3030番で待ち受け）
+	fmt.Println("Server started on " + cfg.WebSocket.Url)
+	log.Fatal(http.ListenAndServe(cfg.WebSocket.Url, router)) // サーバー起動（3030番で待ち受け）
 }
 
 // ルート設定
-func setupRoute(router *mux.Router) {
-	router.HandleFunc("/ws", handle.HandleConnections) // /ws にアクセスされたら WebSocket 接続
+func setupRoute(router *mux.Router, wsHandler *handle.WSHandler) {
+	router.HandleFunc("/ws", wsHandler.HandleConnections) // /ws にアクセスされたら WebSocket 接続
 }
 
 // ゴルーチン開始
-func startGoroutines() {
+func startGoroutines(wsHandler *handle.WSHandler) {
 	// メッセージ配信処理を 別ゴルーチンで並列に実行
-	go handle.HandleMessages()
+	go wsHandler.HandleMessages()
 
 	// Redis購読をゴルーチンで並列実行
-	go handle.RedisProcess()
+	go wsHandler.RedisProcess()
 }

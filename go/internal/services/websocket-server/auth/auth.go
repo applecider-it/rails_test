@@ -2,25 +2,24 @@ package auth
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/golang-jwt/jwt/v5"
 )
 
 // JWTトークンを検証して userID, email, channel を返す
-func AuthenticateToken(tokenString string) (int, string, string, error) {
+func AuthenticateToken(tokenString string, jwtSecret string) (int, string, string, error) {
 	if tokenString == "" {
 		return 0, "", "", fmt.Errorf("token required")
 	}
 
 	// サーバー側で共有する秘密鍵
-	var jwtSecret []byte = []byte(os.Getenv("APP_JWT_SECRET"))
+	var jwtSecretByte []byte = []byte(jwtSecret)
 
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
-		return jwtSecret, nil
+		return jwtSecretByte, nil
 	})
 
 	if err != nil || !token.Valid {

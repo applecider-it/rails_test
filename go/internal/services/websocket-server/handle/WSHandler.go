@@ -28,13 +28,23 @@ var broadcast = make(chan types.BroadcastPayload)
 
 var ctx = context.Background()
 
+type WSHandler struct {
+	Config *config.Config
+}
+
+func NewWSHandler(cfg *config.Config) *WSHandler {
+	return &WSHandler{
+		Config: cfg,
+	}
+}
+
 // WebSocket の接続を処理する関数
-func HandleConnections(w http.ResponseWriter, r *http.Request) {
+func (h *WSHandler) HandleConnections(w http.ResponseWriter, r *http.Request) {
 	tokenString := r.URL.Query().Get("token")
 
 	fmt.Printf("Connection: tokenString=%s\n", tokenString)
 
-	userID, email, channel, err := auth.AuthenticateToken(tokenString)
+	userID, email, channel, err := auth.AuthenticateToken(tokenString, h.Config.JwtSecret)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return
@@ -72,7 +82,7 @@ func HandleConnections(w http.ResponseWriter, r *http.Request) {
 			receivedData.Json, client.UserID, client.Email)
 
 		// Railsへのテスト送信
-		test.TestSend(client.TokenString, receivedData.Json)
+		test.TestSend(client.TokenString, receivedData.Json, h.Config)
 
 		// 送信用ユーザー情報に変換
 		sender := types.ClientSimple{
@@ -91,12 +101,12 @@ func HandleConnections(w http.ResponseWriter, r *http.Request) {
 }
 
 // Redis Pub/Subの処理
-func RedisProcess() {
+func (h *WSHandler) RedisProcess() {
 	fmt.Println("begin redisProcess")
 
-	rdb := data.GetRedis()
+	rdb := data.GetRedis(h.Config)
 
-	pubsub := rdb.Subscribe(ctx, config.WS_REDIS_PUBSUB_CHANNEL)
+	pubsub := rdb.Subscribe(ctx, h.Config.RedisPubSubChannel)
 	defer pubsub.Close()
 
 	ch := pubsub.Channel()
@@ -117,7 +127,7 @@ func RedisProcess() {
 		// 送信用ユーザー情報に変換
 		sender := types.ClientSimple{
 			UserID:      0,
-			Email:       config.WS_REDIS_SYSTEM_EMAIL,
+			Email:       h.Config.WsRedisSystemEmail,
 			TokenString: "",
 			Channel:     redisData.Channel,
 		}
@@ -138,7 +148,7 @@ func RedisProcess() {
 }
 
 // メッセージを全員に送信する関数
-func HandleMessages() {
+func (h *WSHandler) HandleMessages() {
 	for {
 		payload := <-broadcast // チャネル broadcast にメッセージが届くのを待つ（待ち受け）
 		receivedData := payload.Received

@@ -9,6 +9,7 @@ import (
 	webpush "github.com/SherClockHolmes/webpush-go"
 	"github.com/go-redis/redis/v8"
 
+	"myapp/internal/config"
 	"myapp/internal/services/websocket-server/data"
 )
 
@@ -23,21 +24,15 @@ type PushData struct {
 
 // プッシュ通知送信管理クラス
 type PushSender struct {
-	Mailto     string
-	PublicKey  string
-	PrivateKey string
-	RedisKey   string
-	Redis      *redis.Client
+	Config *config.Config
+	Redis  *redis.Client
 }
 
 // プッシュ通知送信管理クラスコンストラクタ
-func NewPushSender(mailto string, publicKey string, privateKey string, redisKey string) *PushSender {
+func NewPushSender(cfg *config.Config) *PushSender {
 	return &PushSender{
-		Mailto:     mailto,
-		PublicKey:  publicKey,
-		PrivateKey: privateKey,
-		RedisKey:   redisKey,
-		Redis:      data.GetRedis(),
+		Config: cfg,
+		Redis:  data.GetRedis(cfg),
 	}
 }
 
@@ -50,8 +45,10 @@ func (ps *PushSender) ExecPushSender() error {
 func (ps *PushSender) pushAll() error {
 	ctx := context.Background()
 
+	redisKey := ps.Config.Push.RedisKey
+
 	for {
-		item, err := ps.Redis.LPop(ctx, ps.RedisKey).Result()
+		item, err := ps.Redis.LPop(ctx, redisKey).Result()
 		if err == redis.Nil {
 			// キューが空 → 完了
 			log.Println("Queue empty.")
@@ -93,14 +90,18 @@ func (ps *PushSender) pushOne(item string) error {
 		},
 	}
 
+	mailto := "mailto:" + ps.Config.Push.Mailto
+	publicKey := ps.Config.Push.PublicKey
+	privateKey := ps.Config.Push.PrivateKey
+
 	// WebPush request
 	resp, err := webpush.SendNotification(
 		payload,
 		sub,
 		&webpush.Options{
-			Subscriber:      ps.Mailto,
-			VAPIDPublicKey:  ps.PublicKey,
-			VAPIDPrivateKey: ps.PrivateKey,
+			Subscriber:      mailto,
+			VAPIDPublicKey:  publicKey,
+			VAPIDPrivateKey: privateKey,
 			TTL:             60,
 		},
 	)
