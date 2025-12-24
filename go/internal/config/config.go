@@ -7,12 +7,14 @@ import (
 
 // アプリケーションの設定
 type Config struct {
-	WebSocket          WebSocketConfig
-	Push               PushConfig
-	JwtSecret          string
-	Redis              RedisConfig
-	RailsHost          string
+	WebSocket WebSocketConfig
+	Push      PushConfig
+	JwtSecret string
+	Redis     RedisConfig
+	RailsHost string
+	// ブロードキャスト用Redis pub/subチャンネル
 	RedisPubSubChannel string
+	// WebSocket RedisのシステムのEMAIL
 	WsRedisSystemEmail string
 }
 
@@ -60,10 +62,8 @@ func Load() *Config {
 
 		RailsHost: os.Getenv("APP_RAILS_HOST"),
 
-		// ブロードキャスト用Redis pub/subチャンネル
 		RedisPubSubChannel: "broadcast",
 
-		// WebSocket RedisのシステムのEMAIL
 		WsRedisSystemEmail: "System (redis)",
 	}
 }
