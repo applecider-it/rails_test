@@ -1,24 +1,13 @@
+/*
+Push通知一括送信処理のエントリーポイント
+*/
+
 package main
 
 import (
-	"fmt"
-	"log"
-
-	"myapp/internal/config"
-	"myapp/internal/services/push-sender/pushsender"
-	"myapp/internal/services/system"
+	"myapp/internal/services/push-sender/setup"
 )
 
 func main() {
-	fmt.Println("begin main")
-
-	system.SetupApp()
-
-	cfg := config.Load()
-
-	sender := pushsender.NewPushSender(cfg)
-
-	if err := sender.ExecPushSender(); err != nil {
-		log.Fatal(err)
-	}
+	setup.SetupPushSender()
 }
