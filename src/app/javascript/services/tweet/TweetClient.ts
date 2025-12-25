@@ -1,7 +1,3 @@
-import axios from 'axios';
-
-import { showToast } from '@/services/ui/message';
-
 import WebSocketCtrl from './tweet-client/WebSocketCtrl';
 import TweetCtrl from './tweet-client/TweetCtrl';
 

@@ -34,7 +34,7 @@
 /** チャットエリアコンポーネント */
 
 import { ref, onMounted, computed } from 'vue';
-import ChatClient from '../ChatClient';
+import type ChatClient from '../ChatClient';
 import { ChatMessage } from '../types';
 
 const props = defineProps<{
