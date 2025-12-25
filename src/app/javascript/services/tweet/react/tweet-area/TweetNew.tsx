@@ -29,6 +29,8 @@ export default function TweetNew({ tweetClient }: Prop) {
     try {
       const result =await tweetClient.tweetCtrl.sendTweet(content, isCommit);
 
+      setErrors({});
+
       if (isForm) {
         // フォーム画面の時
 
@@ -40,6 +42,9 @@ export default function TweetNew({ tweetClient }: Prop) {
         tweetClient.refreshList();
 
         showToast('ツイートしました。');
+
+        setContent('')
+        setIsForm(true);
       }
     } catch (error) {
       if (error.response?.status === 422) {
