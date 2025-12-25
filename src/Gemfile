@@ -81,3 +81,8 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'websocket-client-simple'
 
 gem 'redis'
+
+group :development do
+  gem 'rack-mini-profiler'
+  gem 'bullet'
+end

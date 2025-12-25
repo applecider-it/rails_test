@@ -99,6 +99,9 @@ GEM
     brakeman (7.1.1)
       racc
     builder (3.3.0)
+    bullet (8.1.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     capybara (3.40.0)
       addressable
       matrix
@@ -252,6 +255,8 @@ GEM
     raabro (1.4.0)
     racc (1.8.1)
     rack (3.2.4)
+    rack-mini-profiler (4.0.1)
+      rack (>= 1.2.0)
     rack-proxy (0.7.7)
       rack
     rack-session (2.1.1)
@@ -402,6 +407,7 @@ GEM
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.1.0)
+    uniform_notifier (1.18.0)
     uri (1.1.1)
     useragent (0.16.11)
     vite_rails (3.0.19)
@@ -441,6 +447,7 @@ DEPENDENCIES
   activeadmin
   bootsnap
   brakeman
+  bullet
   capybara
   debug
   devise
@@ -452,6 +459,7 @@ DEPENDENCIES
   pg
   propshaft
   puma (>= 5.0)
+  rack-mini-profiler
   rails (~> 8.0.3)
   redis
   rubocop-rails-omakase
