@@ -1,8 +1,5 @@
-import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { setIsLoading, showToast } from '@/services/ui/message';
-
-import LoadingInline from '@/services/ui/react/message/LoadingInline';
 
 import TweetClient from '../../TweetClient';
 
@@ -11,42 +8,26 @@ type Prop = {
 };
 
 /**
- * ツイート更新画面
+ * 新規ツイート画面
  */
-export default function TweetEdit({ tweetClient }: Prop) {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
-
-  const [tweet, setTweet] = useState<any>(null);
-
+export default function TweetNew({ tweetClient }: Prop) {
   const [content, setContent] = useState('');
   const [errors, setErrors] = useState<any>({});
   const [isForm, setIsForm] = useState(true);
 
   useEffect(() => {
-    console.log('init edit');
-
-    init();
+    console.log('init new');
   }, []);
-
-  /** 初期化 */
-  const init = async () => {
-    const resultTweet = await tweetClient.tweetCtrl.getTweet(id);
-
-    console.log(resultTweet);
-
-    setTweet(resultTweet);
-    setContent(resultTweet.content);
-  };
 
   /** ボタンをクリックしたときに、ツイート送信 */
   const onSubmit = async (e) => {
     e.preventDefault();
+
     const isCommit = !isForm;
 
     setIsLoading(true);
     try {
-      await tweetClient.tweetCtrl.putTweet(tweet.id, content, isCommit);
+      const result =await tweetClient.tweetCtrl.sendTweet(content, isCommit);
 
       if (isForm) {
         // フォーム画面の時
@@ -56,8 +37,9 @@ export default function TweetEdit({ tweetClient }: Prop) {
       } else {
         // 確認画面の時
 
-        showToast('更新しました。');
-        navigate(`/${tweet.id}`);
+        tweetClient.refreshList();
+
+        showToast('ツイートしました。');
       }
     } catch (error) {
       if (error.response?.status === 422) {
@@ -79,30 +61,12 @@ export default function TweetEdit({ tweetClient }: Prop) {
 
   return (
     <div>
-      <h2 className="app-h2">ツイート更新</h2>
+      <h3 className="app-h3">新規ツイート</h3>
 
-      {tweet ? (
-        <>
-          {isForm ? (
-            <FormArea {...{ onSubmit, content, setContent, errors }}></FormArea>
-          ) : (
-            <ConfirmArea {...{ onSubmit, content, onBack }}></ConfirmArea>
-          )}
-
-          <div className="space-x-2 my-10">
-            <Link to="/" className="app-link-normal">
-              一覧
-            </Link>
-            <span>|</span>
-            <Link to={`/${tweet.id}`} className="app-link-normal">
-              詳細
-            </Link>
-          </div>
-        </>
+      {isForm ? (
+        <FormArea {...{ onSubmit, content, setContent, errors }}></FormArea>
       ) : (
-        <div>
-          <LoadingInline />
-        </div>
+        <ConfirmArea {...{ onSubmit, content, onBack }}></ConfirmArea>
       )}
     </div>
   );
@@ -111,20 +75,19 @@ export default function TweetEdit({ tweetClient }: Prop) {
 /** フォームエリア */
 const FormArea = ({ onSubmit, content, setContent, errors }) => {
   return (
-    <form onSubmit={onSubmit} className="mb-4 mt-10">
+    <form onSubmit={onSubmit} className="mb-4 mt-10" id="tweetForm">
       <textarea
         rows={3}
         className="w-full border rounded p-2"
         placeholder="What's happening?"
         value={content}
+        name="content"
         onChange={(e) => setContent(e.target.value)}
       />
       {errors.content && <p className="text-red-600">{errors.content[0]}</p>}
-      <div className="space-x-5">
-        <button type="submit" className="mt-2 app-btn-primary">
-          確認
-        </button>
-      </div>
+      <button type="submit" className="mt-2 app-btn-primary">
+        確認
+      </button>
     </form>
   );
 };
@@ -139,7 +102,7 @@ const ConfirmArea = ({ onSubmit, content, onBack }) => {
           戻る
         </button>
         <button type="submit" className="app-btn-primary">
-          確定
+          投稿
         </button>
       </div>
     </form>

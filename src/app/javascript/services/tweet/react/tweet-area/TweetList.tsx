@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import LoadingInline from '@/services/ui/react/message/LoadingInline';
@@ -16,7 +15,11 @@ export default function TweetList({ tweetClient }: Prop) {
   useEffect(() => {
     console.log('init list');
 
-    init();
+    tweetClient.refreshList = () => {
+      init();
+    };
+
+    tweetClient.refreshList();
   }, []);
 
   /** 初期化 */
@@ -37,13 +40,7 @@ export default function TweetList({ tweetClient }: Prop) {
 
   return (
     <div>
-      <h2 className="app-h2">ツイート一覧</h2>
-
-      <div className="my-10">
-        <Link to="/new" className="app-btn-primary">
-          新規作成
-        </Link>
-      </div>
+      <h3 className="app-h3">ツイート一覧</h3>
 
       {tweetContainers ? (
         <div className="space-y-4 mt-10">
@@ -73,11 +70,6 @@ const RowArea = ({ tweetContainer }) => {
         by {tweetContainer.tweet.user.email} -{' '}
         {new Date(tweetContainer.tweet.created_at).toLocaleString()}
       </p>
-      <div className="mt-4">
-        <Link to={`/${tweetContainer.tweet.id}`} className="app-link-normal">
-          参照
-        </Link>
-      </div>
     </div>
   );
 };
