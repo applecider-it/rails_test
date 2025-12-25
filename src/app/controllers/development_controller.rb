@@ -23,6 +23,9 @@ class DevelopmentController < ApplicationController
       p('tweet.as_json(include: :user)', tweet.as_json(include: :user))
     end
 
+    memory_mb = `ps -o rss= -p #{Process.pid}`.to_i / 1024.0
+    Rails.logger.info "使用メモリ: #{memory_mb.round(2)} MB"
+
     render :complate
   end
 
