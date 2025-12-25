@@ -8,7 +8,7 @@ type Prop = {
 };
 
 /**
- * 新規ツイート画面
+ * 新規ツイートエリア
  */
 export default function TweetNew({ tweetClient }: Prop) {
   const [content, setContent] = useState('');
@@ -27,7 +27,7 @@ export default function TweetNew({ tweetClient }: Prop) {
 
     setIsLoading(true);
     try {
-      const result =await tweetClient.tweetCtrl.sendTweet(content, isCommit);
+      const result = await tweetClient.tweetCtrl.sendTweet(content, isCommit);
 
       setErrors({});
 
@@ -43,7 +43,7 @@ export default function TweetNew({ tweetClient }: Prop) {
 
         showToast('ツイートしました。');
 
-        setContent('')
+        setContent('');
         setIsForm(true);
       }
     } catch (error) {

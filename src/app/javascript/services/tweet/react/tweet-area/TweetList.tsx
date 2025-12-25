@@ -8,22 +8,20 @@ type Prop = {
   tweetClient: TweetClient;
 };
 
-/** 一覧ページ */
+/** 一覧エリア */
 export default function TweetList({ tweetClient }: Prop) {
   const [tweetContainers, setTweetContainers] = useState(null);
 
   useEffect(() => {
-    console.log('init list');
-
     tweetClient.refreshList = () => {
-      init();
+      refreshList();
     };
 
     tweetClient.refreshList();
   }, []);
 
-  /** 初期化 */
-  const init = async () => {
+  /** 一覧を最新の状態にする */
+  const refreshList = async () => {
     const initialTweets = await tweetClient.tweetCtrl.getList();
 
     console.log(initialTweets);
