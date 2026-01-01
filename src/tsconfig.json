@@ -4,6 +4,7 @@
     "module": "es2022",
     "jsx": "react-jsx",
     "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
     "baseUrl": "./app/javascript",
     "paths": {
       "@/*": ["*"]
