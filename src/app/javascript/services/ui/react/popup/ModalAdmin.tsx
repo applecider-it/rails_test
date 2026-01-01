@@ -8,8 +8,6 @@ type Props = {
  * モーダルウィンドウ（Tailwind なし・インラインスタイル版）
  */
 export default function Modal({ isOpen, onClose, children }: Props) {
-  if (!isOpen) return null;
-
   const backdropStyle: React.CSSProperties = {
     position: "fixed",
     top: 0,
@@ -21,8 +19,18 @@ export default function Modal({ isOpen, onClose, children }: Props) {
     justifyContent: "center",
     alignItems: "center",
     zIndex: 9999,
+    transitionProperty: 'opacity',
+    transitionTimingFunction: 'cubic-bezier(0.4, 0, 1, 1)',
+    transitionDuration: '500ms',
   };
 
+  if (isOpen) {
+    backdropStyle.pointerEvents = 'auto';
+    backdropStyle.opacity = 1;
+  } else {
+    backdropStyle.pointerEvents = 'none';
+    backdropStyle.opacity = 0;
+  }
   const contentStyle: React.CSSProperties = {
     background: "#ffffff",
     padding: "24px",

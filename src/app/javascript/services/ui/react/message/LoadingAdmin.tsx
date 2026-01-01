@@ -1,7 +1,5 @@
 /** ローディングコンポーネント */
 export default function LoadingAdmin({ isLoading }: { isLoading: boolean }) {
-  if (!isLoading) return null;
-
   const overlayStyle: React.CSSProperties = {
     position: 'fixed',
     inset: '0',
@@ -11,7 +9,18 @@ export default function LoadingAdmin({ isLoading }: { isLoading: boolean }) {
     alignItems: 'center',
     zIndex: 2000,
     userSelect: 'none',
+    transitionProperty: 'opacity',
+    transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    transitionDuration: '500ms',
   };
+
+  if (isLoading) {
+    overlayStyle.pointerEvents = 'auto';
+    overlayStyle.opacity = 1;
+  } else {
+    overlayStyle.pointerEvents = 'none';
+    overlayStyle.opacity = 0;
+  }
 
   const spinnerStyle: React.CSSProperties = {
     width: '2.5rem',

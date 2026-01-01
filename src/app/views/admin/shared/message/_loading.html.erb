@@ -1,4 +1,6 @@
 <%
+target_class = "app-local__views__admin__shared__message__loading"
+
 style =
   "display: flex;
   justify-content: center;
@@ -6,7 +8,12 @@ style =
   height: 10rem;
   font-family: sans-serif;
   font-size: 1.2rem;
-  color: #555;"
+  color: #555;
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 500ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+"
 
 style_spinner =
   "width: 2rem;
@@ -29,8 +36,18 @@ style_spinner =
   }
 }
 </style>
-<div style="<%= style %>">
+<div class="<%= target_class %>" style="<%= style %>">
     <div style="<%= style_spinner %>">
     </div>
     <div>読み込み中…</div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.<%= target_class %>').forEach((el) => {
+      setTimeout(() => {
+        el.style.opacity = '1';
+      }, 1000);
+    });
+  });
+</script>
