@@ -1,26 +1,21 @@
 <template>
   <div class="mt-5 py-6 border-gray-500 border-2 p-5 space-y-3">
-    <div class="mb-6 text-lg">vue動作確認</div>
-    <div class="mb-6">タグからの値: {{ name }}</div>
+    <div class="text-lg">vue動作確認</div>
+
+    <div>タグからの値: {{ name }}</div>
+
     <div>
-      <button @click="cnt++" class="app-btn-primary">Add</button>
-    </div>
-    <div>
-      <span>cnt: {{ cnt }}</span>
+      <RefArea />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import RefArea from './test-area-vue/RefArea.vue';
 
 interface Props {
   name: string;
 }
 
 const props = defineProps<Props>();
-
-const name = ref(props.name ?? '');
-
-const cnt = ref<number>(0);
 </script>
