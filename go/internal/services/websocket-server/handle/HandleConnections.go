@@ -8,7 +8,9 @@ import (
 	"myapp/internal/services/websocket-server/auth"
 	"myapp/internal/services/websocket-server/test"
 	"myapp/internal/services/websocket-server/types"
-	"myapp/internal/services/websocket-server/websocket"
+	mywebsocket "myapp/internal/services/websocket-server/websocket"
+
+	"github.com/gorilla/websocket"
 )
 
 // WebSocket の接続を処理する関数
@@ -25,7 +27,7 @@ func HandleConnectionsMain(h *WSHandler, w http.ResponseWriter, r *http.Request)
 
 	fmt.Printf("Connected user: ID=%d, Email=%s channel=%s\n", userID, email, channel)
 
-	ws, err := websocket.Upgrader.Upgrade(w, r, nil) // WebSocketへ変換
+	ws, err := mywebsocket.Upgrader.Upgrade(w, r, nil) // WebSocketへ変換
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -41,6 +43,11 @@ func HandleConnectionsMain(h *WSHandler, w http.ResponseWriter, r *http.Request)
 	}
 	h.Clients[client] = true
 
+	roopProccessWebSocket(h, ws, client)
+}
+
+// ループ処理
+func roopProccessWebSocket(h *WSHandler, ws *websocket.Conn, client *types.Client) {
 	// 永久ループで WebSocket からデータを受け取る。
 	for {
 		var receivedData types.ReceivedData

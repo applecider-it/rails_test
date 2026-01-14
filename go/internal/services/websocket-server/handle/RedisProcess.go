@@ -6,6 +6,8 @@ import (
 
 	"myapp/internal/services/websocket-server/data"
 	"myapp/internal/services/websocket-server/types"
+
+	"github.com/go-redis/redis/v8"
 )
 
 // Redis Pub/Subの処理
@@ -18,6 +20,13 @@ func RedisProcessMain(h *WSHandler) {
 	defer pubsub.Close()
 
 	ch := pubsub.Channel()
+
+	roopProccessRedis(h, ch)
+}
+
+// redisのループ処理
+func roopProccessRedis(h *WSHandler, ch <-chan *redis.Message) {
+
 	for msg := range ch {
 		// メッセージを受け取った時
 

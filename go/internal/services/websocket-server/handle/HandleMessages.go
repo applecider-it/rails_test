@@ -3,6 +3,7 @@ package handle
 import (
 	"fmt"
 	"log"
+	"myapp/internal/services/websocket-server/types"
 )
 
 // メッセージを全員に送信する関数
@@ -26,48 +27,52 @@ func HandleMessagesMain(h *WSHandler) {
 
 				fmt.Println("send")
 
-				// 接続中の全 WebSocket クライアントに送信する。
-				//
-				// 送信内容
-				//{
-				//	data: {
-				//		json: receivedData.Json
-				//	},
-				//	sender: {
-				//		user_id: sender.UserID,
-				//		email: sender.Email,
-				//	},
-				//}
-				err := client.Conn.WriteJSON(struct {
-					Data struct {
-						Json string `json:"json"`
-					} `json:"data"`
-					Sender struct {
-						UserID int    `json:"user_id"`
-						Email  string `json:"email"`
-					} `json:"sender"`
-				}{
-					Data: struct {
-						Json string `json:"json"`
-					}{
-						Json: receivedData.Json,
-					},
-					Sender: struct {
-						UserID int    `json:"user_id"`
-						Email  string `json:"email"`
-					}{
-						UserID: sender.UserID,
-						Email:  sender.Email,
-					},
-				})
+				err := send(client, receivedData, sender)
 
 				if err != nil {
 					log.Printf("error: WriteJSON: %v", err)
 					client.Conn.Close()
 					delete(h.Clients, client)
 				}
-
 			}
 		}
 	}
+}
+
+// メッセージを送信
+func send(client *types.Client, receivedData types.ReceivedData, sender types.ClientSimple) error {
+	// 送信内容
+	//{
+	//	data: {
+	//		json: receivedData.Json
+	//	},
+	//	sender: {
+	//		user_id: sender.UserID,
+	//		email: sender.Email,
+	//	},
+	//}
+	err := client.Conn.WriteJSON(struct {
+		Data struct {
+			Json string `json:"json"`
+		} `json:"data"`
+		Sender struct {
+			UserID int    `json:"user_id"`
+			Email  string `json:"email"`
+		} `json:"sender"`
+	}{
+		Data: struct {
+			Json string `json:"json"`
+		}{
+			Json: receivedData.Json,
+		},
+		Sender: struct {
+			UserID int    `json:"user_id"`
+			Email  string `json:"email"`
+		}{
+			UserID: sender.UserID,
+			Email:  sender.Email,
+		},
+	})
+
+	return err
 }
