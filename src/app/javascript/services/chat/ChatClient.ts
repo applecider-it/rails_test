@@ -28,7 +28,7 @@ export default class ChatClient {
     consumer.subscriptions.create(
       { channel: 'ChatChannel', room: this.room },
       {
-        received: (data) => this.onReceived(data),
+        received: (data) => this.onMessageAC(data),
       }
     );
   }
@@ -49,7 +49,7 @@ export default class ChatClient {
   }
 
   /** ActionCableメッセージ受信 */
-  onReceived(data) {
+  onMessageAC(data) {
     console.log('受信:', data);
     this.addMessage({
       message: data.message,
@@ -58,24 +58,38 @@ export default class ChatClient {
     } as ChatMessage);
   }
 
-  /** WebSocketメッセージ送信 */
-  sendMessage(message: string) {
-    console.log(message);
+  /** メッセージ送信 */
+  sendMessage(message: string, type: string) {
+    console.log('sendMessage', message, type);
     if (!message) return;
 
+    if (type === 'websocket') {
+      this.send(message);
+    } else {
+      this.sendApi(message, type);
+    }
+  }
+
+  /** WebSocketメッセージ送信 */
+  private async send(message: string) {
     const json = JSON.stringify({ message });
     this.ws.send(JSON.stringify({ json }));
     this.setMessage('');
   }
 
-  /** ActionCableでメッセージ送信 */
-  async sendMessageAC(message: string) {
+  /** APIでメッセージ送信 */
+  private async sendApi(message: string, type: string) {
     const headers = jsonRequestHeaders();
 
     const data: any = { message, room: this.room };
     console.log(data);
 
-    const response = await axios.post('/chat/store_ac', data, {
+    const url = {
+      'actioncable': '/chat/store_ac',
+      'redis': '/chat/store_redis',
+    }[type];
+
+    const response = await axios.post(url, data, {
       headers: headers,
     });
     console.log('response.data', response.data);

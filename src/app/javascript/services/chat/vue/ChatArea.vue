@@ -9,10 +9,13 @@
         placeholder="Message"
         @keydown="onKeydown"
       />
-      <button @click="sendMessage" class="app-btn-primary w-auto ml-2 mt-2">
+      <button @click="() => sendMessage('websocket')" class="app-btn-primary w-auto ml-2 mt-2">
         Send
       </button>
-      <button @click="sendMessageAC" class="app-btn-primary w-auto ml-2 mt-2">
+      <button @click="() => sendMessage('redis')" class="app-btn-primary w-auto ml-2 mt-2">
+        Send(R)
+      </button>
+      <button @click="() => sendMessage('actioncable')" class="app-btn-primary w-auto ml-2 mt-2">
         Send(AC)
       </button>
     </div>
@@ -49,19 +52,13 @@ const reversedMessages = computed(() => [...messages.value].reverse());
 
 /** キーダウン時 */
 const onKeydown = (e) => {
-  if (e.key === 'Enter') sendMessage();
+  if (e.key === 'Enter') sendMessage('websocket');
 };
 
 /** メッセージ送信 */
-const sendMessage = () => {
+const sendMessage = (type: string) => {
   console.log(message.value);
-  props.chatClient.sendMessage(message.value);
-};
-
-/** メッセージ送信(ActionCable) */
-const sendMessageAC = () => {
-  console.log(message.value);
-  props.chatClient.sendMessageAC(message.value);
+  props.chatClient.sendMessage(message.value, type);
 };
 
 // 初期化時

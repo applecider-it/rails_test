@@ -2,14 +2,14 @@
 
 <h2 class="app-h2">
   Chat
-  <% if @room %>
+  <% if @room != 'default' %>
     room: <%= @room %>
   <% end %>
 </h2>
 
 <div class="space-x-2 my-5">
   <% @rooms.each do |room| %>
-    <%= link_to (room ? room : 'default'), chat_index_path({room: room}), class: "app-link-normal" %>
+    <%= link_to room, chat_index_path({room: room}), class: "app-link-normal" %>
   <% end %>
 </div>
 
@@ -17,7 +17,7 @@
   data-all="<%= {
     token: @token,
     host: Rails.configuration.x.ws_server_host,
-    room: @room ? @room : 'default',
+    room: @room,
     }.to_json %>"
 >
   <%= render 'shared/message/loading' %>
