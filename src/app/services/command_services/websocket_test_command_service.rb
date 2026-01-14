@@ -14,7 +14,7 @@ class CommandServices::WebsocketTestCommandService
     system_service = WebsocketServices::SystemService.new
 
     system_service.send_to_redis(
-      ChannelServices::ChatChannelService.get_channel,
+      ChannelServices::ChatChannelService.get_channel('default'),
       { message: "Hello from Rails Redis Pub/Sub" }
     )
 
