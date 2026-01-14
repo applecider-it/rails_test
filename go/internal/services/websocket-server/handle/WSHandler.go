@@ -5,7 +5,10 @@ import (
 	"net/http"
 
 	"myapp/internal/config"
+	"myapp/internal/services/websocket-server/data"
 	"myapp/internal/services/websocket-server/types"
+
+	"github.com/go-redis/redis/v8"
 )
 
 type WSHandler struct {
@@ -19,7 +22,9 @@ type WSHandler struct {
 	//
 	// 誰かから受け取ったメッセージを「全員に送る」ための通信用チャネル。
 	Broadcast chan types.BroadcastPayload
-	Ctx       context.Context
+
+	Ctx context.Context
+	Rdb *redis.Client
 }
 
 func NewWSHandler(cfg *config.Config) *WSHandler {
@@ -28,6 +33,7 @@ func NewWSHandler(cfg *config.Config) *WSHandler {
 		Clients:   make(map[*types.Client]bool),
 		Broadcast: make(chan types.BroadcastPayload),
 		Ctx:       context.Background(),
+		Rdb:       data.GetRedis(cfg),
 	}
 }
 

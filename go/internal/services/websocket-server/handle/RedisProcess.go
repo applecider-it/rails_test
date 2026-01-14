@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"myapp/internal/services/websocket-server/data"
 	"myapp/internal/services/websocket-server/types"
 
 	"github.com/go-redis/redis/v8"
@@ -14,9 +13,7 @@ import (
 func RedisProcessMain(h *WSHandler) {
 	fmt.Println("begin redisProcess")
 
-	rdb := data.GetRedis(h.Config)
-
-	pubsub := rdb.Subscribe(h.Ctx, h.Config.RedisPubSubChannel)
+	pubsub := h.Rdb.Subscribe(h.Ctx, h.Config.RedisPubSubChannel)
 	defer pubsub.Close()
 
 	ch := pubsub.Channel()
