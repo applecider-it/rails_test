@@ -1,0 +1,56 @@
+package handle
+
+import (
+	"encoding/json"
+	"fmt"
+
+	"myapp/internal/services/websocket-server/data"
+	"myapp/internal/services/websocket-server/types"
+)
+
+// Redis Pub/Subの処理
+func RedisProcessMain(h *WSHandler) {
+	fmt.Println("begin redisProcess")
+
+	rdb := data.GetRedis(h.Config)
+
+	pubsub := rdb.Subscribe(h.Ctx, h.Config.RedisPubSubChannel)
+	defer pubsub.Close()
+
+	ch := pubsub.Channel()
+	for msg := range ch {
+		// メッセージを受け取った時
+
+		fmt.Printf("redisProcess Received: %s\n", msg.Payload)
+		var redisData types.RedisReceivedData
+
+		err := json.Unmarshal([]byte(msg.Payload), &redisData)
+		if err != nil {
+			fmt.Println("Error:", err)
+			return
+		}
+
+		fmt.Printf("Channel: %s, Json: %s\n", redisData.Channel, redisData.Json)
+
+		// 送信用ユーザー情報に変換
+		sender := types.ClientSimple{
+			UserID:      0,
+			Email:       h.Config.WsRedisSystemEmail,
+			TokenString: "",
+			Channel:     redisData.Channel,
+		}
+
+		receivedData := types.ReceivedData{
+			Json: redisData.Json,
+		}
+
+		fmt.Println(sender)
+		fmt.Println(receivedData)
+
+		// チャネル broadcast にメッセージを送る（送信処理へ渡す）
+		h.Broadcast <- types.BroadcastPayload{
+			Received: receivedData,
+			Sender:   sender,
+		}
+	}
+}

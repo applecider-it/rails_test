@@ -1,0 +1,74 @@
+package handle
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+
+	"myapp/internal/services/websocket-server/auth"
+	"myapp/internal/services/websocket-server/test"
+	"myapp/internal/services/websocket-server/types"
+	"myapp/internal/services/websocket-server/websocket"
+)
+
+// WebSocket の接続を処理する関数
+func HandleConnectionsMain(h *WSHandler, w http.ResponseWriter, r *http.Request) {
+	tokenString := r.URL.Query().Get("token")
+
+	fmt.Printf("Connection: tokenString=%s\n", tokenString)
+
+	userID, email, channel, err := auth.AuthenticateToken(tokenString, h.Config.JwtSecret)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusUnauthorized)
+		return
+	}
+
+	fmt.Printf("Connected user: ID=%d, Email=%s channel=%s\n", userID, email, channel)
+
+	ws, err := websocket.Upgrader.Upgrade(w, r, nil) // WebSocketへ変換
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer ws.Close()
+
+	// 接続ユーザー情報を保存
+	client := &types.Client{
+		Conn:        ws,
+		UserID:      userID,
+		Email:       email,
+		TokenString: tokenString,
+		Channel:     channel,
+	}
+	h.Clients[client] = true
+
+	// 永久ループで WebSocket からデータを受け取る。
+	for {
+		var receivedData types.ReceivedData
+		err := ws.ReadJSON(&receivedData) // JSONが届くのを待つ（待ち受け）
+		if err != nil {
+			log.Printf("error: ReadJSON: %v", err)
+			delete(h.Clients, client)
+			break
+		}
+
+		fmt.Printf("Received data: json=%s, userID=%d, email=%s\n",
+			receivedData.Json, client.UserID, client.Email)
+
+		// Railsへのテスト送信
+		test.TestSend(client.TokenString, receivedData.Json, h.Config)
+
+		// 送信用ユーザー情報に変換
+		sender := types.ClientSimple{
+			UserID:      client.UserID,
+			Email:       client.Email,
+			TokenString: client.TokenString,
+			Channel:     client.Channel,
+		}
+
+		// チャネル broadcast にメッセージを送る（送信処理へ渡す）
+		h.Broadcast <- types.BroadcastPayload{
+			Received: receivedData,
+			Sender:   sender,
+		}
+	}
+}
