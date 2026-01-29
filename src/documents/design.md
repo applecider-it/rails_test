@@ -58,6 +58,6 @@ vite.config.ts
 
 モデルはDB構成に連動させるべきですが、コントローラーはドメインの区切りに合わせるべきなので、user_tweets_controller.rbにしないで、tweets_controller.rbにして、UserTweetモデルとの連動を断っています。
 
-フロントエンドは、vite、react、tsxを使うほうがいいので、importmapなどは使っていません。
+フロントエンドは、viteを使うほうがいいので、importmapは使っていません。
 
 ビジネスロジックは、コントローラーやモデルに書かないで、サービスクラスにまとめています。
