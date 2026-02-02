@@ -42,8 +42,8 @@ Rails.application.routes.draw do
 
   # 開発者向けページ
   get "development/index"
-  get "development/backend_test"
-  get "development/frontend_test"
+  get "development/ruby_test"
+  get "development/javascript_test"
   post "api/development/go_api_test"
   get "development/websocket_test"
 end

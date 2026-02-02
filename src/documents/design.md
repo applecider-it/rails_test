@@ -1,6 +1,6 @@
 # 設計
 
-フロントエンドアーキテクチャは、Laravelと同じように、vite, tailwind。
+Javascript,CSS管理は、Laravelと同じように、vite, tailwind。
 
 MVCSにして、ビジネスロジックは、カテゴリーごとにフォルダを分けたサービスクラスにまとめている。
 
@@ -43,7 +43,7 @@ documents/ <- Railsモノリス固有のドキュメント
 Procfile.dev
 Procfile.prod
 
-(フロントエンド関連の設定ファイル)
+(npm関連の設定ファイル)
 postcss.config.js
 tailwind.config.js
 tsconfig.json
@@ -58,6 +58,6 @@ vite.config.ts
 
 モデルはDB構成に連動させるべきですが、コントローラーはドメインの区切りに合わせるべきなので、user_tweets_controller.rbにしないで、tweets_controller.rbにして、UserTweetモデルとの連動を断っています。
 
-フロントエンドは、viteを使うほうがいいので、importmapは使っていません。
+Javascript,CSS管理は、viteを使うほうがいいので、importmapは使っていません。
 
 ビジネスロジックは、コントローラーやモデルに書かないで、サービスクラスにまとめています。

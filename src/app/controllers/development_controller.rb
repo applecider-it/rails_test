@@ -3,8 +3,8 @@ class DevelopmentController < ApplicationController
   def index
   end
 
-  # バックエンド動作確認
-  def backend_test
+  # Ruby動作確認
+  def ruby_test
     sample_service = SampleServices::SampleService.new
     sample_service.test_exec("backend_test")
 
@@ -29,8 +29,8 @@ class DevelopmentController < ApplicationController
     render :complate
   end
 
-  # フロントエンド動作確認
-  def frontend_test
+  # Javascript動作確認
+  def javascript_test
     @name = "Test!!"
   end
 end
