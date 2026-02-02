@@ -6,7 +6,7 @@ class DevelopmentController < ApplicationController
   # Ruby動作確認
   def ruby_test
     sample_service = SampleServices::SampleService.new
-    sample_service.test_exec("backend_test")
+    sample_service.test_exec("ruby_test")
 
     user = current_user
 
