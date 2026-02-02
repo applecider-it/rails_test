@@ -57,6 +57,13 @@ ActiveAdmin.register User do
   filter :current_sign_in_at
   filter :sign_in_count
   filter :created_at
+  filter :discard_status,
+    as: :select,
+    collection: [
+      ['有効', 'kept'],
+      ['削除済み', 'discarded']
+    ],
+    label: 'ユーザーの状態'
 
   form do |f|
     f.inputs do
