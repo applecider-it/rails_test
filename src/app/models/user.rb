@@ -23,10 +23,10 @@ class User < ApplicationRecord
 
   # 有効なユーザーかの値を返すransack用属性
   # ActiveAdminで利用している
-  ransacker :discard_status do
+  ransacker :discard_status do |parent|
     Arel.sql <<~SQL
       CASE
-        WHEN users.discarded_at IS NULL THEN 'kept'
+        WHEN #{parent.table.name}.discarded_at IS NULL THEN 'kept'
         ELSE 'discarded'
       END
     SQL
