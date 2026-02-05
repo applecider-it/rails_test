@@ -13,7 +13,6 @@ export default class ChatClient {
   private ws;
   private room;
 
-  setMessage: Function;;
   addMessage: Function;;
 
   constructor(host, token, room) {
@@ -75,7 +74,6 @@ export default class ChatClient {
   private async send(message: string) {
     const json = JSON.stringify({ message });
     this.ws.send(JSON.stringify({ json }));
-    this.setMessage('');
   }
 
   /** APIでメッセージ送信 */
@@ -94,6 +92,5 @@ export default class ChatClient {
       headers: headers,
     });
     console.log('response.data', response.data);
-    this.setMessage('');
   }
 }

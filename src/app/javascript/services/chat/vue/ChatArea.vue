@@ -59,14 +59,11 @@ const onKeydown = (e) => {
 const sendMessage = (type: string) => {
   console.log(message.value);
   props.chatClient.sendMessage(message.value, type);
+  message.value = "";
 };
 
 // 初期化時
 onMounted(() => {
-  props.chatClient.setMessage = (val: string) => {
-    message.value = val;
-  };
-
   props.chatClient.addMessage = (val: ChatMessage) => {
     messages.value.push(val);
   };
