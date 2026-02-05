@@ -10,10 +10,11 @@ import { jsonRequestHeaders } from '@/services/api/http';
  * チャットクライアント
  */
 export default class ChatClient {
-  ws;
-  setMessage;
-  addMessage;
-  room;
+  private ws;
+  private room;
+
+  setMessage: Function;;
+  addMessage: Function;;
 
   constructor(host, token, room) {
     this.room = room;
@@ -29,12 +30,12 @@ export default class ChatClient {
       { channel: 'ChatChannel', room: this.room },
       {
         received: (data) => this.onMessageAC(data),
-      }
+      },
     );
   }
 
   /** WebSocketメッセージ受信 */
-  onMessage(event) {
+  private onMessage(event) {
     // result = { data: { json }, sender: { user_id, email } }
     const result = JSON.parse(event.data);
     console.log('onmessage', result);
@@ -49,7 +50,7 @@ export default class ChatClient {
   }
 
   /** ActionCableメッセージ受信 */
-  onMessageAC(data) {
+  private onMessageAC(data) {
     console.log('受信:', data);
     this.addMessage({
       message: data.message,
@@ -85,8 +86,8 @@ export default class ChatClient {
     console.log(data);
 
     const url = {
-      'actioncable': '/chat/store_ac',
-      'redis': '/chat/store_redis',
+      actioncable: '/chat/store_ac',
+      redis: '/chat/store_redis',
     }[type];
 
     const response = await axios.post(url, data, {
