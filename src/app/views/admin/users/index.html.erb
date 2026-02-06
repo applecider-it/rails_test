@@ -11,13 +11,7 @@
   <% end %>
 </div>
 
-<div id="users">
-  <% @users.each do |user| %>
-    <div class="mb-5">
-      <%= render "row", user: user %>
-    </div>
-  <% end %>
-</div>
+<%= render "list" %>
 
 <div class="mt-5">
   <%= paginate @users %>

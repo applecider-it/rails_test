@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   scope path: "/admin_secret", as: "admin", module: "admin" do
     get "", to: "home#index"
-    resources :users
+    resources :users, except: [:show]
   end
 
   # ユーザー関連

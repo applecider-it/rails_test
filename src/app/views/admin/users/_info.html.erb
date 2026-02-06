@@ -1,19 +1,10 @@
-<div id="<%= dom_id user %>" class="max-w-2xl mx-auto bg-white shadow-lg rounded-2xl p-6 border border-gray-200 mb-8">
-  <!-- ヘッダー -->
-  <div class="flex items-center mb-4">
-    <div class="flex-shrink-0">
-      <!-- ユーザーアイコン代用 -->
-      <span class="inline-block w-12 h-12 bg-gray-300 rounded-full text-center leading-12 font-bold text-white">
-        <%= user.email[0].upcase %>
-      </span>
-    </div>
-    <div class="ml-4">
-      <h2 class="text-xl font-semibold text-gray-800"><%= user.email %></h2>
-      <p class="text-sm text-gray-500">Created at <%= user.created_at.strftime("%Y-%m-%d %H:%M") %></p>
-    </div>
-  </div>
-
-  <div class="mt-4 text-gray-800 leading-relaxed text-lg">
-    <p>discarded_at: <%= user.discarded_at ? user.discarded_at.strftime("%Y-%m-%d %H:%M") : 'none' %></p>
-  </div>
+<div class="my-3">
+  <%= form.label :created_at %><br />
+  <%= user.created_at.strftime("%Y-%m-%d %H:%M") %>
 </div>
+
+<div class="my-3">
+  <%= form.label :discarded_at %><br />
+  <%= user.discarded_at ? user.discarded_at.strftime("%Y-%m-%d %H:%M") : 'none' %>
+</div>
+
