@@ -163,3 +163,6 @@ npm install @rails/actioncable
 
 rails db:drop db:create db:migrate db:seed
 
+rails generate devise:views admin_users
+
+rails generate devise:controllers admin_users

@@ -10,7 +10,10 @@ Rails.application.routes.draw do
 
   # 管理画面
   scope "/admin_secret" do
-    devise_for :admin_users
+    devise_for :admin_users, controllers: {
+      sessions: 'admin_users/sessions',
+      passwords: 'admin_users/passwords',
+    }
   end
 
   scope path: "/admin_secret", as: "admin", module: "admin" do
