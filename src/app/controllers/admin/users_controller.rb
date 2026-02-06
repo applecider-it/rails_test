@@ -64,14 +64,13 @@ class Admin::UsersController < Admin::BaseController
     redirect_to admin_users_path, notice: "削除しました。", status: :see_other
   end
 
-  private
-    # カレントデータの取得
-    def set_user
-      @user = User.find(params.expect(:id))
-    end
+  # カレントデータの取得
+  private def set_user
+    @user = User.find(params.expect(:id))
+  end
 
-    # 変更可能な項目だけを絞り込む
-    def user_params
-      params.expect(user: [ :email, :password, :password_confirmation ])
-    end
+  # 変更可能な項目だけを絞り込む
+  private def user_params
+    params.expect(user: [ :email, :password, :password_confirmation ])
+  end
 end

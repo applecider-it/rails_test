@@ -124,27 +124,26 @@ class TweetsController < ApplicationController
     end
   end
 
-  private
-    # カレントデータの取得
-    def set_tweet
-      @tweet = UserTweet.kept.find(params.expect(:id))
-    end
+  # カレントデータの取得
+  private def set_tweet
+    @tweet = UserTweet.kept.find(params.expect(:id))
+  end
 
-    # 変更可能な項目だけを絞り込む
-    def tweet_params
-      params.expect(tweet: [ :content ])
-    end
+  # 変更可能な項目だけを絞り込む
+  private def tweet_params
+    params.expect(tweet: [ :content ])
+  end
 
-    # サービスクラスのセットアップ
-    def setup_service_class
-      @list_service = TweetServices::ListService.new
-      @websocket_service = TweetServices::WebsocketService.new
-    end
+  # サービスクラスのセットアップ
+  private def setup_service_class
+    @list_service = TweetServices::ListService.new
+    @websocket_service = TweetServices::WebsocketService.new
+  end
 
-    # オーナーチェック用メソッド
-    def check_owner
-      return if @tweet.user == current_user
+  # オーナーチェック用メソッド
+  private def check_owner
+    return if @tweet.user == current_user
 
-      redirect_to tweets_path, alert: "権限がありません"
-    end
+    redirect_to tweets_path, alert: "権限がありません"
+  end
 end
