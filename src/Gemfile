@@ -64,7 +64,6 @@ group :test do
 end
 
 gem 'devise'
-gem "activeadmin"
 
 gem 'vite_rails'
 
@@ -87,3 +86,5 @@ group :development do
   gem 'bullet'
   gem 'memory_profiler'
 end
+
+gem 'kaminari'

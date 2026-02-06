@@ -157,3 +157,9 @@ npm install axios
 rails g channel Chat
 
 npm install @rails/actioncable
+
+-----------------------------------
+
+
+rails db:drop db:create db:migrate db:seed
+

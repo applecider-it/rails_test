@@ -10,7 +10,6 @@ javascriptを使わないでtypescriptだけ利用している。
 
 ```
 app/
-  admin/ <- activeadmin関連
   controllers/
     users/ <- devise関連
     tweets_controller.rb <- user_tweets_controller.rbにしないで、Tweetというドメインを表すようにしている。
@@ -25,7 +24,6 @@ app/
     .
     .
   views/
-    admin/ <- activeadminから呼ぶpartial
     kaminari/ <- paginationファイル
     users/ <- devise関連
     .

@@ -52,7 +52,7 @@ test2@localhost.com / test2test2
 
 http://localhost:3000/admin_secret/admin
 
-admin@example.com / password
+admin@example.com / adminadmin
 
 
 管理者追加

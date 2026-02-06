@@ -10,11 +10,7 @@ Rails.application.routes.draw do
 
   # 管理画面
   scope "/admin_secret" do
-    devise_for :admin_users, ActiveAdmin::Devise.config
-    ActiveAdmin.routes(self)
-
-    # 管理画面の開発者向けページ用API
-    post "admin_api/development/api_test"
+    devise_for :admin_users
   end
 
   # ユーザー関連
