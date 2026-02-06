@@ -16,10 +16,11 @@ class User < ApplicationRecord
 
   before_discard :discard_all_relations
 
-  # ActiveAdminで空のパスワードは無視するためのメソッド
-  def password_required?
-    new_record? || password.present?
-  end
+  # キーワード検索用スコープ
+  scope :search_by_keyword, ->(keyword) {
+    return all if keyword.blank?
+    where("email LIKE ?", "%#{sanitize_sql_like(keyword)}%")
+  }
 
   # ログイン可能かチェック
   def active_for_authentication?

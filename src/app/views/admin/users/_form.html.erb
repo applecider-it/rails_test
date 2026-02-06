@@ -1,0 +1,16 @@
+<%= render "shared/message/error_messages", resource: user %>
+
+<div class="my-3">
+  <%= form.label :email %><br />
+  <%= form.email_field :email, autofocus: true, autocomplete: "email", class: "app-form-input" %>
+</div>
+
+<div class="my-3">
+  <%= form.label :password %>
+  <%= form.password_field :password, autocomplete: "new-password", class: "app-form-input" %>
+</div>
+
+<div class="my-3">
+  <%= form.label :password_confirmation %><br />
+  <%= form.password_field :password_confirmation, autocomplete: "new-password", class: "app-form-input" %>
+</div>

@@ -1,0 +1,24 @@
+<h2 class="app-h2">ユーザー一覧</h2>
+
+<div class="my-10">
+  <%= link_to "新規作成", new_admin_user_path, class: "app-btn-primary" %>
+</div>
+
+<div class="my-3">
+  <%= form_with url: admin_users_path, method: :get, local: true do |form| %>
+    <%= form.text_field :keyword, value: @keyword, placeholder: "キーワード検索", class: "app-form-input inline-block w-auto" %>
+    <%= form.submit "検索", class: "app-btn-primary inline-block w-auto" %>
+  <% end %>
+</div>
+
+<div id="users">
+  <% @users.each do |user| %>
+    <div class="mb-5">
+      <%= render "row", user: user %>
+    </div>
+  <% end %>
+</div>
+
+<div class="mt-5">
+  <%= paginate @users %>
+</div>

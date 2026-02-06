@@ -1,0 +1,24 @@
+<%
+  link_style = "text-md text-gray-800 hover:text-gray-900"
+%>
+<div class="flex justify-between h-16 items-center">
+  <!-- 左側：ロゴ / トップリンク -->
+  <div class="flex flex-shrink-0 items-center gap-4">
+    <%= link_to 'Top', admin_path, class: link_style %>
+    <%= link_to 'Users', admin_users_path, class: link_style %>
+  </div>
+
+  <!-- 右側リンク：デスクトップ -->
+  <div class="flex items-center gap-4">
+    <% if admin_user_signed_in? %>
+      <div class="bg-gray-300 hover:bg-gray-200 text-gray-500 font-semibold px-2 py-1 rounded transition"><%= current_admin_user.email %></div>
+      <%= button_to 'Logout',
+        destroy_admin_user_session_path,
+        method: :delete,
+        class: "bg-red-100 hover:bg-red-200 text-gray-500 font-semibold px-2 py-1 rounded transition",
+        onclick: "return confirm('ログアウトしますか？');" %>
+    <% else %>
+      <%= link_to 'Login', new_admin_user_session_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-2 py-1 rounded transition" %>
+    <% end %>
+  </div>
+</div>

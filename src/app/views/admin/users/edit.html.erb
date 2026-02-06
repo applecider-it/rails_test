@@ -1,0 +1,16 @@
+<h2 class="app-h2">ユーザー変更</h2>
+
+<%= form_with(model: @user, url: admin_user_path(@user), scope: :user) do |form| %>
+  <%= render "form", form: form, user: @user %>
+
+  <div class="my-2">
+    <%= form.submit "確定", class: "app-btn-primary w-40" %>
+  </div>
+<% end %>
+
+<br>
+
+<div>
+  <%= link_to "参照", admin_user_path(@user), class: "app-link-normal" %> |
+  <%= link_to "一覧", admin_users_path, class: "app-link-normal" %>
+</div>

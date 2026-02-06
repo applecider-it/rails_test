@@ -13,6 +13,11 @@ Rails.application.routes.draw do
     devise_for :admin_users
   end
 
+  scope path: "/admin_secret", as: "admin", module: "admin" do
+    get "", to: "home#index"
+    resources :users
+  end
+
   # ユーザー関連
   devise_for :users, controllers: {
     sessions: 'users/sessions',

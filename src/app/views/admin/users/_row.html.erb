@@ -1,0 +1,21 @@
+<div id="<%= dom_id user %>" class="bg-white shadow-sm rounded-xl p-4 mb-4 border-2 border-gray-200">
+  <p class="text-sm text-gray-500">
+    <strong class="font-semibold text-gray-700">User:</strong>
+    <%= user.email %>
+  </p>
+
+  <p class="mt-2 text-gray-700">
+    <div>
+      <strong class="font-semibold">created_at:</strong>
+      <%= user.created_at.strftime("%Y-%m-%d %H:%M") %>
+    </div>
+    <div>
+      <strong class="font-semibold">discarded_at:</strong>
+      <%= user.discarded_at ? user.discarded_at.strftime("%Y-%m-%d %H:%M") : 'none' %>
+    </div>
+  </p>
+  
+  <p class="mt-4">
+    <%= link_to "参照", admin_user_path(user), class: "app-link-normal" %>
+  </p>
+</div>

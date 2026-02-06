@@ -50,7 +50,7 @@ test@localhost.com / testtest
 test2@localhost.com / test2test2
 
 
-http://localhost:3000/admin_secret/admin
+http://localhost:3000/admin_secret/
 
 admin@example.com / adminadmin
 

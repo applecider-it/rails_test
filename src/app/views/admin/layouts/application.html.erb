@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <%= render 'admin/layouts/shared/head' %>
+  </head>
+
+  <body class="bg-gray-300 min-h-screen font-sans flex flex-col items-center">
+    <%= render 'admin/layouts/shared/common' %>
+    <%= render 'admin/layouts/shared/navbar' %>
+
+    <main class="w-full p-0 sm:p-10 flex items-center">
+      <div class="w-full bg-white shadow-md rounded p-6">
+        <%= render 'admin/layouts/shared/message' %>
+
+        <%= yield %>
+      </div>
+    </main>
+
+  </body>
+</html>
