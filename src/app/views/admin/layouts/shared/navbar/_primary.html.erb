@@ -11,7 +11,7 @@
   <!-- 右側リンク：デスクトップ -->
   <div class="flex items-center gap-4">
     <% if admin_user_signed_in? %>
-      <div class="bg-gray-300 hover:bg-gray-200 text-gray-500 font-semibold px-2 py-1 rounded transition"><%= current_admin_user.email %></div>
+      <div class="bg-gray-300 text-gray-500 font-semibold px-2 py-1 rounded transition"><%= current_admin_user.email %></div>
       <%= button_to 'Logout',
         destroy_admin_user_session_path,
         method: :delete,

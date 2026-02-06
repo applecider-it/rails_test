@@ -6,6 +6,7 @@ class Admin::UsersController < Admin::BaseController
   def index
     page = params[:page]
     @keyword = params[:keyword]
+
     @users = User
       .order(id: :desc)
       .search_by_keyword(@keyword)
@@ -26,18 +27,16 @@ class Admin::UsersController < Admin::BaseController
   def create
     @user = User.new(user_params)
 
-    respond_to do |format|
-      if @user.valid?
-        # エラーがないとき
-          
-        @user.save
+    if @user.valid?
+      # エラーがないとき
 
-        format.html { redirect_to admin_user_path(@user), notice: "作成しました。" }
-      else
-        # エラーがあるとき
-        
-        format.html { render :new, status: :unprocessable_entity }
-      end
+      @user.save
+
+      redirect_to edit_admin_user_path(@user), notice: "作成しました。"
+    else
+      # エラーがあるとき
+      
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -45,17 +44,16 @@ class Admin::UsersController < Admin::BaseController
   def update
     @user.assign_attributes(user_params)
 
-    respond_to do |format|
-      if @user.valid?
-        # エラーがないとき
-          
-        @user.save
-        format.html { redirect_to admin_user_path(@user), notice: "更新しました。", status: :see_other }
-      else
-        # エラーがあるとき
-        
-        format.html { render :edit, status: :unprocessable_entity }
-      end
+    if @user.valid?
+      # エラーがないとき
+
+      @user.save
+
+      redirect_to edit_admin_user_path(@user), notice: "更新しました。", status: :see_other
+    else
+      # エラーがあるとき
+      
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -63,9 +61,7 @@ class Admin::UsersController < Admin::BaseController
   def destroy
     @user.discard
 
-    respond_to do |format|
-      format.html { redirect_to admin_users_path, notice: "削除しました。", status: :see_other }
-    end
+    redirect_to admin_users_path, notice: "削除しました。", status: :see_other
   end
 
   private
