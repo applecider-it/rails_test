@@ -8,34 +8,27 @@ class TweetsController < ApplicationController
   before_action :setup_service_class
   before_action :check_owner, only: %i[ edit update destroy ]
 
-  # GET /tweets or /tweets.json
+  # 一覧画面
   def index
     page = params[:page]
     @keyword = params[:keyword]
     @tweets = @list_service.get_list page, @keyword
   end
 
-  # GET /tweets/react_top
-  def react_top
-    @user = current_user
-    @token = current_user.jwt_token(ChannelServices::TweetChannelService.get_channel)
-  end
-
-  # GET /tweets/1 or /tweets/1.json
+  # 詳細画面
   def show
   end
 
-  # GET /tweets/new
+  # 新規作成画面
   def new
     @tweet = UserTweet.new
   end
 
-  # GET /tweets/1/edit
+  # 更新画面
   def edit
   end
 
   # 新規作成処理
-  # POST /tweets or /tweets.json
   def create
     commit = params[:commit]
     confirm = params[:confirm]
@@ -81,7 +74,6 @@ class TweetsController < ApplicationController
   end
 
   # 更新処理
-  # PATCH/PUT /tweets/1 or /tweets/1.json
   def update
     commit = params[:commit]
     confirm = params[:confirm]
@@ -122,7 +114,7 @@ class TweetsController < ApplicationController
     end
   end
 
-  # DELETE /tweets/1 or /tweets/1.json
+  # 削除処理
   def destroy
     @tweet.discard
 
@@ -133,12 +125,12 @@ class TweetsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # カレントデータの取得
     def set_tweet
       @tweet = UserTweet.kept.find(params.expect(:id))
     end
 
-    # Only allow a list of trusted parameters through.
+    # 変更可能な項目だけを絞り込む
     def tweet_params
       params.expect(tweet: [ :content ])
     end

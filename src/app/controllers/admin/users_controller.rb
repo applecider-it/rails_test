@@ -2,7 +2,7 @@
 class Admin::UsersController < Admin::BaseController
   before_action :set_user, only: %i[ edit update destroy ]
 
-  # GET /users or /users.json
+  # 一覧画面
   def index
     page = params[:page]
     @keyword = params[:keyword]
@@ -13,17 +13,16 @@ class Admin::UsersController < Admin::BaseController
       .per(20)
   end
 
-  # GET /users/new
+  # 新規作成画面
   def new
     @user = User.new
   end
 
-  # GET /users/1/edit
+  # 更新画面
   def edit
   end
 
   # 新規作成処理
-  # POST /users or /users.json
   def create
     @user = User.new(user_params)
 
@@ -43,7 +42,6 @@ class Admin::UsersController < Admin::BaseController
   end
 
   # 更新処理
-  # PATCH/PUT /users/1 or /users/1.json
   def update
     @user.assign_attributes(user_params)
 
@@ -61,7 +59,7 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
-  # DELETE /users/1 or /users/1.json
+  # 削除処理
   def destroy
     @user.discard
 
@@ -71,12 +69,12 @@ class Admin::UsersController < Admin::BaseController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # カレントデータの取得
     def set_user
       @user = User.find(params.expect(:id))
     end
 
-    # Only allow a list of trusted parameters through.
+    # 変更可能な項目だけを絞り込む
     def user_params
       params.expect(user: [ :email, :password, :password_confirmation ])
     end

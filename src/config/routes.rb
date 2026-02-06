@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post "chat/store_redis"
 
   # ツイート
-  get "tweets/react_top"
+  get "tweets_js/index"
   resources :tweets
 
   # 管理画面
