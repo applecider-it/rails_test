@@ -21,5 +21,4 @@
 - devise
 - vite
 - tailwind
-- activeadmin
 - discard

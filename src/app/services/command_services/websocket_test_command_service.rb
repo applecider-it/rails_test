@@ -10,7 +10,7 @@ class CommandServices::WebsocketTestCommandService
     end
   end
 
-  def test_redis
+  private def test_redis
     system_service = WebsocketServices::SystemService.new
 
     system_service.send_to_redis(

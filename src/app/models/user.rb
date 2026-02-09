@@ -23,11 +23,17 @@ class User < ApplicationRecord
   }
 
   # ログイン可能かチェック
+  # 
+  # Devise が内部で使ってるメソッド
   def active_for_authentication?
     super && !discarded?
   end
 
-  # 無効な理由（フラッシュ表示用）
+  # アカウントが無効な理由のメッセージに使われるキーを返す
+  # 
+  # 言語ファイルの、devise.failure.{returnvalue}を表示
+  # 
+  # Devise が内部で使ってるメソッド
   def inactive_message
     discarded? ? :deleted_account : super
   end

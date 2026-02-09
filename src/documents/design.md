@@ -11,6 +11,8 @@ javascriptを使わないでtypescriptだけ利用している。
 ```
 app/
   controllers/
+    admin/ <- 管理画面
+    admin_users/ <- devise関連
     users/ <- devise関連
     tweets_controller.rb <- user_tweets_controller.rbにしないで、Tweetというドメインを表すようにしている。
   javascript/
@@ -24,6 +26,7 @@ app/
     .
     .
   views/
+    admin_users/ <- devise関連
     kaminari/ <- paginationファイル
     users/ <- devise関連
     .
@@ -54,8 +57,8 @@ vite.config.ts
 
 ## Railswayじゃない部分
 
-モデルはDB構成に連動させるべきですが、コントローラーはドメインの区切りに合わせるべきなので、user_tweets_controller.rbにしないで、tweets_controller.rbにして、UserTweetモデルとの連動を断っています。
+- モデルはDB構成に連動させるべきですが、コントローラーはドメインの区切りに合わせるべきなので、user_tweets_controller.rbにしないで、tweets_controller.rbにして、UserTweetモデルとの連動を断っています。
 
-Javascript,CSS管理は、viteを使うほうがいいので、importmapは使っていません。
+- Javascript,CSS管理は、viteを使うほうがいいので、importmapは使っていません。
 
-ビジネスロジックは、コントローラーやモデルに書かないで、サービスクラスにまとめています。
+- ビジネスロジックは、コントローラーやモデルに書かないで、サービスクラスにまとめています。
