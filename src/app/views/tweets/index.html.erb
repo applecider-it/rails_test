@@ -5,18 +5,11 @@
 </div>
 
 <div class="my-3">
-  <%= form_with url: tweets_path, method: :get, local: true do |form| %>
-    <%= form.text_field :keyword, value: @keyword, placeholder: "キーワード検索", class: "app-form-input inline-block w-auto" %>
-    <%= form.submit "検索", class: "app-btn-primary inline-block w-auto" %>
-  <% end %>
+  <%= render "search" %>
 </div>
 
 <div id="tweets">
-  <% @tweets.each do |tweet| %>
-    <div class="mb-5">
-      <%= render "row", tweet: tweet %>
-    </div>
-  <% end %>
+  <%= render "list" %>
 </div>
 
 <div class="mt-5">
