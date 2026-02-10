@@ -14,11 +14,11 @@ Rails.application.routes.draw do
       sessions: 'admin_users/sessions',
       passwords: 'admin_users/passwords',
     }
-  end
 
-  scope path: "/admin_secret", as: "admin", module: "admin" do
-    get "", to: "home#index"
-    resources :users, except: [:show]
+    scope as: "admin", module: "admin" do
+      get "", to: "home#index"
+      resources :users, except: [:show]
+    end
   end
 
   # ユーザー関連
