@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AdminUsers::SessionsController < Devise::SessionsController
+class AdminUsers::SessionsController < AdminUsers::BaseController
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
