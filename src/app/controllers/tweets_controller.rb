@@ -5,14 +5,14 @@
 class TweetsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_tweet, only: %i[ show edit update destroy ]
-  before_action :setup_service_class
   before_action :check_owner, only: %i[ edit update destroy ]
 
   # 一覧画面
   def index
+    list_service = TweetServices::ListService.new
     page = params[:page]
     @keyword = params[:keyword]
-    @tweets = @list_service.get_list page, @keyword
+    @tweets = list_service.get_list page, @keyword
   end
 
   # 詳細画面
@@ -30,6 +30,8 @@ class TweetsController < ApplicationController
 
   # 新規作成処理
   def create
+    websocket_service = TweetServices::WebsocketService.new
+
     commit = params[:commit]
     confirm = params[:confirm]
 
@@ -45,7 +47,7 @@ class TweetsController < ApplicationController
           
           @tweet.save
 
-          @websocket_service.broadcast(@tweet)
+          websocket_service.broadcast(@tweet)
 
           format.html { redirect_to tweet_path(@tweet), notice: "作成しました。" }
           format.json { render :show, status: :created, location: tweet_path(@tweet) }
@@ -132,12 +134,6 @@ class TweetsController < ApplicationController
   # 変更可能な項目だけを絞り込む
   private def tweet_params
     params.expect(tweet: [ :content ])
-  end
-
-  # サービスクラスのセットアップ
-  private def setup_service_class
-    @list_service = TweetServices::ListService.new
-    @websocket_service = TweetServices::WebsocketService.new
   end
 
   # オーナーチェック用メソッド
