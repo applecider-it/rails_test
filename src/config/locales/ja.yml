@@ -97,7 +97,6 @@ ja:
       year: 年
   errors:
     #format: "%{attribute}%{message}"
-    # こっちにしないとactiveadminでカラム名が表示されなくなる
     format: "%{message}"
     messages:
       accepted: "%{attribute}を受諾してください"

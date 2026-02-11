@@ -27,9 +27,6 @@ module Myapp
     # デフォルト言語を日本語に設定
     config.i18n.default_locale = :ja
 
-    # activeadminをインストールするとinherited_resourcesに切り替わるので戻す
-    config.generators.scaffold_controller :scaffold_controller
-
     # アプリケーション全体のタイムゾーン
     config.time_zone = 'Tokyo'
 
