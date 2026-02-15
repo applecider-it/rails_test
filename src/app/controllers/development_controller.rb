@@ -31,7 +31,33 @@ class DevelopmentController < ApplicationController
 
   # View動作確認
   def view_test
+    view_test_common
     @form = ViewTestForm.new
+    @form.list_val = 2
+    @form.radio_val = "val1"
+    @form.datetime_val = "2026-02-15T14:30"
+  end
+  def view_test_post
+    view_test_common
+    @form = ViewTestForm.new
+
+    @form.assign_attributes(view_test_params)
+
+    render :view_test
+  end
+  private def view_test_common
+    @list_vals = {
+      1 => "No. 1",
+      2 => "No. 2",
+      3 => "No. 3"
+    }
+    @radio_vals = {
+      "val1" => "Value 1",
+      "val2" => "Value 2"
+    }
+  end
+  private def view_test_params
+    params.expect(view_test_form: [ :list_val, :radio_val, :datetime_val ])
   end
 
   # Javascript動作確認

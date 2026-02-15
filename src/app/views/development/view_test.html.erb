@@ -1,29 +1,13 @@
-<%
-@form.list_val = 2
-@form.radio_val = "val1"
-@form.datetime_val = "2026-02-15T14:30"
-
-list_vals = {
-  1 => "No. 1",
-  2 => "No. 2",
-  3 => "No. 3"
-}
-radio_vals = {
-  "val1" => "Value 1",
-  "val2" => "Value 2"
-}
-%>
-
-<%= form_with model: @form, url: development_view_test_path do |f| %>
+<%= form_with model: @form, url: development_view_test_post_path do |f| %>
 
   <div class="mt-5">
     <%= f.label :list_val, "リスト動作確認" %>
-    <%= f.select :list_val, list_vals.map { |k, v| [v, k] }, { prompt: "選択してください" } %>
+    <%= f.select :list_val, @list_vals.map { |k, v| [v, k] }, { prompt: "選択してください" } %>
   </div>
 
   <div class="mt-5">
     <%= f.label :list_val, "ラジオボタン動作確認" %>
-    <% radio_vals.each do |key, value| %>
+    <% @radio_vals.each do |key, value| %>
       <%= f.label :"radio_val_#{key}" do %>
         <%= f.radio_button :radio_val, key %>
         <%= value %>

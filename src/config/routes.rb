@@ -48,7 +48,7 @@ Rails.application.routes.draw do
   get "development/index"
   get "development/ruby_test"
   get "development/view_test"
-  post "development/view_test"
+  post "development/view_test_post"
   get "development/javascript_test"
   post "api/development/go_api_test"
   get "development/websocket_test"
