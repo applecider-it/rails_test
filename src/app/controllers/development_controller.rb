@@ -29,6 +29,11 @@ class DevelopmentController < ApplicationController
     render :complate
   end
 
+  # View動作確認
+  def view_test
+    @form = ViewTestForm.new
+  end
+
   # Javascript動作確認
   def javascript_test
     @name = "Test!!"
