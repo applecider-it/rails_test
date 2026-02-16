@@ -38,6 +38,13 @@ class User < ApplicationRecord
     discarded? ? :deleted_account : super
   end
 
+  # メーラーを設定
+  # 
+  # Devise が内部で使ってるメソッド
+  def devise_mailer
+    UserDeviseMailer
+  end
+
   # 関連テーブル全てを高速に論理削除
   private def discard_all_relations
     user_tweets.kept.update_all(discarded_at: Time.current)
