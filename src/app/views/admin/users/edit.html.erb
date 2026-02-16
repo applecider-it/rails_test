@@ -10,10 +10,18 @@
   </div>
 <% end %>
 
-<br>
+
+<div class="mt-5">
+  <%= render "tweets" %>
+</div>
+
+<div class="mt-5">
+  <%= paginate @tweets, param_name: :tweets_page %>
+</div>
 
 
-<div>
+
+<div class="mt-5">
   <%= link_to "一覧", admin_users_path, class: "app-link-normal" %>
 </div>
 

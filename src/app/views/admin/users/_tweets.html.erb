@@ -1,0 +1,22 @@
+<div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
+  <table class="min-w-full divide-y divide-gray-200 text-sm">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="px-6 py-3 text-left font-semibold text-gray-600">ID</th>
+        <th class="px-6 py-3 text-left font-semibold text-gray-600">内容</th>
+        <th class="px-6 py-3 text-left font-semibold text-gray-600">作成日時</th>
+        <th class="px-6 py-3 text-left font-semibold text-gray-600">削除日時</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      <% @tweets.each do |tweet| %>
+      <tr class="hover:bg-gray-50 transition">
+        <td class="px-6 py-4 text-gray-700"><%= tweet.id %></td>
+        <td class="px-6 py-4 font-medium text-gray-900"><%= tweet.content %></td>
+        <td class="px-6 py-4"><%= tweet.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td class="px-6 py-4"><%= tweet.discarded_at ? tweet.discarded_at.strftime("%Y-%m-%d %H:%M") : '' %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

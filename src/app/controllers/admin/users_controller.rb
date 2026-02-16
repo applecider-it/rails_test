@@ -21,6 +21,14 @@ class Admin::UsersController < Admin::BaseController
 
   # 更新画面
   def edit
+    edit_common
+  end
+  def edit_common
+    tweets_page = params[:tweets_page]
+    @tweets = @user.user_tweets
+      .order(id: :desc)
+      .page(tweets_page)
+      .per(5)
   end
 
   # 新規作成処理
@@ -42,6 +50,7 @@ class Admin::UsersController < Admin::BaseController
 
   # 更新処理
   def update
+    edit_common
     @user.assign_attributes(user_params)
 
     if @user.valid?
