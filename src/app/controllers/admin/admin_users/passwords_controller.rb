@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AdminUsers::PasswordsController < Devise::PasswordsController
+class Admin::AdminUsers::PasswordsController < Devise::PasswordsController
   layout "admin/layouts/application"
 
   # GET /resource/password/new
