@@ -1,5 +1,5 @@
-# 管理画面ユーザー登録関連管理クラス
-class AdminServices::UserServices::RegistrationService
+# 管理画面　ユーザー登録関連管理クラス
+class AdminServices::UserServices::EditService
   # 更新処理を上書き
   # 
   # パスワードがなくても更新できるようしている

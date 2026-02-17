@@ -5,14 +5,12 @@ class Admin::UsersController < Admin::BaseController
 
   # 一覧画面
   def index
+    list_service = AdminServices::UserServices::ListService.new
+
     page = params[:page]
     @keyword = params[:keyword]
 
-    @users = User
-      .order(id: :desc)
-      .search_by_keyword(@keyword)
-      .page(page)
-      .per(20)
+    @users = list_service.get_list(page, @keyword)
   end
 
   # 新規作成画面
@@ -43,11 +41,11 @@ class Admin::UsersController < Admin::BaseController
 
   # 更新処理
   def update
-    registration_service = AdminServices::UserServices::RegistrationService.new
+    edit_service = AdminServices::UserServices::EditService.new
 
     params = user_params
 
-    registration_service.update_params(params)
+    edit_service.update_params(params)
 
     @user.assign_attributes(params)
 
@@ -83,11 +81,10 @@ class Admin::UsersController < Admin::BaseController
 
   # 更新画面の共通処理
   private def edit_common
+    list_service = AdminServices::UserServices::ListService.new
+
     tweets_page = params[:tweets_page]
     
-    @tweets = @user.user_tweets
-      .order(id: :desc)
-      .page(tweets_page)
-      .per(5)
+    @tweets = list_service.get_tweets(@user, tweets_page)
   end
 end
