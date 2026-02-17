@@ -1,6 +1,7 @@
 # ユーザー管理コントローラー
 class Admin::UsersController < Admin::BaseController
   before_action :set_user, only: %i[ edit update destroy ]
+  before_action :edit_common, only: %i[ edit update ]
 
   # 一覧画面
   def index
@@ -21,14 +22,6 @@ class Admin::UsersController < Admin::BaseController
 
   # 更新画面
   def edit
-    edit_common
-  end
-  def edit_common
-    tweets_page = params[:tweets_page]
-    @tweets = @user.user_tweets
-      .order(id: :desc)
-      .page(tweets_page)
-      .per(5)
   end
 
   # 新規作成処理
@@ -50,8 +43,17 @@ class Admin::UsersController < Admin::BaseController
 
   # 更新処理
   def update
-    edit_common
-    @user.assign_attributes(user_params)
+    params = user_params
+
+    if params[:password].blank? && params[:password_confirmation].blank?
+      # パスワードが完全に空の時
+
+      # 更新対象からパスワード関連を除外して、パスワードのバリデーションが動かないようにしている
+      params.delete(:password)
+      params.delete(:password_confirmation)
+    end
+
+    @user.assign_attributes(params)
 
     if @user.valid?
       # エラーがないとき
@@ -81,5 +83,14 @@ class Admin::UsersController < Admin::BaseController
   # 変更可能な項目だけを絞り込む
   private def user_params
     params.expect(user: [ :email, :password, :password_confirmation ])
+  end
+
+  # 更新画面の共通処理
+  private def edit_common
+    tweets_page = params[:tweets_page]
+    @tweets = @user.user_tweets
+      .order(id: :desc)
+      .page(tweets_page)
+      .per(5)
   end
 end

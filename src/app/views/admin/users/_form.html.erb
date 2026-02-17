@@ -8,6 +8,9 @@
 
 <div class="my-3">
   <%= form.label :password %>
+  <% unless form.object.new_record? %>
+    <div class="text-sm text-gray-500">空にすると更新されません。</div>
+  <% end %>
   <%= form.password_field :password, autocomplete: "new-password", class: "app-form-input" %>
   <%= field_error(form, :password) %>
 </div>
