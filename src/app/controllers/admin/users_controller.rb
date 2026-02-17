@@ -43,15 +43,11 @@ class Admin::UsersController < Admin::BaseController
 
   # 更新処理
   def update
+    registration_service = AdminServices::UserServices::RegistrationService.new
+
     params = user_params
 
-    if params[:password].blank? && params[:password_confirmation].blank?
-      # パスワードが完全に空の時
-
-      # 更新対象からパスワード関連を除外して、パスワードのバリデーションが動かないようにしている
-      params.delete(:password)
-      params.delete(:password_confirmation)
-    end
+    registration_service.update_params(params)
 
     @user.assign_attributes(params)
 
@@ -88,6 +84,7 @@ class Admin::UsersController < Admin::BaseController
   # 更新画面の共通処理
   private def edit_common
     tweets_page = params[:tweets_page]
+    
     @tweets = @user.user_tweets
       .order(id: :desc)
       .page(tweets_page)
