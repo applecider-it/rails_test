@@ -14,4 +14,9 @@
 <%= vite_client_tag %>
 <%= vite_react_refresh_tag %>
 
+<%= vite_typescript_tag 'application' %>
 <%= vite_stylesheet_tag 'application' %>
+
+<% if admin_user_signed_in? %>
+  <meta name="user" data-json="<%= current_admin_user.to_json %>">
+<% end %>
