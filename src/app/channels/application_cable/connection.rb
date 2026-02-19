@@ -9,8 +9,14 @@ module ApplicationCable
     private
 
     def find_verified_user
+      p("request.cookie_jar", request.cookie_jar)
+      p("cookies.to_hash", cookies.to_hash)
+      p("HTTP_COOKIE", env["HTTP_COOKIE"])
       p("warden", env["warden"])
-      env["warden"].user || reject_unauthorized_connection
+      p("env[warden].user", env["warden"].user)
+      p("env[warden].user(:user)", env["warden"]&.user(:user))
+      p("env[warden].user(:admin_user)", env["warden"]&.user(:admin_user))
+      env["warden"]&.user(:user) || reject_unauthorized_connection
     end
   end
 end

@@ -8,19 +8,6 @@ Rails.application.routes.draw do
   get "tweets_js/index"
   resources :tweets
 
-  # 管理画面
-  scope "/admin_secret" do
-    devise_for :admin_users, controllers: {
-      sessions: 'admin/admin_users/sessions',
-      passwords: 'admin/admin_users/passwords',
-    }
-
-    scope as: "admin", module: "admin" do
-      get "", to: "home#index"
-      resources :users, except: [:show]
-    end
-  end
-
   # ユーザー関連
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -52,4 +39,17 @@ Rails.application.routes.draw do
   get "development/javascript_test"
   post "api/development/go_api_test"
   get "development/websocket_test"
+
+  # 管理画面
+  scope "/admin_secret" do
+    devise_for :admin_users, controllers: {
+      sessions: 'admin/admin_users/sessions',
+      passwords: 'admin/admin_users/passwords',
+    }
+
+    scope as: "admin", module: "admin" do
+      get "", to: "home#index"
+      resources :users, except: [:show]
+    end
+  end
 end

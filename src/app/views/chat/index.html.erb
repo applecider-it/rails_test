@@ -2,14 +2,16 @@
 
 <h2 class="app-h2">
   Chat
-  <% if @room != 'default' %>
-    room: <%= @room %>
-  <% end %>
+  ( room: <%= @rooms[@room.to_sym] %> )
 </h2>
 
 <div class="space-x-2 my-5">
-  <% @rooms.each do |room| %>
-    <%= link_to room, chat_index_path({room: room}), class: "app-link-normal" %>
+  <% @rooms.each do |key, value| %>
+    <% if @room.to_sym == key %>
+      <span><%= value %></span>
+    <% else %>
+      <%= link_to value, chat_index_path({room: key}), class: "app-link-normal" %>
+    <% end %>
   <% end %>
 </div>
 
