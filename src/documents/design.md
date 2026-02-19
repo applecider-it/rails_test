@@ -17,6 +17,7 @@ app/
     tweets_controller.rb <- user_tweets_controller.rbにしないで、Tweetというドメインを表すようにしている。
   javascript/
     entrypoints/ <- vite_railsのエントリーポイント
+      フォルダを分けて管理ができなさそうなので、「___」を区切りに使っている。
     services/ <- ビジネスロジックなど
       (カテゴリーごとにディレクトリを分けて、そのなかにサービスクラスを配置している)
   services/ <- ビジネスロジックなど
