@@ -2,7 +2,14 @@
 <%= vite_typescript_tag 'development' %>
 
 <div id="react-root" data-all="<%= {
-  name: @name
+  name: @name,
+  formData: {
+    list_val: @form.list_val,
+    radio_val: @form.radio_val,
+    datetime_val: @form.datetime_val,
+    list_vals: @list_vals,
+    radio_vals: @radio_vals,
+  },
 }.to_json %>">
   <%= render 'shared/message/loading' %>
 </div>

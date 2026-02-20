@@ -32,10 +32,6 @@ class DevelopmentController < ApplicationController
   # View動作確認
   def view_test
     view_test_common
-    @form = ViewTestForm.new
-    @form.list_val = 2
-    @form.radio_val = "val1"
-    @form.datetime_val = "2026-02-15T14:30"
   end
   def view_test_post
     view_test_common
@@ -46,6 +42,11 @@ class DevelopmentController < ApplicationController
     render :view_test
   end
   private def view_test_common
+    @form = ViewTestForm.new
+    @form.list_val = 2
+    @form.radio_val = "val1"
+    @form.datetime_val = "2026-02-15T14:30"
+
     @list_vals = {
       1 => "No. 1",
       2 => "No. 2",
@@ -62,6 +63,7 @@ class DevelopmentController < ApplicationController
 
   # Javascript動作確認
   def javascript_test
+    view_test_common
     @name = "Test!!"
   end
 end

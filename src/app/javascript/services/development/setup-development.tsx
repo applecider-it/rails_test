@@ -12,17 +12,17 @@ el = document.getElementById('react-root');
 if (el) {
   const all: any = JSON.parse(el.dataset.all);
 
-  console.log(all);
+  console.log('react all', all);
 
   const root = createRoot(el);
-  root.render(<TestAreaReact name={all.name} />);
+  root.render(<TestAreaReact name={all.name} formData={all.formData} />);
 }
 
 el = document.getElementById('vue-root');
 if (el) {
   const all: any = JSON.parse(el.dataset.all);
 
-  console.log(all);
+  console.log('vue all', all);
 
   createApp(TestAreaVue, { name: all.name }).mount(el);
 }

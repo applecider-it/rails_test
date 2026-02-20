@@ -38,6 +38,16 @@
     @apply w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition;
   }
 
+  /* リストボックス */
+  .app-form-list {
+    @apply px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition;
+  }
+
+  /* フォームのラベル */
+  .app-form-label {
+    @apply block font-medium text-gray-700;
+  }
+
   /* 通常のリンク */
   .app-link-normal {
     @apply text-blue-600 hover:underline;
