@@ -41,7 +41,6 @@ export default function FormArea({
         <div className="my-2">
           <select
             id="listVal"
-            className="app-form-list"
             value={listVal ?? ''}
             onChange={(e) =>
               setListVal(e.target.value === '' ? null : Number(e.target.value))
@@ -71,6 +70,7 @@ export default function FormArea({
                 checked={radioVal === key}
                 onChange={() => setRadioVal(key)}
               />
+              &nbsp;
               {value}
             </label>
           ))}
