@@ -131,6 +131,8 @@ GEM
       raabro (~> 1.4)
     globalid (1.3.0)
       activesupport (>= 6.1)
+    httpclient (2.9.0)
+      mutex_m
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     io-console (0.8.1)
@@ -185,6 +187,7 @@ GEM
     mini_mime (1.1.5)
     minitest (5.26.1)
     msgpack (1.8.0)
+    multi_json (1.19.1)
     mutex_m (0.3.0)
     net-imap (0.5.12)
       date
@@ -224,6 +227,11 @@ GEM
     public_suffix (6.0.2)
     puma (7.1.0)
       nio4r (~> 2.0)
+    pusher (2.0.3)
+      httpclient (~> 2.8)
+      multi_json (~> 1.15)
+      pusher-signature (~> 0.1.8)
+    pusher-signature (0.1.8)
     raabro (1.4.0)
     racc (1.8.1)
     rack (3.2.4)
@@ -427,6 +435,7 @@ DEPENDENCIES
   pg
   propshaft
   puma (>= 5.0)
+  pusher
   rack-mini-profiler
   rails (~> 8.0.3)
   redis

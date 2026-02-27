@@ -9,7 +9,7 @@ class ChatServices::ActioncableService
     ActionCable.server.broadcast(
       channel_id,
       {
-        message: message,
+        message: "#{message} (AC)",
         user_id: user.id,
         email: user.email,
       }

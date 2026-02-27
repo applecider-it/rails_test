@@ -172,3 +172,10 @@ rails generate devise:controllers admin_users
 
 npm install -D @tailwindcss/forms
 
+-----------------------------------
+
+gem 'pusher'
+
+npm install pusher-js
+
+

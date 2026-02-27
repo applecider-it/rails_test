@@ -18,6 +18,9 @@
       <button @click="() => sendMessage('actioncable')" class="app-btn-primary w-auto ml-2 mt-2">
         Send(AC)
       </button>
+      <button @click="() => sendMessage('pusher')" class="app-btn-primary w-auto ml-2 mt-2">
+        Send(P)
+      </button>
     </div>
 
     <div class="h-72 my-5 overflow-y-scroll border-2">

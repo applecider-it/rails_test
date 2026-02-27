@@ -1,6 +1,7 @@
 import { ChatMessage } from './types';
 
 import consumer from '@/channels/consumer';
+import { pusher } from '@/services/application/pusher';
 
 import axios from 'axios';
 
@@ -13,7 +14,7 @@ export default class ChatClient {
   private ws;
   private room;
 
-  addMessage: Function;;
+  addMessage: Function;
 
   constructor(host, token, room) {
     this.room = room;
@@ -31,6 +32,11 @@ export default class ChatClient {
         received: (data) => this.onMessageAC(data),
       },
     );
+
+    // pusher 接続
+    const channel = pusher.subscribe(`rails-chat-channel-${this.room}`);
+
+    channel.bind('new-message', (data) => this.onMessageP(data));
   }
 
   /** WebSocketメッセージ受信 */
@@ -50,6 +56,16 @@ export default class ChatClient {
 
   /** ActionCableメッセージ受信 */
   private onMessageAC(data) {
+    console.log('受信:', data);
+    this.addMessage({
+      message: data.message,
+      userId: data.user_id,
+      email: data.email,
+    } as ChatMessage);
+  }
+
+  /** Pusherメッセージ受信 */
+  private onMessageP(data) {
     console.log('受信:', data);
     this.addMessage({
       message: data.message,
@@ -85,6 +101,7 @@ export default class ChatClient {
 
     const url = {
       actioncable: '/chat/store_ac',
+      pusher: '/chat/store_p',
       redis: '/chat/store_redis',
     }[type];
 

@@ -24,6 +24,15 @@ class ChatController < ApplicationController
     render json: { status: 'OK' }
   end
 
+  # Pusherによる送信
+  def store_p
+    pusher_service = ChatServices::PusherService.new
+
+    pusher_service.broadcast(params[:room], params[:message], current_user)
+
+    render json: { status: 'OK' }
+  end
+
   # Redisによる送信
   def store_redis
     redis_service = ChatServices::RedisService.new

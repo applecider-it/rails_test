@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get "chat/index"
   post "chat/store_ac"
   post "chat/store_redis"
+  post "chat/store_p"
 
   # ツイート
   get "tweets_js/index"
