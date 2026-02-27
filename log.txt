@@ -178,4 +178,9 @@ gem 'pusher'
 
 npm install pusher-js
 
+-----------------------------------
+
+
+gem 'gretel'
+
 

@@ -1,3 +1,5 @@
+<% breadcrumb :edit_admin_user, @user %>
+
 <h2 class="app-h2">ユーザー変更</h2>
 
 <%= form_with(model: @user, url: admin_user_path(@user), scope: :user) do |form| %>
