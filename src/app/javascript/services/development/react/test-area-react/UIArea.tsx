@@ -22,7 +22,7 @@ export default function UIArea() {
     setInline(true);
     setTimeout(() => {
       setInline(false);
-    }, 3000);
+    }, 4000);
   };
 
   /** トーストの動作確認 */
