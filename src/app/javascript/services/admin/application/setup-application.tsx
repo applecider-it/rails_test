@@ -1,20 +1,6 @@
-console.log('application init');
+import '@/services/application/bootstrap/application';
 
-import { createRoot } from 'react-dom/client';
-import { getCurrentUser } from '@/services/application/application';
-
-import AppCommon from '@/services/application/react/AppCommon';
-
-const user = getCurrentUser();
-
-console.log('currentAdminUser', user);
-
-const el: any = document.getElementById('app-container-common');
-
-if (el) {
-  const root = createRoot(el);
-  root.render(<AppCommon />);
-}
+console.log('admin/application init');
 
 /*
 // UI動作確認
