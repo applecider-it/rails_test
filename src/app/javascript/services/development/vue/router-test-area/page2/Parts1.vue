@@ -8,6 +8,9 @@
       <button @click="commonCnt++" class="app-btn-primary">Add Common</button>
     </div>
     <div>
+      <button @click="onClickCommon" class="app-btn-primary">Add Common2</button>
+    </div>
+    <div>
       <span>cnt: {{ cnt }}</span>
     </div>
   </div>
@@ -19,6 +22,12 @@ import { ref, onMounted } from 'vue';
 const commonCnt = defineModel<number>("commonCnt");
 
 const cnt = ref<number>(0);
+
+const onClickCommon = () => {
+  console.log('onClickCommon');
+
+  commonCnt.value ++;
+}
 
 // 初期化時
 onMounted(() => {
