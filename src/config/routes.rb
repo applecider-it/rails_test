@@ -39,7 +39,6 @@ Rails.application.routes.draw do
   post "development/view_test_post"
   get "development/javascript_test"
   post "api/development/go_api_test"
-  get "development/router_test"
 
   # 管理画面
   scope "/admin_secret" do

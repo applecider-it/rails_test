@@ -188,3 +188,5 @@ gem 'gretel'
 
 npm install vue-router
 
+npm uninstall vue-router
+
