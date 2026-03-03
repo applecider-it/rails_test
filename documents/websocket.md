@@ -12,6 +12,12 @@ Railsと双方向APIで連携。
 
 一部は、ActionCableで実装している。
 
+## Pusher(soketi)
+
+一部は、Pusher(soketi)で実装している。
+
+soketiは、laravel_testのWebサーバーを起動する必要がある。
+
 ## チャンネル名の定義
 
 `channelname:param1,param2...`
@@ -91,6 +97,20 @@ Pub/Subのチャンネル名: broadcast
 ## ActionCableブロードキャスト時
 
 ### チャット
+
+```
+{
+  message: string,
+  user_id: integer,
+  email: string,
+}
+```
+
+## Pusherブロードキャスト時
+
+### チャット
+
+メッセージ名: `new-message`
 
 ```
 {
