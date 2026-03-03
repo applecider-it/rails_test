@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   get "development/javascript_test"
   post "api/development/go_api_test"
   get "development/websocket_test"
+  get "development/javascript_router_test"
 
   # 管理画面
   scope "/admin_secret" do

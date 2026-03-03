@@ -66,4 +66,9 @@ class DevelopmentController < ApplicationController
     view_test_common
     @name = "Test!!"
   end
+
+  # Javascript router動作確認
+  def javascript_router_test
+    @name = "Router Test!!"
+  end
 end
