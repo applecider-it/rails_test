@@ -1,13 +1,13 @@
 /**
- * チャート画面のセットアップ
+ * チャット画面のセットアップ
  */
 
-import { createApp } from 'vue';
+import { createRoot } from 'react-dom/client';
 
 import ChatClient from './ChatClient';
-import ChatArea from './vue/ChatArea.vue';
+import ChatArea from './react/ChatArea';
 
-const el = document.getElementById('chat-root')!;
+const el = document.getElementById('chat-root');
 
 if (el) {
   const all = JSON.parse(el.dataset.all!);
@@ -16,5 +16,6 @@ if (el) {
 
   const chatClient = new ChatClient(all.host, all.token, all.room);
 
-  createApp(ChatArea, { chatClient }).mount(el);
+  const root = createRoot(el);
+  root.render(<ChatArea chatClient={chatClient} />);
 }
