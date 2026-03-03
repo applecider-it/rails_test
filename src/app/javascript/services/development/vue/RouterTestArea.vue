@@ -1,17 +1,17 @@
 <template>
-  <h2 class="app-h2">router動作確認</h2>
+  <div class="text-lg">router動作確認</div>
 
   <div>タグからの値: {{ name }}</div>
 
-  <div class="space-x-2">
+  <div class="mt-5 space-x-2">
     <router-link to="/" class="app-link-normal" active-class="app-link-active"
-      >page1</router-link
+      >Page1</router-link
     >
     <router-link
-      to="/page2"
+      to="/page2/123"
       class="app-link-normal"
       active-class="app-link-active"
-      >page2</router-link
+      >Page2</router-link
     >
   </div>
 

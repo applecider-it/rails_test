@@ -1,6 +1,7 @@
 <template>
-  <div class="space-y-2">
-    <div>Page1</div>
+  <h2 class="app-h2">Page1</h2>
+
+  <div class="space-y-2 mt-5">
     <div>
       <button @click="cnt++" class="app-btn-primary">Add</button>
     </div>
