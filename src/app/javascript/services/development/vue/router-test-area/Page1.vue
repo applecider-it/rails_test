@@ -11,7 +11,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 const cnt = ref<number>(0);
+
+// 初期化時
+onMounted(() => {
+  console.log('page1 mounted');
+});
 </script>
