@@ -41,7 +41,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
-import { components } from '../../javascript-router-test/page2/router';
+import { components } from '../../router-test/page2/router';
 
 const current = ref('Parts1');
 const currentComponent = computed(() => components[current.value]);

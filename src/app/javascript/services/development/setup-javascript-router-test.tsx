@@ -2,7 +2,7 @@ import { createApp } from 'vue';
 
 import RouterTestArea from './vue/RouterTestArea.vue';
 
-import router from './javascript-router-test/router'
+import router from './router-test/router'
 
 const el = document.getElementById('root');
 if (el) {
