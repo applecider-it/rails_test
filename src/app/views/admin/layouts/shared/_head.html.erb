@@ -22,5 +22,5 @@
 <%= vite_stylesheet_tag 'admin' %>
 
 <% if admin_user_signed_in? %>
-  <meta name="user" data-json="<%= current_admin_user.to_json %>">
+  <meta name="admin-user" data-json="<%= current_admin_user.to_json %>">
 <% end %>
