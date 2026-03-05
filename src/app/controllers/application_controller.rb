@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
 
   # deviseのログイン後のパスを変更
   def after_sign_in_path_for(resource)
-    case resource
+    # 直前に訪れたページか、指定のページを返す
+    stored_location_for(resource) || case resource
     when AdminUser
       admin_path
     else
