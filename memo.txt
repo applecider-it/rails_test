@@ -3,6 +3,14 @@ cd /home/owner/workspace/tmp/rails_test/src
 
 -----------------------------------
 
+port
+
+rails: 3000
+vite: 3036
+websocket: 3030
+
+-----------------------------------
+
 開発サーバーを起動
 
 -------
