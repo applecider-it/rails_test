@@ -49,7 +49,11 @@ Rails.application.routes.draw do
 
     scope as: "admin", module: "admin" do
       get "", to: "home#index"
-      resources :users, except: [:show]
+      resources :users, except: [:show] do
+        member do
+          patch :restore
+        end
+      end
     end
   end
 end

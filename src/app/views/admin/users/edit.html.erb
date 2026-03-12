@@ -27,8 +27,14 @@
   <%= link_to "一覧", admin_users_path, class: "app-link-normal" %>
 </div>
 
-<br>
-
-  <%= button_to "削除", admin_user_path(@user), method: :delete,
-    class: "app-btn-danger w-20 mt-10",
-    form: { onsubmit: "return confirm('本当に削除しますか？');" } %>
+<div class="mt-10">
+  <% if @user.discarded? %>
+    <%= button_to "復元", restore_admin_user_path(@user), method: :patch,
+      class: "app-btn-secondary",
+      form: { onsubmit: "return confirm('本当に復元しますか？');" } %>
+  <% else %>
+    <%= button_to "削除", admin_user_path(@user), method: :delete,
+      class: "app-btn-danger",
+      form: { onsubmit: "return confirm('本当に削除しますか？');" } %>
+  <% end %>
+</div>
