@@ -1,10 +1,10 @@
 <div class="my-3">
-  <%= form.label :created_at %><br />
+  <%= form.label :created_at, class: "app-form-label" %>
   <%= user.created_at.strftime("%Y-%m-%d %H:%M") %>
 </div>
 
 <div class="my-3">
-  <%= form.label :discarded_at %><br />
+  <%= form.label :discarded_at, class: "app-form-label" %>
   <%= user.discarded_at ? user.discarded_at.strftime("%Y-%m-%d %H:%M") : 'none' %>
 </div>
 

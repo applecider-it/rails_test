@@ -1,13 +1,13 @@
 <%= render "shared/message/error_messages", resource: user %>
 
 <div class="my-3">
-  <%= form.label :email %><br />
+  <%= form.label :email, class: "app-form-label" %>
   <%= form.email_field :email, autofocus: true, autocomplete: "email", class: "app-form-input" %>
   <%= field_error(form, :email) %>
 </div>
 
 <div class="my-3">
-  <%= form.label :password %>
+  <%= form.label :password, class: "app-form-label" %>
   <% unless form.object.new_record? %>
     <div class="text-sm text-gray-500">空にすると更新されません。</div>
   <% end %>
@@ -16,7 +16,7 @@
 </div>
 
 <div class="my-3">
-  <%= form.label :password_confirmation %><br />
+  <%= form.label :password_confirmation, class: "app-form-label" %>
   <%= form.password_field :password_confirmation, autocomplete: "new-password", class: "app-form-input" %>
   <%= field_error(form, :password_confirmation) %>
 </div>
