@@ -201,3 +201,10 @@ npm install vue @vitejs/plugin-vue
 npm install @vitejs/plugin-vue --save-dev
 
 
+
+npm uninstall react react-dom
+
+npm uninstall --save-dev @types/react @types/react-dom
+
+npm uninstall @vitejs/plugin-react
+

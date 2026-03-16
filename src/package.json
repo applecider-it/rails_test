@@ -4,8 +4,6 @@
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.11",
     "@types/node": "^24.10.1",
-    "@types/react": "^19.2.5",
-    "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-vue": "^6.0.5",
     "autoprefixer": "^10.4.22",
     "postcss": "^8.5.6",
@@ -16,11 +14,8 @@
   },
   "dependencies": {
     "@rails/actioncable": "^8.1.100",
-    "@vitejs/plugin-react": "^5.1.1",
     "axios": "^1.13.2",
     "pusher-js": "^8.4.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
     "vue": "^3.5.30"
   }
 }
