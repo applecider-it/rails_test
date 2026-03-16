@@ -2,12 +2,12 @@
  * ツイート画面のセットアップ
  */
 
-import { createRoot } from 'react-dom/client';
-import TweetArea from './react/TweetArea';
+import { createApp } from 'vue';
+import TweetArea from './vue/TweetArea.vue';
 
 import TweetClient from './TweetClient';
 
-const el: any = document.getElementById('tweet-root');
+const el = document.getElementById('tweet-root');
 
 if (el) {
   const all = JSON.parse(el.dataset.all);
@@ -16,8 +16,7 @@ if (el) {
 
   const tweetClient = new TweetClient(all.token, all.wsHost, all.user);
 
-  const root = createRoot(el);
-  root.render(
-    <TweetArea tweetClient={tweetClient} />
-  );
+  createApp(TweetArea, {
+    tweetClient: tweetClient,
+  }).mount(el);
 }
