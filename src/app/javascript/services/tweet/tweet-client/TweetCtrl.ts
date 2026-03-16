@@ -14,7 +14,7 @@ export default class TweetCtrl {
 
   /**
    * 新しいツイート送信
-   * 
+   *
    * @param isCommit trueの場合は確定。falseだと確認のみ。
    */
   async sendTweet(content, isCommit: boolean) {

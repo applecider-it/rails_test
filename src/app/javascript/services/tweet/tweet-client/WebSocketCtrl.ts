@@ -25,9 +25,7 @@ export default class WebSocketCtrl {
   initWebSocket() {
     console.log(`[DEBUG] Connecting WebSocket with token: ${this.token}`);
 
-    this.ws = new WebSocket(
-      `ws://${this.wsHost}/ws?token=${this.token}`
-    );
+    this.ws = new WebSocket(`ws://${this.wsHost}/ws?token=${this.token}`);
 
     this.ws.onopen = () => {
       console.log('[DEBUG] WebSocket connected');
