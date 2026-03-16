@@ -1,3 +1,4 @@
+import './bootstrap/alpinejs';
 import './bootstrap/container';
 import './bootstrap/menu';
 

@@ -1,26 +1,28 @@
 <%= vite_typescript_tag 'chat' %>
 
-<h2 class="app-h2">
-  Chat
-  ( room: <%= @rooms[@room.to_sym] %> )
-</h2>
+<div class="app-container-normal">
+  <h2 class="app-h2">
+    Chat
+    ( room: <%= @rooms[@room.to_sym] %> )
+  </h2>
 
-<div class="space-x-2 my-5">
-  <% @rooms.each do |key, value| %>
-    <% if @room.to_sym == key %>
-      <span><%= value %></span>
-    <% else %>
-      <%= link_to value, chat_index_path({room: key}), class: "app-link-normal" %>
+  <div class="space-x-2 my-5">
+    <% @rooms.each do |key, value| %>
+      <% if @room.to_sym == key %>
+        <span><%= value %></span>
+      <% else %>
+        <%= link_to value, chat_index_path({room: key}), class: "app-link-normal" %>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
 
-<div id="chat-root"
-  data-all="<%= {
-    token: @token,
-    host: Rails.configuration.x.ws_server_host,
-    room: @room,
-    }.to_json %>"
->
-  <%= render 'shared/message/loading' %>
+  <div id="chat-root"
+    data-all="<%= {
+      token: @token,
+      host: Rails.configuration.x.ws_server_host,
+      room: @room,
+      }.to_json %>"
+  >
+    <%= render 'shared/message/loading' %>
+  </div>
 </div>

@@ -1,27 +1,37 @@
 <%
-  link_style = "text-md text-gray-800 hover:text-gray-900"
+link_style = "hover:text-indigo-500"
 %>
-<div class="hidden sm:flex justify-between h-16 items-center">
-  <!-- 左側：ロゴ / トップリンク -->
-  <div class="flex flex-shrink-0 items-center gap-4">
+<div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+  <!-- Logo -->
+  <a href="/">
+    <div
+      class="text-2xl font-bold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent"
+    >
+      MySite
+    </div>
+  </a>
+
+  <!-- Desktop Menu -->
+  <nav class="hidden md:flex space-x-8 text-gray-700 font-medium">
     <%= link_to 'Top', root_path, class: link_style %>
     <%= link_to 'Tweet', tweets_path, class: link_style %>
     <%= link_to 'Tweet(JS)', tweets_js_index_path, class: link_style %>
     <%= link_to 'Chat', chat_index_path, class: link_style %>
-  </div>
-
-  <!-- 右側リンク：デスクトップ -->
-  <div class="flex items-center gap-4">
     <% if user_signed_in? %>
-      <%= link_to current_user.email, edit_user_registration_path, class: "bg-gray-300 hover:bg-gray-200 text-gray-500 font-semibold px-2 py-1 rounded transition" %>
+      <%= link_to current_user.email, edit_user_registration_path, class: link_style %>
       <%= button_to 'Logout',
         destroy_user_session_path,
         method: :delete,
-        class: "bg-red-100 hover:bg-red-200 text-gray-500 font-semibold px-2 py-1 rounded transition",
+        class: link_style,
         onclick: "return confirm('ログアウトしますか？');" %>
     <% else %>
-      <%= link_to 'Login', new_user_session_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-2 py-1 rounded transition" %>
-      <%= link_to 'Sign up', new_user_registration_path, class: "bg-green-500 hover:bg-green-600 text-white font-semibold px-2 py-1 rounded transition" %>
+      <%= link_to 'Login', new_user_session_path, class: link_style %>
+      <%= link_to 'Sign up', new_user_registration_path, class: link_style %>
     <% end %>
-  </div>
+  </nav>
+
+  <!-- Mobile Button -->
+  <button @click="open = !open" class="md:hidden text-2xl">
+    ☰
+  </button>
 </div>

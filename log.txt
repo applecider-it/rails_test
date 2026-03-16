@@ -208,3 +208,6 @@ npm uninstall --save-dev @types/react @types/react-dom
 
 npm uninstall @vitejs/plugin-react
 
+
+npm install alpinejs
+

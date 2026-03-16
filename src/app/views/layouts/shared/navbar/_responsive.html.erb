@@ -1,36 +1,26 @@
 <%
-  link_style = "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition w-full text-center"
+link_style = "block py-2 text-gray-700 hover:text-indigo-500"
 %>
-<!-- ハンバーガーメニュー（モバイル） -->
-<div class="flex justify-between h-16 items-center sm:hidden">
-  <div></div>
-  <div>
-    <button id="app-nav-mobile-menu-button" class="text-gray-800 hover:text-gray-900 focus:outline-none">
-      <!-- Heroicons: Menu -->
-      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-      </svg>
-    </button>
-  </div>
-</div>
+<!-- Mobile Menu -->
+<div
+  x-show="open"
+  x-transition.duration.200ms
+  class="px-6 pb-4 md:hidden"
+>
+  <%= link_to 'Top', root_path, class: link_style %>
+  <%= link_to 'Tweet', tweets_path, class: link_style %>
+  <%= link_to 'Tweet(JS)', tweets_js_index_path, class: link_style %>
+  <%= link_to 'Chat', chat_index_path, class: link_style %>
 
-<div id="app-nav-mobile-menu" class="hidden sm:hidden mt-2">
-  <div class="flex flex-col gap-2 pb-10">
-    <%= link_to 'Top', root_path, class: link_style %>
-    <%= link_to 'Tweet', tweets_path, class: link_style %>
-    <%= link_to 'Tweet(JS)', tweets_js_index_path, class: link_style %>
-    <%= link_to 'Chat', chat_index_path, class: link_style %>
-
-    <% if user_signed_in? %>
-        <%= link_to current_user.email, edit_user_registration_path, class: "bg-gray-300 hover:bg-gray-200 text-gray-500 font-semibold px-4 py-2 rounded transition w-full text-center" %>
-        <%= button_to 'Logout',
-          destroy_user_session_path,
-          method: :delete,
-          class: "bg-red-100 hover:bg-red-200 text-gray-500 font-semibold px-4 py-2 rounded transition w-full",
-          onclick: "return confirm('ログアウトしますか？');" %>
-    <% else %>
-        <%= link_to 'Login', new_user_session_path, class: link_style %>
-        <%= link_to 'Sign up', new_user_registration_path, class: "bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded transition w-full text-center" %>
-    <% end %>
-  </div>
+  <% if user_signed_in? %>
+      <%= link_to current_user.email, edit_user_registration_path, class: link_style %>
+      <%= button_to 'Logout',
+        destroy_user_session_path,
+        method: :delete,
+        class: link_style,
+        onclick: "return confirm('ログアウトしますか？');" %>
+  <% else %>
+      <%= link_to 'Login', new_user_session_path, class: link_style %>
+      <%= link_to 'Sign up', new_user_registration_path, class: link_style %>
+  <% end %>
 </div>
