@@ -192,3 +192,12 @@ npm uninstall vue-router
 
 
 npm uninstall vue @vitejs/plugin-vue
+
+-----------------------------------
+
+
+npm install vue @vitejs/plugin-vue
+
+npm install @vitejs/plugin-vue --save-dev
+
+

@@ -1,10 +1,9 @@
-import { createRoot } from 'react-dom/client';
+import { createApp } from "vue";
 
-import AppCommon from '../react/AppCommon';
+import AppCommon from "../vue/AppCommon.vue";
 
-const el: any = document.getElementById('app-container-common');
-
+// 共通JSの初期化
+const el = document.getElementById("app-container-common");
 if (el) {
-  const root = createRoot(el);
-  root.render(<AppCommon />);
+    createApp(AppCommon).mount(el);
 }
