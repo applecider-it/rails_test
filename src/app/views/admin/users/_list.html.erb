@@ -1,23 +1,23 @@
-<div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
-  <table class="min-w-full divide-y divide-gray-200 text-sm">
-    <thead class="bg-gray-50">
+<div class="app-table-container">
+  <table class="app-table">
+    <thead class="app-table-thead">
       <tr>
-        <th class="px-6 py-3 text-left font-semibold text-gray-600">ID</th>
-        <th class="px-6 py-3 text-left font-semibold text-gray-600">名前</th>
-        <th class="px-6 py-3 text-left font-semibold text-gray-600">作成日時</th>
-        <th class="px-6 py-3 text-left font-semibold text-gray-600">削除日時</th>
-        <th class="px-6 py-3 text-right font-semibold text-gray-600">操作</th>
+        <th class="app-table-th">ID</th>
+        <th class="app-table-th">名前</th>
+        <th class="app-table-th">作成日時</th>
+        <th class="app-table-th">削除日時</th>
+        <th class="app-table-th text-right">操作</th>
       </tr>
     </thead>
-    <tbody class="divide-y divide-gray-100">
+    <tbody class="app-table-tbody">
       <% @users.each do |user| %>
         <tr class="transition
          <% if user.discarded? %>bg-gray-300 hover:bg-gray-200<% else %>hover:bg-gray-50<% end %>">
-          <td class="px-6 py-4 text-gray-700"><%= user.id %></td>
-          <td class="px-6 py-4 font-medium text-gray-900"><%= user.email %></td>
-          <td class="px-6 py-4"><%= user.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-          <td class="px-6 py-4"><%= user.discarded_at ? user.discarded_at.strftime("%Y-%m-%d %H:%M") : '' %></td>
-          <td class="px-6 py-4 text-right">
+          <td class="app-table-td text-gray-700"><%= user.id %></td>
+          <td class="app-table-td font-medium text-gray-900"><%= user.email %></td>
+          <td class="app-table-td"><%= user.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+          <td class="app-table-td"><%= user.discarded_at ? user.discarded_at.strftime("%Y-%m-%d %H:%M") : '' %></td>
+          <td class="app-table-td text-right">
             <%= link_to "編集", edit_admin_user_path(user), class: "app-link-normal" %>
           </td>
         </tr>

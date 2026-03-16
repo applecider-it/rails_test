@@ -57,4 +57,34 @@
   .app-container-normal {
     @apply mx-auto max-w-4xl pt-5;
   }
+
+  /* テーブルをレスポンシブ対応させるためのコンテナ */
+  .app-table-container {
+    @apply overflow-x-auto bg-white dark:bg-gray-800 shadow-md rounded-lg;
+  }
+
+  /* tableタグ用 */
+  .app-table {
+    @apply min-w-full divide-y divide-gray-200 dark:divide-gray-700;
+  }
+
+  /* テーブルのtheadタグ用 */
+  .app-table-thead {
+    @apply bg-gray-50 dark:bg-gray-700;
+  }
+
+  /* テーブルのtbodyタグ用 */
+  .app-table-tbody {
+    @apply bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700;
+  }
+
+  /* テーブルのthタグ用 */
+  .app-table-th {
+    @apply px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-300 tracking-wider;
+  }
+
+  /* テーブルのtdタグ用 */
+  .app-table-td {
+    @apply px-6 py-4 whitespace-nowrap;
+  }
 }
