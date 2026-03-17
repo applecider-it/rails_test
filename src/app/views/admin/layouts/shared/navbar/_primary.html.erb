@@ -1,24 +1,29 @@
 <%
-  link_style = "text-md text-gray-800 hover:text-gray-900"
+link_style = "hover:text-indigo-500"
 %>
-<div class="flex justify-between h-16 items-center">
-  <!-- 左側：ロゴ / トップリンク -->
-  <div class="flex flex-shrink-0 items-center gap-4">
+<div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+  <!-- Logo -->
+  <a href="<%= admin_path %>">
+    <div
+      class="text-2xl font-bold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent"
+    >
+      MySite
+    </div>
+  </a>
+
+  <!-- Desktop Menu -->
+  <nav class="flex space-x-8 text-gray-700 font-medium">
     <%= link_to 'Top', admin_path, class: link_style %>
     <%= link_to 'Users', admin_users_path, class: link_style %>
-  </div>
-
-  <!-- 右側リンク：デスクトップ -->
-  <div class="flex items-center gap-4">
     <% if admin_user_signed_in? %>
-      <div class="bg-gray-300 text-gray-500 font-semibold px-2 py-1 rounded transition"><%= current_admin_user.email %></div>
+      <span class="<%= link_style %>"><%= current_admin_user.email %></span>
       <%= button_to 'Logout',
         destroy_admin_user_session_path,
         method: :delete,
-        class: "bg-red-100 hover:bg-red-200 text-gray-500 font-semibold px-2 py-1 rounded transition",
+        class: link_style,
         onclick: "return confirm('ログアウトしますか？');" %>
     <% else %>
-      <%= link_to 'Login', new_admin_user_session_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-2 py-1 rounded transition" %>
+      <%= link_to 'Login', new_admin_user_session_path, class: link_style %>
     <% end %>
   </div>
 </div>
