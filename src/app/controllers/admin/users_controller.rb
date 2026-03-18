@@ -43,11 +43,11 @@ class Admin::UsersController < Admin::BaseController
   def update
     edit_service = AdminServices::UserServices::EditService.new
 
-    params = user_params
+    work_params = user_params
 
-    edit_service.update_params(params)
+    edit_service.update_params(work_params)
 
-    @user.assign_attributes(params)
+    @user.assign_attributes(work_params)
 
     if @user.valid?
       # エラーがないとき
