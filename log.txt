@@ -211,3 +211,17 @@ npm uninstall @vitejs/plugin-react
 
 npm install alpinejs
 
+-----------------------------------
+
+
+python3 -m venv venv
+
+pip install selenium
+
+sudo apt update
+sudo apt install -y chromium-browser
+
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install -y ./google-chrome-stable_current_amd64.deb
+
+sudo apt install -y fonts-noto-cjk

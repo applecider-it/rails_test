@@ -119,3 +119,16 @@ WebSocket動作確認
 bin/rails app:websocket_test[redis]
 
 -----------------------------------
+
+セレニウム
+
+
+cd /home/owner/workspace/tmp/rails_test/selenium
+
+source venv/bin/activate
+
+python -m app.entrypoints.main sample
+
+
+
+-----------------------------------
