@@ -18,7 +18,6 @@ const refreshList = async (): Promise<void> => {
 
   const list: TweetContainer[] = initialTweets.map((tweet) => ({
     tweet,
-    isNew: false,
   }));
 
   tweetContainers.value = list;

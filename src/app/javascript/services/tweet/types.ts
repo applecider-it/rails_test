@@ -11,5 +11,4 @@ type Tweet = {
 
 export type TweetContainer = {
   tweet: Tweet;
-  isNew: boolean;
 };

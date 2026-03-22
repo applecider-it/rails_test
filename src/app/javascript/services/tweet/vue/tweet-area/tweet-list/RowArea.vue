@@ -12,8 +12,6 @@ const formatDate = (date: string): string => {
 
 <template>
   <div class="border rounded p-4">
-    <p v-if="tweetContainer.isNew" class="text-blue-500">new</p>
-
     <p class="text-gray-800">
       {{ tweetContainer.tweet.content }}
     </p>
