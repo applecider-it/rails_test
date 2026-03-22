@@ -1,20 +1,25 @@
 import { showToast } from '@/services/ui/message';
 
+import { User } from '../types';
+import type TweetClient from '../TweetClient';
+
 /**
  * WebSocket管理
  *
  * JWT認証付き WebSocket
  */
 export default class WebSocketCtrl {
-  token;
-  wsHost;
-  user;
-  ws;
+  token: string;
+  wsHost: string;
+  user: User;
+  ws: WebSocket;
+  main: TweetClient;
 
-  constructor(token, wsHost, user) {
+  constructor(token: string, wsHost: string, user: User, main: TweetClient) {
     this.token = token;
     this.wsHost = wsHost;
     this.user = user;
+    this.main = main;
 
     this.ws = null;
 
@@ -55,6 +60,8 @@ export default class WebSocketCtrl {
     console.log('[DEBUG] Received message', data);
 
     const detail = JSON.parse(data.data.json);
+
+    this.main.refreshList();
 
     if (this.user.id === detail.user_id) {
       console.log('自分のツイート');

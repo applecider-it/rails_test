@@ -2,7 +2,6 @@
 import { ref, onMounted } from 'vue';
 
 import LoadingInline from '@/services/ui/vue/message/LoadingInline.vue';
-import RowArea from './tweet-list/RowArea.vue';
 import { TweetContainer } from '../../types';
 import type TweetClient from '../../TweetClient';
 
@@ -35,11 +34,21 @@ onMounted(() => {
 
     <div v-if="tweetContainers">
       <div class="space-y-4 mt-10">
-        <RowArea
+        <div
           v-for="tweetContainer in tweetContainers"
           :key="tweetContainer.tweet.id"
           :tweetContainer="tweetContainer"
-        />
+          class="border rounded p-4"
+        >
+          <p class="text-gray-800">
+            {{ tweetContainer.tweet.content }}
+          </p>
+
+          <p class="text-gray-500 text-sm">
+            by {{ tweetContainer.tweet.user.email }} -
+            {{ new Date(tweetContainer.tweet.created_at).toLocaleString() }}
+          </p>
+        </div>
       </div>
     </div>
 

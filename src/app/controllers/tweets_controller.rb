@@ -45,10 +45,8 @@ class TweetsController < ApplicationController
           if confirm
             # 確認ボタンの時
             # 確認画面に遷移
-            # Jsonでは、statusだけ返す。
             
             format.html { render :new_confirm }
-            format.json { render json: {status: true} }
           else
             # 戻るボタンの時
             
