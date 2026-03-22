@@ -14,18 +14,13 @@ export default class TweetCtrl {
 
   /**
    * 新しいツイート送信
-   *
-   * @param isCommit trueの場合は確定。falseだと確認のみ。
    */
-  async sendTweet(content, isCommit: boolean) {
+  async sendTweet(content) {
     const headers = jsonRequestHeaders();
 
     const data: any = { content };
-    if (isCommit) {
-      data.commit = true;
-    } else {
-      data.confirm = true;
-    }
+
+    data.commit = true;
 
     const response = await axios.post('/tweets', data, {
       headers: headers,
