@@ -1,4 +1,4 @@
-import { ChatMessage } from './types';
+import { ChatMessage, SendType } from './types';
 
 import consumer from '@/channels/consumer';
 import { pusher } from '@/services/application/pusher';
@@ -75,7 +75,7 @@ export default class ChatClient {
   }
 
   /** メッセージ送信 */
-  sendMessage(message: string, type: string) {
+  sendMessage(message: string, type: SendType) {
     console.log('sendMessage', message, type);
     if (!message) return;
 
@@ -93,7 +93,7 @@ export default class ChatClient {
   }
 
   /** APIでメッセージ送信 */
-  private async sendApi(message: string, type: string) {
+  private async sendApi(message: string, type: SendType) {
     const headers = jsonRequestHeaders();
 
     const data: any = { message, room: this.room };

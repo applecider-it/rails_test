@@ -1,3 +1,42 @@
+<script setup lang="ts">
+import { ref, computed, onMounted } from 'vue';
+
+import { ChatMessage, SendType } from '../types'
+import type ChatClient from '../ChatClient'
+
+const props = defineProps<{
+  chatClient: ChatClient;
+}>();
+
+const message = ref<string>('');
+const messages = ref<ChatMessage[]>([]);
+
+/** 逆順メッセージ */
+const reversedMessages = computed<ChatMessage[]>(() => {
+  return [...messages.value].reverse();
+});
+
+/** Enterキー */
+const onKeydown = (e: KeyboardEvent): void => {
+  if (e.key === 'Enter') sendMessage('websocket');
+};
+
+/** メッセージ送信 */
+const sendMessage = (type: SendType): void => {
+  if (!message.value.trim()) return;
+
+  props.chatClient.sendMessage(message.value, type);
+  message.value = '';
+};
+
+/** 初期化 */
+onMounted(() => {
+  props.chatClient.addMessage = (val: ChatMessage) => {
+    messages.value.push(val);
+  };
+});
+</script>
+
 <template>
   <div>
     <div>
@@ -51,38 +90,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref, computed, onMounted } from 'vue';
-
-const props = defineProps({
-  chatClient: Object,
-});
-
-const message = ref('');
-const messages = ref([]);
-
-/** 逆順メッセージ */
-const reversedMessages = computed(() => {
-  return [...messages.value].reverse();
-});
-
-/** Enterキー */
-const onKeydown = (e) => {
-  if (e.key === 'Enter') sendMessage('websocket');
-};
-
-/** メッセージ送信 */
-const sendMessage = (type) => {
-  console.log(message.value);
-  props.chatClient.sendMessage(message.value, type);
-  message.value = '';
-};
-
-/** 初期化 */
-onMounted(() => {
-  props.chatClient.addMessage = (val) => {
-    messages.value.push(val);
-  };
-});
-</script>
