@@ -1,3 +1,35 @@
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
+
+import LoadingInline from '@/services/ui/vue/message/LoadingInline.vue';
+import RowArea from './tweet-list/RowArea.vue';
+import { TweetContainer } from '../../types';
+import type TweetClient from '../../TweetClient';
+
+const props = defineProps<{
+  tweetClient: TweetClient;
+}>();
+
+const tweetContainers = ref<TweetContainer[] | null>(null);
+
+/** 一覧を最新にする */
+const refreshList = async (): Promise<void> => {
+  const initialTweets = await props.tweetClient.tweetCtrl.getList();
+
+  const list: TweetContainer[] = initialTweets.map((tweet) => ({
+    tweet,
+    isNew: false,
+  }));
+
+  tweetContainers.value = list;
+};
+
+onMounted(() => {
+  props.tweetClient.refreshList = refreshList;
+  props.tweetClient.refreshList();
+});
+</script>
+
 <template>
   <div>
     <h3 class="app-h3">ツイート一覧</h3>
@@ -17,42 +49,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref, onMounted } from 'vue';
-
-import LoadingInline from '@/services/ui/vue/message/LoadingInline.vue';
-import RowArea from './tweet-list/RowArea.vue';
-
-const props = defineProps({
-  tweetClient: Object,
-});
-
-const tweetContainers = ref(null);
-
-/** 一覧を最新にする */
-const refreshList = async () => {
-  const initialTweets = await props.tweetClient.tweetCtrl.getList();
-
-  console.log(initialTweets);
-
-  const list = [];
-
-  for (const tweet of initialTweets) {
-    list.push({
-      tweet,
-      isNew: false,
-    });
-  }
-
-  tweetContainers.value = list;
-};
-
-onMounted(() => {
-  props.tweetClient.refreshList = () => {
-    refreshList();
-  };
-
-  props.tweetClient.refreshList();
-});
-</script>

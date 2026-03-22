@@ -1,3 +1,15 @@
+<script setup lang="ts">
+import { TweetContainer } from '../../../types';
+
+const props = defineProps<{
+  tweetContainer: TweetContainer;
+}>();
+
+const formatDate = (date: string): string => {
+  return new Date(date).toLocaleString();
+};
+</script>
+
 <template>
   <div class="border rounded p-4">
     <p v-if="tweetContainer.isNew" class="text-blue-500">new</p>
@@ -12,13 +24,3 @@
     </p>
   </div>
 </template>
-
-<script setup>
-const props = defineProps({
-  tweetContainer: Object,
-});
-
-const formatDate = (date) => {
-  return new Date(date).toLocaleString();
-};
-</script>

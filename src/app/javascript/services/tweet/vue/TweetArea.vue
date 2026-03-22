@@ -1,12 +1,3 @@
-<template>
-  <div>
-    <h2 class="app-h2">ツイート</h2>
-
-    <TweetNew :tweetClient="tweetClient" />
-    <TweetList :tweetClient="tweetClient" />
-  </div>
-</template>
-
 <script setup lang="ts">
 import { onMounted } from 'vue';
 
@@ -24,3 +15,12 @@ onMounted(() => {
   // Reactの useEffect(() => {}, [])
 });
 </script>
+
+<template>
+  <div>
+    <h2 class="app-h2">ツイート</h2>
+
+    <TweetNew :tweetClient="tweetClient" />
+    <TweetList :tweetClient="tweetClient" />
+  </div>
+</template>

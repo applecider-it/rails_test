@@ -1,41 +1,30 @@
-<template>
-  <div>
-    <h3 class="app-h3">新規ツイート</h3>
-
-    <FormArea
-      :onSubmit="onSubmit"
-      :errors="errors"
-      :content="content"
-      @update:content="content = $event"
-    />
-  </div>
-</template>
-
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { setIsLoading, showToast } from '@/services/ui/message';
-
 import FormArea from './tweet-new/FormArea.vue';
+import type TweetClient from '../../TweetClient';
 
-const props = defineProps({
-  tweetClient: Object,
-});
+type Errors = {
+  content?: string[];
+};
 
-const content = ref('');
-const errors = ref({});
+const props = defineProps<{
+  tweetClient: TweetClient;
+}>();
+
+const content = ref<string>('');
+const errors = ref<Errors>({});
 
 onMounted(() => {
   console.log('init new');
 });
 
 /** 送信 */
-const onSubmit = async (e) => {
-  e.preventDefault();
-
+const onSubmit = async () => {
   setIsLoading(true);
 
   try {
-    const result = await props.tweetClient.tweetCtrl.sendTweet(content.value);
+    await props.tweetClient.tweetCtrl.sendTweet(content.value);
 
     errors.value = {};
 
@@ -44,12 +33,20 @@ const onSubmit = async (e) => {
     showToast('ツイートしました。');
 
     content.value = '';
-  } catch (error) {
+  } catch (error: any) {
     if (error.response?.status === 422) {
       errors.value = error.response.data.errors;
     }
+  } finally {
+    setIsLoading(false);
   }
-
-  setIsLoading(false);
 };
 </script>
+
+<template>
+  <div>
+    <h3 class="app-h3">新規ツイート</h3>
+
+    <FormArea :onSubmit="onSubmit" :errors="errors" v-model:content="content" />
+  </div>
+</template>
