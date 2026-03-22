@@ -10,6 +10,6 @@ class TweetServices::ListService
       .order(id: :desc)
       .search_by_keyword(keyword)
       .page(page)
-      .per(20)
+      .per(5)
   end
 end
