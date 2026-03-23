@@ -60,6 +60,8 @@ vite.config.ts
 
 - モデルはDB構成に連動させるべきですが、コントローラーはドメインの区切りに合わせるべきなので、user_tweets_controller.rbにしないで、tweets_controller.rbにして、UserTweetモデルとの連動を断っています。
 
-- Javascript,CSS管理は、viteを使うほうがいいので、importmapは使っていません。
-
 - ビジネスロジックは、コントローラーやモデルに書かないで、サービスクラスにまとめています。
+
+- importmapは、Viteを使うので利用していない。
+
+- turbo, stimulusは、かえって複雑になるため利用していない。
