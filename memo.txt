@@ -1,5 +1,5 @@
 
-cd /home/owner/workspace/tmp/rails_test/src
+cd ~/workspace/github/rails-app/src
 
 -----------------------------------
 
@@ -25,7 +25,7 @@ go
 
 websocketサーバー起動
 
-cd /home/owner/workspace/tmp/rails_test/go
+cd ~/workspace/github/rails-app/go
 
 go run ./cmd/websocket-server
 
@@ -123,7 +123,7 @@ bin/rails app:websocket_test[redis]
 セレニウム
 
 
-cd /home/owner/workspace/tmp/rails_test/selenium
+cd ~/workspace/github/rails-app/selenium
 
 source venv/bin/activate
 
