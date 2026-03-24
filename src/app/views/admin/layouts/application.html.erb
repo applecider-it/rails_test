@@ -5,12 +5,12 @@
   </head>
 
   <body class="bg-gradient-to-br from-indigo-100 via-white to-blue-100 min-h-screen">
-    <%= render 'admin/layouts/shared/common' %>
+    <%= render 'shared/application/container' %>
     <%= render 'admin/layouts/shared/navbar' %>
 
     <main>
-      <%= render 'admin/layouts/shared/message' %>
-      <%= render 'admin/layouts/shared/breadcrumbs' %>
+      <%= render 'shared/message/message' %>
+      <%= render 'shared/nav/breadcrumbs' %>
 
       <%= yield %>
     </main>
