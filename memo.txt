@@ -72,7 +72,14 @@ bin/rails db:seed
 
 ポスグレ接続
 
+win
+
 sudo -u postgres psql
+
+mac
+
+psql postgres
+
 
 DB一覧
 \l
