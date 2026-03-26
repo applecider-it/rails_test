@@ -79,6 +79,13 @@ npm ci
 cp _env.example .env
 
 
+bin/rails db:create
+
+bin/rails db:migrate
+
+bin/rails db:seed
+
+
 -----------------------------------
 
 ポスグレ接続
