@@ -72,6 +72,9 @@ bin/rails db:seed
 
 セットアップ
 
+
+Rails
+
 bundle install
 
 npm ci
@@ -84,6 +87,31 @@ bin/rails db:create
 bin/rails db:migrate
 
 bin/rails db:seed
+
+
+----
+
+Go
+
+go mod tidy
+
+cp .env.example .env
+
+
+----
+
+selenium
+
+
+python3 -m venv venv
+
+source venv/bin/activate
+
+cp .env.example .env
+
+pip install --upgrade pip
+
+pip install -r requirements.txt
 
 
 -----------------------------------

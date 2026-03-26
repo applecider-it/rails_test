@@ -5,9 +5,6 @@ from selenium.webdriver.chrome.options import Options
 def init_driver():
   options = Options()
 
-  # 利用するChromeの実行ファイルを明示指定（Chromiumではなく本物のChromeを使う）
-  options.binary_location = "/usr/bin/google-chrome"
-
   # root/WSL環境でChromeがクラッシュするのを防ぐ（ほぼ必須）
   options.add_argument("--no-sandbox")
 
