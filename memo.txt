@@ -70,6 +70,17 @@ bin/rails db:seed
 
 -----------------------------------
 
+セットアップ
+
+bundle install
+
+npm ci
+
+cp _env.example .env
+
+
+-----------------------------------
+
 ポスグレ接続
 
 win

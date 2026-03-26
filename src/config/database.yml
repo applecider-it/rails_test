@@ -6,9 +6,9 @@
 #
 default: &default
   adapter: postgresql
-  username: <%= Gem.win_platform? ? "postgres" : ENV["USER"] %>
-  host: localhost
-  password: <%= Gem.win_platform? ? "newpassword" : "" %>
+  username: <%= ENV["DATABASE_USERNAME"] %>
+  host: <%= ENV["DATABASE_HOST"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
 
 development:
   <<: *default
