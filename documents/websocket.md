@@ -16,7 +16,7 @@ Railsと双方向APIで連携。
 
 一部は、Pusher(soketi)で実装している。
 
-soketiは、laravel_testのWebサーバーを起動する必要がある。
+soketiは、`laravel-app`のWebサーバーを起動する必要がある。
 
 ## チャンネル名の定義
 
