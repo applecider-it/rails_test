@@ -192,3 +192,24 @@ python -m app.entrypoints.main
 通常のログインをすると、状態が維持される
 
 -----------------------------------
+
+カスタムジェネレーター
+
+
+有効化
+
+ln -s ../app/views/custom_generators lib/templates
+
+
+無効化
+
+rm lib/templates
+
+
+動作例
+
+rails generate scaffold Post title:string body:text --force
+
+
+-----------------------------------
+

@@ -1,0 +1,13 @@
+<div class="app-container-normal">
+  <%% content_for :title, "New <%= human_name.downcase %>" %>
+
+  <h2 class="app-h2">New <%= human_name.downcase %></h2>
+
+  <%%= render "form", <%= singular_table_name %>: @<%= singular_table_name %> %>
+
+  <br>
+
+  <div>
+    <%%= link_to "Back to <%= human_name.pluralize.downcase %>", <%= index_helper(type: :path) %> %>
+  </div>
+</div>
