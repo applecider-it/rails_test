@@ -1,6 +1,5 @@
 import './bootstrap/alpinejs';
 import './bootstrap/container';
-import './bootstrap/menu';
 
 // 動作確認
 import { showToast, setIsLoading } from '@/services/ui/message';
