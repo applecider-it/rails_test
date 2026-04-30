@@ -47,6 +47,14 @@ go build -o ./bin/push-sender ./cmd/push-sender
 
 ./bin/push-sender
 
+-------
+
+アプリ
+
+cd ~/workspace/github/rails-app/appli
+
+npm run dev
+
 
 -----------------------------------
 
