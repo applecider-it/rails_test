@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* ボタン */
+  .app-btn {
+    @apply bg-gradient-to-br px-[18px] py-[10px] rounded-lg cursor-pointer transition duration-200;
+  }
+  .app-btn-hover {
+    @apply -translate-y-0.5;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .app-btn-primary {
+    @apply app-btn from-[#007aff] to-[#00c6ff] text-white;
+  }
+  .app-btn-primary:hover {
+    @apply app-btn-hover;
+  }
+  
+  .app-btn-secondary {
+    @apply app-btn from-[#b5c3d2] to-[#364549] text-white;
+  }
+  .app-btn-secondary:hover {
+    @apply app-btn-hover;
+  }
+
+  /* 通常のリンク */
+  .app-link-normal {
+    @apply text-blue-600 hover:underline;
+  }
+
+  /* フォームのテキストボックス */
+  .app-form-input {
+    @apply w-full border rounded p-2;
+  }
+
+  /* カード */
+  .app-card {
+    @apply bg-white p-[1.3rem] rounded-xl;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  /* タイトル */
+  .app-h2 {
+    @apply text-[28px] font-semibold my-8 tracking-[0.08em] text-[#333];
+  }
+
+}
+
+/* 進む */
+.slide-forward-enter-active,
+.slide-forward-leave-active {
+  transition: all 0.15s ease;
+}
+.slide-forward-enter-from {
+  transform: translateX(10%);
+  opacity: 0;
+}
+.slide-forward-leave-to {
+  transform: translateX(-10%);
+  opacity: 0;
+}
+
+/* 戻る */
+.slide-back-enter-active,
+.slide-back-leave-active {
+  transition: all 0.15s ease;
+}
+.slide-back-enter-from {
+  transform: translateX(-10%);
+  opacity: 0;
+}
+.slide-back-leave-to {
+  transform: translateX(10%);
+  opacity: 0;
+}
