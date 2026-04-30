@@ -8,6 +8,7 @@ port
 rails: 3000
 vite: 3036
 websocket: 3030
+アプリ開発環境: 5173
 
 -----------------------------------
 
@@ -55,6 +56,8 @@ cd ~/workspace/github/rails-app/appli
 
 npm run dev
 
+
+http://localhost:5173/
 
 -----------------------------------
 
