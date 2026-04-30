@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # ツイート
   get "tweets_js/index"
   resources :tweets, only: [:index, :new, :create]
+  get "api/appli/tweets/index"
 
   # ユーザー関連
   devise_for :users, controllers: {

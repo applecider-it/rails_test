@@ -8,3 +8,4 @@
 
 - [Railsモノリスのドキュメント](./src/documents/index.md)
 - [Goマイクロサービスのドキュメント](./go/documents/index.md)
+- [アプリのドキュメント](./appli/documents/index.md)

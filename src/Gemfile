@@ -92,3 +92,5 @@ gem 'kaminari'
 gem 'pusher'
 
 gem 'gretel'
+
+gem 'rack-cors'
