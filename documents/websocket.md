@@ -1,22 +1,10 @@
 # websocket連携
 
-## 独自実装
-
 websocketはgoで連携する。
 
 Railsと双方向APIで連携。
 
 認証はJWTを使う。
-
-## ActionCable
-
-一部は、ActionCableで実装している。
-
-## Pusher(soketi)
-
-一部は、Pusher(soketi)で実装している。
-
-soketiは、`laravel-app`のWebサーバーを起動する必要がある。
 
 ## チャンネル名の定義
 
@@ -91,32 +79,6 @@ Pub/Subのチャンネル名: broadcast
   channel: string, <- WebSocketチャンネル名
   json: string, <- 上記の、「メッセージ送信時」のjsonの部分
 
-}
-```
-
-## ActionCableブロードキャスト時
-
-### チャット
-
-```
-{
-  message: string,
-  user_id: integer,
-  email: string,
-}
-```
-
-## Pusherブロードキャスト時
-
-### チャット
-
-メッセージ名: `new-message`
-
-```
-{
-  message: string,
-  user_id: integer,
-  email: string,
 }
 ```
 
