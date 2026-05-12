@@ -60,12 +60,11 @@ npm run dev
 http://localhost:5173/
 
 
-ビルド
+実行
 
-npm run build
+npm run build && npx cap sync
 
-npx cap sync
-
+npx cap open android
 
 -----------------------------------
 
