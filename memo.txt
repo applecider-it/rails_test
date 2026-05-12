@@ -138,10 +138,6 @@ pip install -r requirements.txt
 
 npm ci
 
-npx cap add android
-
-npx cap add ios
-
 
 -----------------------------------
 
