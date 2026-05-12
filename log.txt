@@ -237,3 +237,5 @@ npx tailwindcss init -p
 
 npm install axios
 
+npm install @capacitor/core @capacitor/cli
+
