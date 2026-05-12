@@ -243,3 +243,6 @@ npx cap init
 
 npm install @capacitor/android
 npx cap add android
+
+npm install @capacitor/ios
+npx cap add ios
