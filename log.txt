@@ -239,3 +239,4 @@ npm install axios
 
 npm install @capacitor/core @capacitor/cli
 
+npx cap init
