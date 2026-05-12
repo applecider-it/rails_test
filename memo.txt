@@ -64,6 +64,9 @@ http://localhost:5173/
 
 npm run build
 
+npx cap sync
+
+
 -----------------------------------
 
 
@@ -128,6 +131,17 @@ cp .env.example .env
 pip install --upgrade pip
 
 pip install -r requirements.txt
+
+
+----
+
+アプリ
+
+npm ci
+
+npx cap add android
+
+npx cap add ios
 
 
 -----------------------------------
